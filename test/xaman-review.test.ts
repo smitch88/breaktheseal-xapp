@@ -153,7 +153,7 @@ test("clearly independent: the terms, support, the first screen and every xApp p
 
 // ---- ready(), the chooser, and the first-launch info sheet ----
 
-import { INFO_LINKS, READY_FALLBACK_MS, connectView, infoUrl, openOutside, readyGate } from "../src/lib/auth/xapp-host.ts";
+import { INFO_LINKS, NAV_HOME, READY_FALLBACK_MS, connectView, navBack, navScreen, navVisit, openOutside, readyGate, xappLink } from "../src/lib/auth/xapp-host.ts";
 import { createXappClient } from "../src/lib/auth/xapp-client.ts";
 import { INFO_KEY, createUserstore } from "../src/lib/auth/xapp-userstore.ts";
 import { createXappService } from "../src/lib/auth/xapp.ts";
@@ -298,15 +298,83 @@ test("info sheet, property: if the userstore can't be read, or there's no JWT, i
   fc.assert(fc.property(fc.jsonValue(), (a) => assert.equal(infoNeeded(a), !(a !== null && typeof a === "object" && !Array.isArray(a) && (a as { show?: unknown }).show === false))));
 });
 
-test("info sheet: Support, the Privacy Policy and the Terms open through Xaman's openBrowser, as https pages of this site", async () => {
+test("in place: Support, Privacy and Terms are this site's own pages and open inside the xApp, from the info sheet, the landing, the footer and Help", () => {
+  const origin = "https://breaktheseal.rip";
+  assert.deepEqual(INFO_LINKS.map((l) => [l.path, l.label]), [["/support", "Support"], ["/privacy", "Privacy Policy"], ["/terms", "Terms"]]);
+  // A tap on any of them is left to the webview, so it stays in the xApp: the host hands nothing to openBrowser.
+  for (const path of ["/support", "/privacy", "/terms", "/terms#refunds", "/privacy#browser", "/how", "/rates", "/fair", "/xapp", "/packs"]) {
+    for (const target of [null, undefined, "_self"]) assert.equal(xappLink(path, target, origin), null, `${path} ${target}`);
+    assert.equal(xappLink(`${origin}${path}`, null, origin), null, `${origin}${path}`);
+  }
+  // The info sheet navigates in place, and the landing, footer and Help tab use plain links to the same pages.
+  const shell = read("src/components/XappShell.tsx");
+  const sheet = shell.slice(shell.indexOf("export function XappInfoSheet"));
+  assert.match(sheet, /onClick=\{\(\) => router\.push\(l\.path\)\}/);
+  assert.doesNotMatch(sheet, /openOutside|openBrowser|target=/);
+  for (const file of ["src/components/XappBoot.tsx", "src/components/XappShell.tsx"]) assert.match(read(file), /LEGAL_LINKS\.map\(\(l\) => \(\s*<Link key=\{l\.href\} href=\{l\.href\}>/, file);
+  assert.match(shell, /\{ href: "\/terms", label: "Terms" \},\s*\{ href: "\/privacy", label: "Privacy" \}/, "Help lists them");
+});
+
+test("off our site: Discord, X, xrpl.to and any other https site still go through Xaman's openBrowser, and email still goes to the mail app", async () => {
   const origin = "https://breaktheseal.rip";
   const asked: string[] = [];
   const sdk = Promise.resolve({ openBrowser: ({ url }: { url: string }) => void asked.push(url) });
-  for (const l of INFO_LINKS) assert.equal(await openOutside(infoUrl(l.path, origin), { sdk, fallback: () => assert.fail("no tab while Xaman answers") }), "xaman");
-  assert.deepEqual(asked, ["https://breaktheseal.rip/support", "https://breaktheseal.rip/privacy", "https://breaktheseal.rip/terms"]);
-  assert.deepEqual(INFO_LINKS.map((l) => l.label), ["Support", "Privacy Policy", "Terms"]);
-  const sheet = read("src/components/XappShell.tsx");
-  assert.match(sheet, /onClick=\{\(\) => void openOutside\(infoUrl\(l\.path, window\.location\.origin\)\)\}/);
+  const outside = ["https://discord.gg/bearish", "https://x.com/bearish_af", "https://xrpl.to", "https://livenet.xrpl.org/accounts/rLixKPQ3jGk4yYhAt3ybAwdrC8tvTLLvG", "http://example.com/a"];
+  for (const href of outside) {
+    const url = xappLink(href, "_blank", origin);
+    assert.ok(url?.startsWith("https://"), href);
+    assert.equal(await openOutside(url!, { sdk, fallback: () => assert.fail("no tab while Xaman answers") }), "xaman");
+  }
+  assert.deepEqual(asked, ["https://discord.gg/bearish", "https://x.com/bearish_af", "https://xrpl.to/", "https://livenet.xrpl.org/accounts/rLixKPQ3jGk4yYhAt3ybAwdrC8tvTLLvG", "https://example.com/a"]);
+  fc.assert(
+    fc.property(fc.webUrl({ validSchemes: ["https"] }), fc.constantFrom(null, "_blank"), (href, target) => {
+      fc.pre(new URL(href).origin !== origin);
+      assert.equal(xappLink(href, target, origin), new URL(href).href);
+    }),
+  );
+  assert.equal(xappLink("mailto:gm@bearish.af", null, origin), null);
+});
+
+test("Back, property: it returns to the screen the player came from, never leaves this site, and with nothing before goes to the packs", () => {
+  // The landing, then the info sheet's Terms, then Back: the landing again. Packs, Help, Privacy, Back, Back: Help, then the packs.
+  let s: string[] = [];
+  for (const p of ["/xapp", "/terms"]) s = navVisit(s, p);
+  assert.equal(navBack(s, "/terms"), "/xapp");
+  s = navVisit(s, navBack(s, "/terms"));
+  assert.deepEqual(s, ["/xapp"]);
+  for (const p of ["/packs", "/support", "/privacy"]) s = navVisit(s, p);
+  assert.equal(navBack(s, "/privacy"), "/support");
+  s = navVisit(s, "/support");
+  assert.equal(navBack(s, "/support"), "/packs");
+  assert.equal(navBack([], "/terms"), NAV_HOME);
+  // A launch's token and style are never part of a screen.
+  assert.equal(navScreen("/xapp", "?xAppToken=3f0c2a8e-5b1d-4c7a-9e2f-1a2b3c4d5e6f&xAppStyle=DARK"), "/xapp");
+  assert.equal(navScreen("/nft/5", "?again=1&xAppStyle=LIGHT"), "/nft/5?again=1");
+  const screen = fc.oneof(fc.constantFrom("/xapp", "/packs", "/collection", "/support", "/terms", "/privacy", "/nft/5", "/packs/a?again=1"), fc.webPath().map((p) => `/${p.replace(/^\/+/, "")}`));
+  const junk = fc.oneof(fc.webUrl(), fc.constantFrom("//evil.test/a", "https://evil.test", "javascript:alert(1)", "/\\evil.test"), fc.anything());
+  fc.assert(
+    fc.property(fc.array(fc.oneof(screen, junk), { maxLength: 40 }), screen, (visits, last) => {
+      let list: string[] = [];
+      for (const v of visits) list = navVisit(list, v as string);
+      const before = list.at(-1);
+      list = navVisit(list, last);
+      const to = navBack(list, last);
+      assert.ok(to.startsWith("/") && !to.startsWith("//") && !to.includes("\\"), to);
+      // Only the packs, which shows no Back, can be its own way back.
+      if (to === last) assert.equal(to, NAV_HOME);
+      // Back from a new screen is the screen before it, whenever there was one and it wasn't this same screen or a step back.
+      if (before && before !== last && list.at(-1) === last && list.length >= 2) assert.equal(to, list.at(-2));
+    }),
+  );
+});
+
+test("Back: the shell's Back uses the app's own list, never the browser's history, on every page but the two tab roots", () => {
+  const shell = read("src/components/XappShell.tsx");
+  assert.match(shell, /<button type="button" className="xback" onClick=\{back\}>/);
+  assert.match(shell, /const ROOTS: readonly string\[\] = \["\/packs", "\/collection"\];/);
+  const host = read("src/components/XappHost.tsx");
+  assert.doesNotMatch(host + shell, /router\.back\(\)|history\.back\(\)|history\.go\(/);
+  assert.match(host, /navBack\(readNav\(\), here\(\)\)/);
 });
 
 test("launch: resolved where Xaman issues the player's JWT, which rides only in the signed launch cookie; the platform endpoint stays the fallback", async () => {

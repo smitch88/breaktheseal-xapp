@@ -1,7 +1,9 @@
 "use client";
 
+import { usePathname, useRouter } from "next/navigation";
 import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
-import { openOutside, readyGate, xappLink, xappSdk } from "@/lib/auth/xapp-host";
+import { shellBack } from "@/lib/again";
+import { navBack, navScreen, navVisit, openOutside, readyGate, xappLink, xappSdk } from "@/lib/auth/xapp-host";
 import { inXapp } from "@/lib/xapp-style";
 
 interface Xapp {
@@ -18,9 +20,23 @@ interface Xapp {
   readonly refresh: () => Promise<boolean>;
   /** The launch is known and its first screen is drawn: the page shows, and Xaman hears ready(). Once; later calls do nothing. */
   readonly settle: () => void;
+  /** The xApp's Back: to the screen shown before this one, always inside the app (navBack). */
+  readonly back: () => void;
 }
 
-const XappContext = createContext<Xapp>({ active: false, shell: false, account: null, proven: false, checked: false, refresh: async () => false, settle: () => {} });
+const XappContext = createContext<Xapp>({ active: false, shell: false, account: null, proven: false, checked: false, refresh: async () => false, settle: () => {}, back: () => {} });
+
+/** The screens this tab showed, for Back. Session storage: navigation, nothing about the player, and gone when Xaman closes the app. */
+const NAV_KEY = "seal:xnav";
+const readNav = (): unknown[] => {
+  try {
+    const v = JSON.parse(sessionStorage.getItem(NAV_KEY) ?? "[]");
+    return Array.isArray(v) ? v : [];
+  } catch {
+    return [];
+  }
+};
+const here = () => navScreen(window.location.pathname, window.location.search);
 export const useXapp = () => useContext(XappContext);
 
 function Host({ children }: { children: React.ReactNode }) {
@@ -69,7 +85,21 @@ function Host({ children }: { children: React.ReactNode }) {
     return () => document.removeEventListener("click", onClick, true);
   }, [shell]);
 
-  return <XappContext.Provider value={{ ...launch, shell, refresh, settle }}>{children}</XappContext.Provider>;
+  // Every screen shown inside the xApp goes on the app's own list, so Back never depends on the browser's history.
+  const path = usePathname();
+  const router = useRouter();
+  useEffect(() => {
+    if (!shell) return;
+    try {
+      sessionStorage.setItem(NAV_KEY, JSON.stringify(navVisit(readNav(), here())));
+    } catch {
+      /* With no storage, Back goes to the packs. */
+    }
+  }, [shell, path]);
+  // A pack page reached by Open another goes back to the shelf, not into the sale before it.
+  const back = useCallback(() => router.push(shellBack(window.location.search) === "packs" ? "/packs" : navBack(readNav(), here())), [router]);
+
+  return <XappContext.Provider value={{ ...launch, shell, refresh, settle, back }}>{children}</XappContext.Provider>;
 }
 
 /** With the flag off this renders only its children, and nothing below it knows the xApp exists. */

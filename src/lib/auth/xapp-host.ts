@@ -211,10 +211,42 @@ export function readyGate(o: { readonly ready: () => unknown; readonly reveal?: 
 /** What a press that needs a wallet shows. Inside the xApp it is never the website's chooser: the account comes from Xaman's launch. */
 export const connectView = (s: { readonly open: boolean; readonly xapp: boolean }): "none" | "xapp" | "chooser" => (!s.open ? "none" : s.xapp ? "xapp" : "chooser");
 
-/** The first-launch info sheet's three links. Xaman asks that they open in the phone's browser, through openBrowser. */
+/** The first-launch info sheet's three links: this site's own pages, opened in place inside the xApp, each with Back at its top. */
 export const INFO_LINKS = [
   { path: "/support", label: "Support" },
   { path: "/privacy", label: "Privacy Policy" },
   { path: "/terms", label: "Terms" },
 ] as const;
-export const infoUrl = (path: string, origin: string): string => https(new URL(path, origin).href);
+
+/**
+ * The xApp's own Back. It never uses the browser's history: in Xaman's sandbox the app sits in a frame whose history is shared with
+ * Xaman's own page, so a history step back could leave the xApp. The app keeps its own list of the screens it showed, as paths on this
+ * site, and Back goes to the one before, or to the packs. A launch's token and style are never part of a screen.
+ */
+export const NAV_HOME = "/packs";
+const NAV_MAX = 30;
+const samePath = (p: unknown): p is string => typeof p === "string" && p.startsWith("/") && !p.startsWith("//") && !p.includes("\\");
+
+/** One screen, as the list keeps it: its path and query, without the launch's xAppToken and xAppStyle. */
+export function navScreen(pathname: string, search: string): string {
+  const q = new URLSearchParams(search);
+  q.delete("xAppToken");
+  q.delete("xAppStyle");
+  const rest = q.toString();
+  return `${pathname}${rest ? `?${rest}` : ""}`;
+}
+
+/** The list after showing `here`: the same screen again changes nothing, the one before it is a step back, anything else is a step on. */
+export function navVisit(stack: readonly unknown[], here: string): string[] {
+  const list = stack.filter(samePath);
+  if (!samePath(here) || list.at(-1) === here) return list;
+  if (list.at(-2) === here) return list.slice(0, -1);
+  return [...list, here].slice(-NAV_MAX);
+}
+
+/** Where Back goes from `here`: the screen shown before it, always a page of this site, or the packs. */
+export function navBack(stack: readonly unknown[], here: string): string {
+  const list = stack.filter(samePath);
+  const before = list.at(-1) === here ? list.at(-2) : list.at(-1);
+  return before && before !== here ? before : NAV_HOME;
+}

@@ -3,10 +3,9 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { shellBack } from "@/lib/again";
 import { useDemo } from "@/lib/demo/store";
 import { noOrphan } from "@/lib/format";
-import { INFO_LINKS, infoUrl, openOutside } from "@/lib/auth/xapp-host";
+import { INFO_LINKS } from "@/lib/auth/xapp-host";
 import { LEGAL_LINKS, OPERATOR, SUPPORT_CHANNELS, SUPPORT_EMAIL } from "@/lib/legal/links";
 import { aboutFine, aboutLine, independence, infoLine } from "@/lib/xapp-copy";
 import { usePendingCount } from "@/lib/live/hooks";
@@ -26,11 +25,12 @@ const TABS = [
   { href: "/collection", label: "Stash", match: (p: string) => p.startsWith("/collection") || p.startsWith("/sell") || p.startsWith("/ship") || p.startsWith("/profile"), art: icon(<><path d="M21 8v13H3V8M1 3h22v5H1zM10 12h4" /></>) },
   { href: "/support", label: "Help", match: (p: string) => HELP.some((h) => p.startsWith(h)), art: icon(<><circle cx="12" cy="12" r="10" /><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01" /></>) },
 ] as const;
-const ROOTS: readonly string[] = TABS.map((t) => t.href);
+/** Tab screens with no Back. Help is a tab too, but its pages are also where Support, Terms and Privacy open, so it keeps Back. */
+const ROOTS: readonly string[] = ["/packs", "/collection"];
 
 /** The app's own header and tabs inside Xaman, in place of the site's. The site's are hidden by CSS before first paint, so neither flashes. */
 export function XappShell() {
-  const { shell } = useXapp();
+  const { shell, back } = useXapp();
   const path = usePathname() ?? "/";
   const router = useRouter();
   const demo = useDemo();
@@ -42,13 +42,13 @@ export function XappShell() {
   }, [shell, path, router]);
 
   if (!shell) return null;
-  // Xaman's own bar already names the app, so the main tabs start with their content. Deeper pages get a way back. A pack page reached by
-  // Open another goes back to the shelf, not into the sale before it.
+  // Xaman's own bar already names the app, so the main tabs start with their content. Every other page, the legal ones included, gets Back,
+  // to the screen the player came from: the landing, the packs, or wherever they tapped. It never leaves the xApp.
   return (
     <>
       {ROOTS.includes(path) ? null : (
         <header className="xhead">
-          <button type="button" className="xback" onClick={() => (shellBack(window.location.search) === "packs" || window.history.length <= 1 ? router.push("/packs") : router.back())}>
+          <button type="button" className="xback" onClick={back}>
             {icon(<path d="m15 18-6-6 6-6" />)} Back
           </button>
         </header>
@@ -148,9 +148,10 @@ export function XappSupport() {
 
 /**
  * The first-launch info sheet inside Xaman, and the same sheet from About: what this is, who makes it, and Support, the Privacy Policy
- * and the Terms, which open in the phone's browser through Xaman's openBrowser. Got it is the only thing that marks it read.
+ * and the Terms, which open in place, inside the xApp, with Back at their top to this landing. Got it is the only thing that marks it read.
  */
 export function XappInfoSheet({ seal, cards, onClose, onGotIt }: { seal: boolean; cards: boolean; onClose: () => void; onGotIt: () => void }) {
+  const router = useRouter();
   return (
     <Sheet onClose={onClose} label="About Break the Seal" className="xinfo">
       {(close) => (
@@ -160,7 +161,7 @@ export function XappInfoSheet({ seal, cards, onClose, onGotIt }: { seal: boolean
           <p className="fine">{noOrphan(independence(OPERATOR))}</p>
           <div className="xinfolinks">
             {INFO_LINKS.map((l) => (
-              <button key={l.path} type="button" className="btn ol full" onClick={() => void openOutside(infoUrl(l.path, window.location.origin))}>
+              <button key={l.path} type="button" className="btn ol full" onClick={() => router.push(l.path)}>
                 {l.label}
               </button>
             ))}
