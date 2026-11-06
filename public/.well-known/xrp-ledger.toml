@@ -1,0 +1,22 @@
+[METADATA]
+modified = 2026-11-05T13:45:00.000Z
+
+[[ACCOUNTS]]
+address = "rLixKPQ3jGk4yYhAt3ybAwdrC8tvTLLvG"
+network = "main"
+desc = "Break the Seal treasury: pack payments and sales payouts"
+
+[[ACCOUNTS]]
+address = "rPdknMvaDqzSxUpH5bvNbbxNWNk2kHNvTX"
+network = "main"
+desc = "Break the Seal vault: holds the NFTs in packs"
+
+[[ACCOUNTS]]
+address = "rMQk9e6x9jwi5wTvz1vW3hLC6JRcpL854K"
+network = "main"
+desc = "Break the Seal minter: mints card NFTs and creates offers"
+
+[[ACCOUNTS]]
+address = "rpMMt3bVhnkEC9AFQMNmYyiKRFvySt4QWT"
+network = "main"
+desc = "Break the Seal NFT issuer: the issuer on Break the Seal card NFTs"

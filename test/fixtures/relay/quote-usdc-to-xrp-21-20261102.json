@@ -1,0 +1,424 @@
+{
+"requestId": "0x17936563922dc94494023be04d6fd5fd863673209813d14a49fc086fd5bc4df5",
+"steps": [
+{
+"id": "deposit",
+"action": "Confirm transaction in your wallet",
+"description": "Depositing funds to the relayer to execute the swap for XRP",
+"kind": "transaction",
+"items": [
+{
+"status": "incomplete",
+"data": {
+"instructions": [
+{
+"keys": [
+{
+"pubkey": "Dodg2HifwU8rmaVVyMyUZDGTRbqAJTyVYxXPwcbNpBKc",
+"isSigner": false,
+"isWritable": false
+},
+{
+"pubkey": "8kpUHDwhZ5GYpuBmzjgsAK3jWZe3TGxZDPktSn6MCXm8",
+"isSigner": true,
+"isWritable": true
+},
+{
+"pubkey": "8kpUHDwhZ5GYpuBmzjgsAK3jWZe3TGxZDPktSn6MCXm8",
+"isSigner": false,
+"isWritable": false
+},
+{
+"pubkey": "7uTT8Xi5RWXzy7h9XL244GRgEycDYDhLjr3ZyNdXi8pZ",
+"isSigner": false,
+"isWritable": false
+},
+{
+"pubkey": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+"isSigner": false,
+"isWritable": false
+},
+{
+"pubkey": "9gPdydd6J2fh6cCKnML2fVLp99pqn1R23gjnCMjBbUh7",
+"isSigner": false,
+"isWritable": true
+},
+{
+"pubkey": "4nvJ5zWdVspxJiNZzB127U6amPH98SFFkBx2JZrAduia",
+"isSigner": false,
+"isWritable": true
+},
+{
+"pubkey": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+"isSigner": false,
+"isWritable": false
+},
+{
+"pubkey": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL",
+"isSigner": false,
+"isWritable": false
+},
+{
+"pubkey": "11111111111111111111111111111111",
+"isSigner": false,
+"isWritable": false
+}
+],
+"programId": "99vQwtBwYtrqqD9YSXbdum3KBdxPAVxYTaQ3cfnJSrN2",
+"data": "0b9c60da27a3b413406f400100000000b8dca7c4a72edcc9a9c285e7a029ed44930bc09721dbfc9121dc748189b43e14"
+}
+],
+"addressLookupTableAddresses": [
+"Hm9fUgcn7qwDaiNTFiGh6pNtVATgnaRcmK6Bbx6EMZfP"
+]
+},
+"check": {
+"endpoint": "/intents/status/v3?requestId=0x17936563922dc94494023be04d6fd5fd863673209813d14a49fc086fd5bc4df5",
+"method": "GET"
+}
+}
+],
+"requestId": "0x17936563922dc94494023be04d6fd5fd863673209813d14a49fc086fd5bc4df5",
+"depositAddress": ""
+}
+],
+"fees": {
+"gas": {
+"currency": {
+"chainId": 792703809,
+"address": "11111111111111111111111111111111",
+"symbol": "SOL",
+"name": "Solana",
+"decimals": 9,
+"metadata": {
+"logoURI": "https://upload.wikimedia.org/wikipedia/en/b/b9/Solana_logo.png",
+"verified": true
+}
+},
+"amount": "2609",
+"amountFormatted": "0.000002609",
+"amountUsd": "0.000240",
+"minimumAmount": "2609"
+},
+"relayer": {
+"currency": {
+"chainId": 792703809,
+"address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+"symbol": "USDC",
+"name": "USD Coin",
+"decimals": 6,
+"metadata": {
+"logoURI": "https://coin-images.coingecko.com/coins/images/6319/large/usdc.png?1696506694",
+"verified": true
+}
+},
+"amount": "72161",
+"amountFormatted": "0.072161",
+"amountUsd": "0.072125",
+"minimumAmount": "72161"
+},
+"relayerGas": {
+"currency": {
+"chainId": 792703809,
+"address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+"symbol": "USDC",
+"name": "USD Coin",
+"decimals": 6,
+"metadata": {
+"logoURI": "https://coin-images.coingecko.com/coins/images/6319/large/usdc.png?1696506694",
+"verified": true
+}
+},
+"amount": "7596",
+"amountFormatted": "0.007596",
+"amountUsd": "0.007592",
+"minimumAmount": "7596"
+},
+"relayerService": {
+"currency": {
+"chainId": 792703809,
+"address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+"symbol": "USDC",
+"name": "USD Coin",
+"decimals": 6,
+"metadata": {
+"logoURI": "https://coin-images.coingecko.com/coins/images/6319/large/usdc.png?1696506694",
+"verified": true
+}
+},
+"amount": "64565",
+"amountFormatted": "0.064565",
+"amountUsd": "0.064532",
+"minimumAmount": "64565"
+},
+"app": {
+"currency": {
+"chainId": 792703809,
+"address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+"symbol": "USDC",
+"name": "USD Coin",
+"decimals": 6,
+"metadata": {
+"logoURI": "https://coin-images.coingecko.com/coins/images/6319/large/usdc.png?1696506694",
+"verified": true
+}
+},
+"amount": "0",
+"amountFormatted": "0.0",
+"amountUsd": "0",
+"minimumAmount": "0"
+},
+"subsidized": {
+"currency": {
+"chainId": 792703809,
+"address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+"symbol": "USDC",
+"name": "USD Coin",
+"decimals": 6,
+"metadata": {
+"logoURI": "https://coin-images.coingecko.com/coins/images/6319/large/usdc.png?1696506694",
+"verified": true
+}
+},
+"amount": "0",
+"amountFormatted": "0.0",
+"amountUsd": "0",
+"minimumAmount": "0"
+}
+},
+"details": {
+"operation": "swap",
+"sender": "8kpUHDwhZ5GYpuBmzjgsAK3jWZe3TGxZDPktSn6MCXm8",
+"recipient": "rLixKPQ3jGk4yYhAt3ybAwdrC8tvTLLvG",
+"currencyIn": {
+"currency": {
+"chainId": 792703809,
+"address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+"symbol": "USDC",
+"name": "USD Coin",
+"decimals": 6,
+"metadata": {
+"logoURI": "https://coin-images.coingecko.com/coins/images/6319/large/usdc.png?1696506694",
+"verified": true
+}
+},
+"amount": "21000000",
+"amountFormatted": "21.0",
+"amountUsd": "20.989395",
+"minimumAmount": "21000000"
+},
+"currencyOut": {
+"currency": {
+"chainId": 537724,
+"address": "xrp",
+"symbol": "XRP",
+"name": "XRP",
+"decimals": 6,
+"metadata": {
+"logoURI": "https://assets.relay.link/icons/currencies/xrp.png",
+"verified": true
+}
+},
+"amount": "16722870",
+"amountFormatted": "16.72287",
+"amountUsd": "20.880694",
+"minimumAmount": "16388412"
+},
+"refundCurrency": {
+"currency": {
+"chainId": 792703809,
+"address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+"symbol": "USDC",
+"name": "USD Coin",
+"decimals": 6,
+"metadata": {
+"logoURI": "https://coin-images.coingecko.com/coins/images/6319/large/usdc.png?1696506694",
+"verified": true
+}
+},
+"amount": "21000000",
+"amountFormatted": "21.0",
+"amountUsd": "20.989395",
+"minimumAmount": "21000000"
+},
+"totalImpact": {
+"usd": "-0.108701",
+"percent": "-0.52"
+},
+"swapImpact": {
+"usd": "-0.036576",
+"percent": "-0.17"
+},
+"expandedPriceImpact": {
+"swap": {
+"usd": "-0.068516"
+},
+"execution": {
+"usd": "-0.027592"
+},
+"relay": {
+"usd": "-0.012593"
+},
+"app": {
+"usd": "0"
+},
+"sponsored": {
+"usd": "0"
+}
+},
+"rate": "0.7963271428571429",
+"slippageTolerance": {
+"total": "200",
+"origin": {
+"usd": "0.000000",
+"value": "0",
+"percent": "0.00"
+},
+"destination": {
+"usd": "0.417614",
+"value": "334458",
+"percent": "2.00"
+}
+},
+"timeEstimate": 3,
+"userBalance": "0",
+"isFixedRate": false,
+"route": {
+"origin": {
+"inputCurrency": {
+"currency": {
+"chainId": 792703809,
+"address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+"symbol": "USDC",
+"name": "USD Coin",
+"decimals": 6,
+"metadata": {
+"logoURI": "https://coin-images.coingecko.com/coins/images/6319/large/usdc.png?1696506694",
+"verified": true
+}
+},
+"amount": "21000000",
+"amountFormatted": "21.0",
+"amountUsd": "20.989395",
+"minimumAmount": "21000000"
+},
+"outputCurrency": {
+"currency": {
+"chainId": 792703809,
+"address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+"symbol": "USDC",
+"name": "USD Coin",
+"decimals": 6,
+"metadata": {
+"logoURI": "https://coin-images.coingecko.com/coins/images/6319/large/usdc.png?1696506694",
+"verified": true
+}
+},
+"amount": "21000000",
+"amountFormatted": "21.0",
+"amountUsd": "20.989395",
+"minimumAmount": "21000000"
+},
+"router": "relay"
+},
+"destination": {
+"inputCurrency": {
+"currency": {
+"chainId": 537724,
+"address": "xrp",
+"symbol": "XRP",
+"name": "XRP",
+"decimals": 6,
+"metadata": {
+"logoURI": "https://assets.relay.link/icons/currencies/xrp.png",
+"verified": true
+}
+},
+"amount": "16722870",
+"amountFormatted": "16.72287",
+"amountUsd": "20.880694",
+"minimumAmount": "16388412"
+},
+"outputCurrency": {
+"currency": {
+"chainId": 537724,
+"address": "xrp",
+"symbol": "XRP",
+"name": "XRP",
+"decimals": 6,
+"metadata": {
+"logoURI": "https://assets.relay.link/icons/currencies/xrp.png",
+"verified": true
+}
+},
+"amount": "16722870",
+"amountFormatted": "16.72287",
+"amountUsd": "20.880694",
+"minimumAmount": "16388412"
+},
+"router": "relay"
+}
+}
+},
+"protocol": {
+"v2": {
+"orderId": "0xb8dca7c4a72edcc9a9c285e7a029ed44930bc09721dbfc9121dc748189b43e14",
+"hubType": "onchain",
+"orderData": {
+"version": "v1",
+"solverChainId": "base",
+"solver": "0xf70da97812cb96acdf810712aa562db8dfa3dbef",
+"salt": "0x9fbc77686eea067d1286f99bc0969a339929eaafa16086eb6cf8834b0db3f9ec",
+"inputs": [
+{
+"payment": {
+"chainId": "solana",
+"currency": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+"amount": "21000000",
+"weight": "1"
+},
+"refunds": [
+{
+"chainId": "solana",
+"recipient": "8kpUHDwhZ5GYpuBmzjgsAK3jWZe3TGxZDPktSn6MCXm8",
+"currency": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+"minimumAmount": "0",
+"deadline": 1794261192,
+"extraData": "0x"
+},
+{
+"chainId": "xrp",
+"recipient": "rLixKPQ3jGk4yYhAt3ybAwdrC8tvTLLvG",
+"currency": "rrrrrrrrrrrrrrrrrrrrrhoLvTp",
+"minimumAmount": "0",
+"deadline": 1794261192,
+"extraData": "0x"
+}
+]
+}
+],
+"output": {
+"chainId": "xrp",
+"payments": [
+{
+"recipient": "rLixKPQ3jGk4yYhAt3ybAwdrC8tvTLLvG",
+"currency": "rrrrrrrrrrrrrrrrrrrrrhoLvTp",
+"minimumAmount": "16388412",
+"expectedAmount": "16722870"
+}
+],
+"calls": [],
+"deadline": 1794261192,
+"extraData": "0x"
+},
+"fees": []
+},
+"paymentDetails": {
+"chainId": "solana",
+"depository": "99vQwtBwYtrqqD9YSXbdum3KBdxPAVxYTaQ3cfnJSrN2",
+"currency": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+"amount": "21000000"
+}
+}
+}
+}

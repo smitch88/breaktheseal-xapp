@@ -1,0 +1,171 @@
+/*
+ * Only inside Xaman. The attribute is set by a script in <head> from Xaman's user agent, before anything paints, so the browser site
+ * never matches any of this and the xApp never flashes the site's chrome. Rules are Xaman's: transparent html and body from the first
+ * frame, 16px body text, 40px touch targets. The dark color sits on a fixed layer painted with the rest of the page.
+ */
+html[data-xapp],html[data-xapp] body{background:transparent}
+html[data-xapp] body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--canvas)}
+html[data-xapp]{--xtab:60px;--xsafe:env(safe-area-inset-bottom,0px)}
+
+/* The site's chrome, and what only a website needs. */
+html[data-xapp] .hdr,html[data-xapp] .foot,html[data-xapp] .crumb,html[data-xapp] .app .stats,html[data-xapp] .panels>.panel:nth-child(2),html[data-xapp] a[href^="/try"],html[data-xapp] .webonly,html[data-xapp] .cardrate,html[data-xapp] .packs-top>.sh,html[data-xapp] h3.sub,html[data-xapp] .co .pstage{display:none}
+html[data-xapp] .panels{grid-template-columns:minmax(0,1fr)}
+html[data-xapp] .buy:has(>:only-child){grid-template-columns:1fr}
+html[data-xapp] .pgrid.five .pc:last-child{grid-column:auto}
+
+/* Shell */
+html[data-xapp] .app{padding-bottom:calc(var(--xtab) + var(--xsafe))}
+.xhead{position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:52px;padding:4px var(--gr) 4px var(--g);background:var(--canvas);border-bottom:1px solid var(--divider)}
+.xhead .logo img,.xboot .logo img{height:36px;width:auto}
+.xback{display:inline-flex;align-items:center;gap:4px;min-height:44px;min-width:44px;padding:0 8px 0 0;background:none;border:0;font-weight:700;font-size:16px;color:var(--text)}
+.xtabs{position:fixed;left:0;right:0;bottom:0;z-index:40;display:grid;grid-template-columns:repeat(3,1fr);height:calc(var(--xtab) + var(--xsafe));padding-bottom:var(--xsafe);background:var(--panel);border-top:1px solid var(--divider)}
+.xtabs a{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:#b8bac8;font-size:13px;font-weight:700}
+.xtabs a.on{color:var(--y)}
+.xtabs .count{position:absolute;top:6px;left:calc(50% + 8px)}
+html[data-xapp] .packp{padding-bottom:calc(110px + var(--xtab))}
+html[data-xapp] .packp .buy{bottom:calc(var(--xtab) + var(--xsafe));padding-bottom:10px}
+/* Checkout's bar sits on the tabs, which already clear the home indicator. The page keeps the bar's height free above the tabs. */
+html[data-xapp] .cobar{bottom:calc(var(--xtab) + var(--xsafe));padding-bottom:10px}
+html[data-xapp] .packp.cop{padding-bottom:16px}
+html[data-xapp] .app:has(.cobar){padding-bottom:calc(var(--cobar,0px) + var(--xtab) + var(--xsafe))}
+.xboot{display:grid;gap:16px;padding-top:24px}
+.xabout{display:grid;gap:8px;padding:14px 0 6px}.xabout h2{font:400 26px/1.1 var(--d);text-transform:uppercase}.xabout p{margin:0}
+.xreach{display:grid;gap:10px;margin:8px 0}
+.xtopics{display:grid;margin:6px 0 0;border-top:1px solid var(--divider)}html[data-xapp] .xtopics a{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:52px;padding:0 2px;margin:0;border-bottom:1px solid var(--divider);font-weight:700;font-size:16px;color:var(--text)}.xtopics svg{flex:none;color:var(--muted)}
+.xfoot{padding:14px var(--gr) 18px var(--g);border-top:1px solid var(--divider);margin-top:22px}
+.xlegal{display:flex;flex-wrap:wrap;gap:0 16px;margin:0}.xlegal a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;font-size:16px;text-decoration:underline}
+
+/* 16px for anything meant to be read. Small caps labels and tier tags stay smaller, at 13px or more. */
+html[data-xapp] .fine,html[data-xapp] .note,html[data-xapp] .freshness,html[data-xapp] .btn,html[data-xapp] .linky,html[data-xapp] .waitrow,html[data-xapp] .consent,html[data-xapp] .consent a,html[data-xapp] .dl>div,html[data-xapp] .sub2,html[data-xapp] .rnext,html[data-xapp] .redlines li,html[data-xapp] .ratetable,html[data-xapp] .anywallet summary,html[data-xapp] .mr,html[data-xapp] .mr *,html[data-xapp] .ps strong,html[data-xapp] .trail li,html[data-xapp] .trail li *,html[data-xapp] .soldamount span,html[data-xapp] .sh h2,html[data-xapp] .legal h2,html[data-xapp] .item h3,html[data-xapp] .item strong,html[data-xapp] .pgrid .pc strong.st,html[data-xapp] .flip button,html[data-xapp] .attr,html[data-xapp] .attr a,html[data-xapp] main p,html[data-xapp] main li,html[data-xapp] main td,html[data-xapp] main dd,html[data-xapp] main dt,html[data-xapp] main small,html[data-xapp] main p a,html[data-xapp] main li a,html[data-xapp] .sheet p{font-size:16px}
+html[data-xapp] .lb,html[data-xapp] .notbanner,html[data-xapp] .count,html[data-xapp] .tag,html[data-xapp] .tier,html[data-xapp] .pc .pt,html[data-xapp] .ratetable thead th,html[data-xapp] .hint,html[data-xapp] .hint.rpack,html[data-xapp] .skip,html[data-xapp] .rtoggle,html[data-xapp] .rsym,html[data-xapp] .tkc,html[data-xapp] main code{font-size:13px}
+
+/* 40px touch targets. Links inside a sentence grow their box without moving the text. */
+html[data-xapp] .linky{min-height:44px;min-width:44px;display:inline-flex;align-items:center}
+html[data-xapp] p a,html[data-xapp] li a,html[data-xapp] .note a,html[data-xapp] .consent a,html[data-xapp] .redlines a,html[data-xapp] .dl dd a,html[data-xapp] nav a,html[data-xapp] .trail a,html[data-xapp] .attr a{padding:12px 4px;margin:-12px -4px}
+html[data-xapp] a.fine{display:inline-flex;align-items:center;min-height:44px}
+html[data-xapp] .consent{min-height:44px;align-items:center}
+html[data-xapp] .skip{min-width:44px;padding:0 6px}
+html[data-xapp] .hint.rpack{letter-spacing:0}
+/* Links laid out as rows or tabs are already 44px and up. The inline-link padding above would push each one's tap area into its neighbors. */
+html[data-xapp] .xtabs a,html[data-xapp] main details nav a[href],html[data-xapp] .mlist a.mrow{margin:0}
+html[data-xapp] .xtabs a{padding:0}
+html[data-xapp] main details nav a[href]{padding:0;min-height:44px}
+html[data-xapp] .mlist a.mrow{padding:10px 0}
+/* The stage's hint line at 13px can be wider than a small phone (PACK 1 OF 10 · TESTNET · BITE THE SEAL OR TAP): it wraps instead of running off the edge. */
+html[data-xapp] .stop>.hint:not(.rpack){white-space:normal;text-wrap:balance;line-height:1.35;letter-spacing:1px}
+html[data-xapp] .sheet .freshness~.waitrow{display:none}
+html[data-xapp] .oddsb{width:40px;height:40px}
+html[data-xapp] .flip button{height:40px}
+
+/* Several packs at once, inside Xaman: 16px to read, 40px and up to touch. Only ever shows with SEAL_MULTI_QTY on. */
+html[data-xapp] .qtyb,html[data-xapp] .qtystep output,html[data-xapp] .qtytotal,html[data-xapp] .mtile h3,html[data-xapp] .mtile .mr small,html[data-xapp] .mnext .btn,html[data-xapp] .mbar .btn,html[data-xapp] .kv,html[data-xapp] .msell strong,html[data-xapp] .mlinks a,html[data-xapp] .mpend h3,html[data-xapp] .stage .fine,html[data-xapp] .stage .note,html[data-xapp] .steps,html[data-xapp] .steps a,html[data-xapp] .steps .linky{font-size:16px}
+html[data-xapp] .mlinks a{min-height:44px;min-width:44px}
+html[data-xapp] .steps .linky{min-height:44px}
+html[data-xapp] .qtyb{min-height:44px;min-width:44px}
+html[data-xapp] .qtystep .qtyb{font-size:22px}
+html[data-xapp] .qtyrow{gap:6px}
+html[data-xapp] .qtytotal{flex-wrap:wrap}
+html[data-xapp] .mmore .linky{text-align:left}
+html[data-xapp] .mcheck{width:32px;height:32px}
+html[data-xapp] .mtile .sellbadge{font-size:13px}
+
+/*
+ * The Packs tab. Filters and Sort sit in one bar of two equal buttons, and one rhythm (--xr) spaces the bar, the grid, the cards and the
+ * footer, inside the page's own 16px gutters. NFT packs and card packs read as one grid of two columns.
+ */
+.xptop{display:none}
+html[data-xapp]{--xr:12px}
+html[data-xapp] .packs-top .tools,html[data-xapp] .packs-top .filters{display:none}
+html[data-xapp] .s.packs-top{margin-top:0}
+html[data-xapp] .pg:has(>.packs-top){padding-top:0;padding-bottom:0}
+html[data-xapp] .pg:has(>.packs-top)+.xfoot{margin-top:var(--xr);padding-top:var(--xr)}
+html[data-xapp] .xptop{position:sticky;top:0;z-index:20;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--xr);padding:var(--xr) 0;background:var(--canvas)}
+.xpbtn{display:flex;align-items:center;justify-content:center;gap:8px;min-width:0;min-height:44px;padding:0 12px;border:1px solid var(--divider);border-radius:3px;background:var(--panel);color:var(--text);font:700 16px var(--b);white-space:nowrap}
+.xpbtn svg{flex:none}.xpbtn span{min-width:0;overflow:hidden;text-overflow:ellipsis}.xpbtn .fcount{flex:none}
+.xpbtn:active{border-color:var(--y)}
+html[data-xapp] .pgrid,html[data-xapp] .pgrid.five{grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--xr)}
+html[data-xapp] .pgrid~.pgrid{margin-top:var(--xr)}
+html[data-xapp] .pgrid .pc,html[data-xapp] .pgrid.five .pc{padding:10px}
+/* The kind stays at the top left. With a Restocking tag beside it on a narrow card, the tag drops under it rather than splitting "XRPL NFT". */
+html[data-xapp] .pc .pt{flex-wrap:wrap;gap:4px 8px;letter-spacing:.4px;min-height:0}
+html[data-xapp] .pc .pt>span{white-space:nowrap}
+html[data-xapp] .pc .stack{height:150px;margin:6px 0}
+html[data-xapp] .pc .stack img{height:128px}
+html[data-xapp] .pgrid .pc .stack.one{height:170px}
+html[data-xapp] .pgrid .pc .stack.one img{height:158px}
+html[data-xapp] .pgrid .pc h3{font-size:20px;margin:4px 0}
+/* Price and XRP are the read, at 17px. Their small-caps labels sit at the 13px floor with tighter spacing. */
+html[data-xapp] .pgrid .pc .ps{gap:8px;padding:8px 0;margin-bottom:10px}
+html[data-xapp] .pgrid .pc .ps strong,html[data-xapp] .pgrid .pc .ps .st{font-size:17px}
+html[data-xapp] .pgrid .pc .ps .lb{letter-spacing:.4px}
+html[data-xapp] .pgrid .pc .btn{min-height:44px;padding:8px;gap:8px;font-size:16px}
+html[data-xapp] .fgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+html[data-xapp] .sheet .fchip{font-size:16px}
+.xsortlist{display:grid;gap:8px}
+.xsortrow{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:48px;padding:0 14px;border:1px solid var(--divider);border-radius:3px;background:transparent;color:var(--text);font:700 16px var(--b);text-align:left}
+.xsortrow[aria-pressed=true]{background:#ffd91a14;border-color:#b79c12;color:var(--y)}
+.xsortmark{flex:none;min-width:16px}
+
+/* Results as a list inside Xaman: 16px to read, the tier and status at the 13px floor. */
+html[data-xapp] .btn.two-line small{font-size:14px}
+html[data-xapp] .mrname,html[data-xapp] .mrcash,html[data-xapp] .mrwhy,html[data-xapp] .mrside strong,html[data-xapp] .mselect{font-size:16px}
+html[data-xapp] .mrmeta,html[data-xapp] .mrmeta .tier{font-size:13px}
+
+/*
+ * Xaman's color styles, from its xAppStyle (set on <html> by the head script, before first paint). Dark is the app's own ink. Moonlight
+ * and Royal sit on Xaman's own backgrounds for those styles. Light is the same design on paper: the yellow stays a fill, and anything
+ * that was yellow text turns a deep gold so it can be read on white. The bite and its reveal stay a dark stage in every style, like
+ * a full-screen player; the pages around them follow the style. Selectors are spelled out, so each one outranks the rule it replaces.
+ */
+html[data-xapp][data-xstyle=moonlight]{--canvas:#181a21;--panel:#1f222b;--panel2:#262a34;--divider:#383c4a}
+html[data-xapp][data-xstyle=royal]{--canvas:#030b36;--panel:#0a1443;--panel2:#111c50;--divider:#29336c}
+html[data-xapp][data-xstyle=light]{
+  color-scheme:light;
+  --canvas:#fff;--panel:#f4f5f8;--panel2:#fff;--divider:#d6d9e1;--muted:#575c6c;--text:#14141c;--yt:#7a6100;
+  --doc-text:#2a2c36;--doc-toc:#2a2c36;--doc-mark:#7a6100;
+  --foil:#5d6273;--ice:#0a6fae;--flame:#b84d00;--surge:#077a4e;
+}
+html[data-xapp][data-xstyle=light] body::before{background:var(--canvas)}
+html[data-xapp][data-xstyle=light] .stage{
+  color-scheme:dark;
+  --canvas:#08080d;--panel:#101018;--panel2:#16161f;--divider:#2c2c3a;--muted:#9c9fb2;--text:#f7f7f2;
+  --foil:#dfe5ec;--ice:#8fd8ff;--flame:#ff7a1a;--surge:#5df2b4;
+}
+html[data-xapp][data-xstyle=light] .stage.sold{--text:#14141c}
+/* Yellow text, now a deep gold, except on the stage. */
+html[data-xapp][data-xstyle=light] h1 em,html[data-xapp][data-xstyle=light] .xtabs a.on,html[data-xapp][data-xstyle=light] .fchip[aria-pressed=true],html[data-xapp][data-xstyle=light] .xsortrow[aria-pressed=true],html[data-xapp][data-xstyle=light] .warnT,html[data-xapp][data-xstyle=light] .t-Chase,html[data-xapp][data-xstyle=light] .notbanner,html[data-xapp][data-xstyle=light] .demo-note,html[data-xapp][data-xstyle=light] .sellbadge.soon,html[data-xapp][data-xstyle=light] .mselect[aria-pressed=true]{color:var(--yt)}
+html[data-xapp][data-xstyle=light] .stage h1 em,html[data-xapp][data-xstyle=light] .stage .t-Chase,html[data-xapp][data-xstyle=light] .stage .notbanner,html[data-xapp][data-xstyle=light] .stage .mselect[aria-pressed=true]{color:var(--y)}
+html[data-xapp][data-xstyle=light] .fchip[aria-pressed=true],html[data-xapp][data-xstyle=light] .xsortrow[aria-pressed=true]{background:#ffd91a33;border-color:#b79c12}
+/* Light text and dark surfaces the site set by hand. */
+html[data-xapp][data-xstyle=light] .fchip,html[data-xapp][data-xstyle=light] .consent,html[data-xapp][data-xstyle=light] .mrcash,html[data-xapp][data-xstyle=light] .legal p,html[data-xapp][data-xstyle=light] .steps3 p,html[data-xapp][data-xstyle=light] .err p{color:var(--text)}
+html[data-xapp][data-xstyle=light] .xtabs a,html[data-xapp][data-xstyle=light] .pt{color:var(--muted)}
+html[data-xapp][data-xstyle=light] .stage .mrcash{color:#cfd0da}
+html[data-xapp][data-xstyle=light] .pc{background:linear-gradient(130deg,#f4f5f8,#fff)}
+html[data-xapp][data-xstyle=light] .pc:hover,html[data-xapp][data-xstyle=light] .item[href]:hover{border-color:#b79c12}
+html[data-xapp][data-xstyle=light] .tag{border-color:#b9bdc9}
+html[data-xapp][data-xstyle=light] .warnT,html[data-xapp][data-xstyle=light] .notbanner{border-color:#b79c12}
+html[data-xapp][data-xstyle=light] .pstage{background:radial-gradient(ellipse at 50% 60%,#fff4bf,#eef0f4 70%)}
+html[data-xapp][data-xstyle=light] .meter{background:var(--divider)}
+html[data-xapp][data-xstyle=light] .packp .buy,html[data-xapp][data-xstyle=light] .cobar,html[data-xapp][data-xstyle=light] .mbar{background:var(--canvas)}
+html[data-xapp][data-xstyle=light] .stage .mbar{background:#08080d}
+html[data-xapp][data-xstyle=light] .sheet input{background:var(--panel)}
+html[data-xapp][data-xstyle=light] .btn.ol{border-color:#8a8fa0}
+html[data-xapp][data-xstyle=light] .btn.ol:hover:not(:disabled){background:var(--panel)}
+html[data-xapp][data-xstyle=light] .stage .btn.ol{border-color:#5a5a70}
+html[data-xapp][data-xstyle=light] .stage.sold .btn.ol{border-color:var(--ink)}
+html[data-xapp][data-xstyle=light] .sellbadge,html[data-xapp][data-xstyle=light] .oddsb{background:#ffffffe6;border-color:#0002}
+html[data-xapp][data-xstyle=light] .oddstip{background:var(--panel2);box-shadow:0 6px 18px #0002}
+html[data-xapp][data-xstyle=light] .qtyb:disabled{color:#a0a4b0;border-color:#c5c8d2}
+html[data-xapp][data-xstyle=light] .tka{background:var(--panel)}
+html[data-xapp][data-xstyle=light] .dim{background:rgba(20,20,28,.45)}
+/* A multi order's results are a list to read and act on, not the stage, so they follow the style. */
+html[data-xapp][data-xstyle=light] .stage.mgrid{
+  color-scheme:light;background:var(--canvas);
+  --canvas:#fff;--panel:#f4f5f8;--panel2:#fff;--divider:#d6d9e1;--muted:#575c6c;--text:#14141c;
+  --foil:#5d6273;--ice:#0a6fae;--flame:#b84d00;--surge:#077a4e;
+}
+html[data-xapp][data-xstyle=light] .stage.mgrid h1 em,html[data-xapp][data-xstyle=light] .stage.mgrid .t-Chase,html[data-xapp][data-xstyle=light] .stage.mgrid .notbanner,html[data-xapp][data-xstyle=light] .stage.mgrid .mselect[aria-pressed=true],html[data-xapp][data-xstyle=light] .stage.mgrid .hint.rpack{color:var(--yt)}
+html[data-xapp][data-xstyle=light] .stage.mgrid .mbar{background:var(--canvas)}
+html[data-xapp][data-xstyle=light] .stage.mgrid .mrcash{color:var(--text)}
+html[data-xapp][data-xstyle=light] .stage.mgrid .btn.ol{border-color:#8a8fa0}
+html[data-xapp][data-xstyle=light] .stage.mgrid .sq{background:var(--panel)}

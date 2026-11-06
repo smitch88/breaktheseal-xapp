@@ -1,0 +1,14 @@
+# SEAL Rips keeps its own workspace and lockfile, so its WalletConnect tree never touches the root pnpm-lock.yaml. It
+# sits one folder below apps/ so the root's `apps/*` glob doesn't see it, and the root pnpm-workspace.yaml stays untouched:
+# merging this app rebuilds no other Vercel project.
+packages:
+  - "."
+allowBuilds:
+  sharp: true
+  esbuild: false
+  bufferutil: false
+  utf-8-validate: false
+  keccak: false
+  secp256k1: false
+overrides:
+  sharp: ">=0.33"

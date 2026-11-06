@@ -1,0 +1,85 @@
+{
+ "note": "The public asset record of a real WATCH 250 prize, read 2026-11-02 with getAsset, the shape a reveal's nftWon carries. Nothing was bought.",
+ "mint": "9RE5itiwTREKPEH31tC9NP1q7jJu1nRi45dCcrqyEpQ5",
+ "machine": "ewatch_250",
+ "content": {
+  "metadata": {
+   "attributes": [
+    {
+     "value": "2026080642C222122",
+     "trait_type": "Collector Crypt ID"
+    },
+    {
+     "value": "Watch",
+     "trait_type": "Type"
+    },
+    {
+     "value": "Watch",
+     "trait_type": "Category"
+    },
+    {
+     "value": "Valid",
+     "trait_type": "Status"
+    },
+    {
+     "value": "2026",
+     "trait_type": "Year"
+    },
+    {
+     "value": "16430",
+     "trait_type": "Insured Value"
+    },
+    {
+     "value": "Wristcheck",
+     "trait_type": "Vault"
+    },
+    {
+     "value": "Wristcheck, Wristcheck, Wristcheck",
+     "trait_type": "Location"
+    },
+    {
+     "value": "Wristcheck",
+     "trait_type": "Vault ID"
+    },
+    {
+     "value": "Wristcheck",
+     "trait_type": "Grading Company"
+    },
+    {
+     "value": "false",
+     "trait_type": "Autographed"
+    },
+    {
+     "value": "10",
+     "trait_type": "The Grade"
+    },
+    {
+     "value": "true",
+     "trait_type": "Authenticated"
+    },
+    {
+     "value": "10",
+     "trait_type": "GradeNum"
+    },
+    {
+     "value": "Rolex",
+     "trait_type": "Brand"
+    },
+    {
+     "value": "Submariner No-Date",
+     "trait_type": "Model"
+    },
+    {
+     "value": "124060-0001",
+     "trait_type": "Reference Number"
+    }
+   ],
+   "name": "Rolex Submariner No-Date",
+   "symbol": ""
+  },
+  "links": {
+   "image": "https://nft.collectorcrypt.com/front/2026080642C222122",
+   "external_url": "https://collectorcrypt.com/assets/solana/9RE5itiwTREKPEH31tC9NP1q7jJu1nRi45dCcrqyEpQ5"
+  }
+ }
+}

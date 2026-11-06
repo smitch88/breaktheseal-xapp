@@ -1,0 +1,325 @@
+{
+ "source": "https://breaktheseal.rip/api/rip/pool/5",
+ "readAt": "2026-11-05",
+ "season": "5-5",
+ "bands": [
+  {
+   "tier": "Common",
+   "nfts": []
+  },
+  {
+   "tier": "Uncommon",
+   "nfts": [
+    {
+     "id": "00080FA04FCD4698F840FDD8480ADBEF2688636D233D4A15A82B8FBC05B5081E",
+     "collection": "Rituals",
+     "name": "Ritual 25",
+     "markXrp": 3
+    },
+    {
+     "id": "0008138843B6C87E1B3BEA3E2BC2B69C46E1B509154E36094D2BA28605E7BDEB",
+     "collection": "Digital Minds",
+     "name": "The Whisper of Colors and Silence",
+     "markXrp": 3.382914
+    },
+    {
+     "id": "000813889AD3C6802A5FFCE6304F5EA7F4556F7998721F89052B501204081F77",
+     "collection": "XRP Frens Club",
+     "name": "FREN #2524",
+     "markXrp": 2.844492
+    },
+    {
+     "id": "000813889AD3C6802A5FFCE6304F5EA7F4556F7998721F89A9940C0E04081F73",
+     "collection": "XRP Frens Club",
+     "name": "FREN #2836",
+     "markXrp": 2.821127
+    },
+    {
+     "id": "00081388DD41A117873752120FB88271AEC545DD5D1E9E5955DA2D0005DBDD66",
+     "collection": "BABYSEAL",
+     "name": "BABYSEAL #90",
+     "markXrp": 3.037511
+    },
+    {
+     "id": "00081388DD41A117873752120FB88271AEC545DD5D1E9E5957B479BF05DBDD23",
+     "collection": "BABYSEAL",
+     "name": "BABYSEAL #45",
+     "markXrp": 3.037512
+    },
+    {
+     "id": "0008170207397A8AA414511E6E0649C9980E185E1C19D7401FC19A5805E4798B",
+     "collection": "Fuzzy Cubs",
+     "name": "Cub #2475",
+     "markXrp": 2.86481
+    },
+    {
+     "id": "0008170207397A8AA414511E6E0649C9980E185E1C19D7404004E51405E478CF",
+     "collection": "Fuzzy Cubs",
+     "name": "Cub #1960",
+     "markXrp": 3.352437
+    },
+    {
+     "id": "0008170207397A8AA414511E6E0649C9980E185E1C19D740DBFFC0A805E4703B",
+     "collection": "Fuzzy Cubs",
+     "name": "Cub #2817",
+     "markXrp": 2.874969
+    },
+    {
+     "id": "0008177087D408DB95FAF41FF9AA29BB53EBCE2BFF08242C6DC00E0D00001FA3",
+     "collection": "DoodlePunkX",
+     "name": "Doodlepunkx #9138",
+     "markXrp": 3.555615
+    },
+    {
+     "id": "00081B5843B6C87E1B3BEA3E2BC2B69C46E1B509154E360902EB494C05E7BEB1",
+     "collection": "Digital Minds",
+     "name": "*Along the River of Imagination*",
+     "markXrp": 3.555615
+    },
+    {
+     "id": "000822603EA060FD1026C04B2D390CC132D07D600DA9B0822D358F2F0487DB8A",
+     "collection": "xSPECTAR AVATARS V1 COLLECTION",
+     "name": "Avatar #9763",
+     "markXrp": 3.04767
+    },
+    {
+     "id": "0008271005ECDB63C36C15BAAF49634CA2D7C65D9ADDD1DD0936F1C605A2E731",
+     "collection": "Black Market Dawgs",
+     "name": "XDawg2258",
+     "markXrp": 2.03178
+    },
+    {
+     "id": "00083A98A79D12EF0431D0F5BAE8503287BFF5F4C4297EB40A8FEFF5000010DC",
+     "collection": "zPunks",
+     "name": "zPunk #6912",
+     "markXrp": 1.75
+    },
+    {
+     "id": "00181F40EB467BD9E06C744DD0BB103B109BFD2699310F8A0AB759C106304A26",
+     "collection": "Round Tripprx Beyond",
+     "name": "695",
+     "markXrp": 2.732744
+    },
+    {
+     "id": "00181F40EB467BD9E06C744DD0BB103B109BFD2699310F8A664E9DC506304A2A",
+     "collection": "Round Tripprx Beyond",
+     "name": "587",
+     "markXrp": 2.732745
+    }
+   ]
+  },
+  {
+   "tier": "Rare",
+   "nfts": [
+    {
+     "id": "00080BB8C9F057673FC8D5A78215B8BA9FD5A2A9B7F8540E75D8FA09059BF36D",
+     "collection": "Ouroboros",
+     "name": "1240",
+     "markXrp": 5
+    },
+    {
+     "id": "00081388070BD6653EE9A4855CC69D8AFCEE750690B118247078D89E06668B04",
+     "collection": "XCAINZ UNIVERSE",
+     "name": "My XRPL Collection #93",
+     "markXrp": 9.14301
+    },
+    {
+     "id": "000813889162C7FDCF752841C2A6F9270FF1159B177941EC0FBD5E74058F5ADA",
+     "collection": "WIZ BANG CLUB - SMILE Collection",
+     "name": "SMILE #862",
+     "markXrp": 10
+    },
+    {
+     "id": "000813889162C7FDCF752841C2A6F9270FF1159B177941EC2C444385058F5EEB",
+     "collection": "WIZ BANG CLUB - BANGlien Collection",
+     "name": "BANGlien-89",
+     "markXrp": 10.1589
+    },
+    {
+     "id": "000813889162C7FDCF752841C2A6F9270FF1159B177941EC50F904AB058F5E0D",
+     "collection": "WIZ BANG CLUB - BANGlien Collection",
+     "name": "BANGlien-95",
+     "markXrp": 10.1589
+    },
+    {
+     "id": "000813889162C7FDCF752841C2A6F9270FF1159B177941ECCC8CFA8E058F5EF2",
+     "collection": "WIZ BANG CLUB - BANGlien Collection",
+     "name": "BANGlien-243",
+     "markXrp": 10.1589
+    },
+    {
+     "id": "00081388A5753AFA2D401872105C78DC9D9B93ECABBBA2A2059AFF8405F3BCE9",
+     "collection": "Panther",
+     "name": "Panther 1735",
+     "markXrp": 13.714515
+    },
+    {
+     "id": "00081388A5753AFA2D401872105C78DC9D9B93ECABBBA2A209E7A34A05F3BAAF",
+     "collection": "Panther",
+     "name": "Panther 6095",
+     "markXrp": 14.22246
+    },
+    {
+     "id": "00081388A5753AFA2D401872105C78DC9D9B93ECABBBA2A2134F7EAD05F3C312",
+     "collection": "Panther",
+     "name": "Panther 5481",
+     "markXrp": 14
+    },
+    {
+     "id": "00081388A5753AFA2D401872105C78DC9D9B93ECABBBA2A2388A1C4205F3BBA7",
+     "collection": "Panther",
+     "name": "Panther 4650",
+     "markXrp": 14.22246
+    },
+    {
+     "id": "00081388A5753AFA2D401872105C78DC9D9B93ECABBBA2A26ED494D805F3BE3D",
+     "collection": "Panther",
+     "name": "Panther 1250",
+     "markXrp": 13.20657
+    },
+    {
+     "id": "00081388A5753AFA2D401872105C78DC9D9B93ECABBBA2A2E4644E5105F3AEB6",
+     "collection": "Panther",
+     "name": "Panther 5121",
+     "markXrp": 14
+    },
+    {
+     "id": "00081388C182B4F213B82CCFA4C6F59AD76F0AFCFBDF04D57889816B00000490",
+     "collection": "xShrooms",
+     "name": "xShroom #5742",
+     "markXrp": 23.36547
+    },
+    {
+     "id": "00081388CEBA8F5BD8F7434D18DBF016E0466EB3C330BAAF723F543505B727B3",
+     "collection": "KING.",
+     "name": "KING #2427",
+     "markXrp": 5.07945
+    },
+    {
+     "id": "00081388EF7C422EF52CEB969960BEF4144D7BC3F862C4673319040A059EB971",
+     "collection": "Mouse: Lucky Punch",
+     "name": "1479",
+     "markXrp": 16.152651
+    },
+    {
+     "id": "00081388EF7C422EF52CEB969960BEF4144D7BC3F862C46764D80C34059EBB97",
+     "collection": "Mouse: Lucky Punch",
+     "name": "1818",
+     "markXrp": 16.25424
+    },
+    {
+     "id": "00082710F1F5584F5630E36D1FCE776B38684142E8FB74B609C6B493065232F8",
+     "collection": "Punx",
+     "name": "Punx #134",
+     "markXrp": 11.17479
+    },
+    {
+     "id": "001813880C7C14716237C4A8AC7FDA9B4AF1D6642B556AE14B85789C0617FC03",
+     "collection": "Sexy Betzy",
+     "name": "Sexy Betzy #1567",
+     "markXrp": 14
+    },
+    {
+     "id": "001813880C7C14716237C4A8AC7FDA9B4AF1D6642B556AE183E90A9906180100",
+     "collection": "Sexy Betzy",
+     "name": "Sexy Betzy #1483",
+     "markXrp": 14.22246
+    },
+    {
+     "id": "001813880C7C14716237C4A8AC7FDA9B4AF1D6642B556AE1984A56B80617FE1F",
+     "collection": "Sexy Betzy",
+     "name": "Sexy Betzy #1670",
+     "markXrp": 14.22246
+    },
+    {
+     "id": "001813880C7C14716237C4A8AC7FDA9B4AF1D6642B556AE1D91A9170061800D7",
+     "collection": "Sexy Betzy",
+     "name": "Sexy Betzy #1854",
+     "markXrp": 15.136761
+    },
+    {
+     "id": "00181B582531081A737B46B80556D4904EE401652D2DEC1B1D1E52360666EC9C",
+     "collection": "MAX on XRPL",
+     "name": "MAX #230",
+     "markXrp": 17.27013
+    },
+    {
+     "id": "00181B582531081A737B46B80556D4904EE401652D2DEC1B340423390666EC9D",
+     "collection": "MAX on XRPL",
+     "name": "MAX #108",
+     "markXrp": 17.27013
+    },
+    {
+     "id": "00181B582531081A737B46B80556D4904EE401652D2DEC1BC28A83FB0666EB5F",
+     "collection": "MAX on XRPL",
+     "name": "MAX #551",
+     "markXrp": 17.259972
+    },
+    {
+     "id": "0018271083C7EEA26CA6F03D38153D17E10866C269B9F1DF7DD35486063D6FEB",
+     "collection": "dropchan",
+     "name": "dropchan #8853",
+     "markXrp": 12
+    }
+   ]
+  },
+  {
+   "tier": "Epic",
+   "nfts": [
+    {
+     "id": "00081388E4B1FEC868A27B165AADB008370A6B286D454162929F8E7205CB2CD8",
+     "collection": "PHNIXs",
+     "name": "PHNIX987",
+     "markXrp": 49.77861
+    },
+    {
+     "id": "00082710D66F170849D02E1C6EE26DB6662D87190B9B0C5721560DEF057D7054",
+     "collection": "YAMADA SKULL",
+     "name": "YAMADA SKULL #369",
+     "markXrp": 45.71505
+    },
+    {
+     "id": "00181388208AE9E5739668CEE25874F9BBE7EB2452EC4B8D84F8A6EE06370954",
+     "collection": "Animal Fam",
+     "name": "ANIMAL FAM #535",
+     "markXrp": 56.788251
+    },
+    {
+     "id": "00182710EF7C422EF52CEB969960BEF4144D7BC3F862C46768CB7242059EBDBB",
+     "collection": "Food and Liquor",
+     "name": "Forever Lovers",
+     "markXrp": 50.692911
+    }
+   ]
+  },
+  {
+   "tier": "Chase",
+   "nfts": [
+    {
+     "id": "00081B581189F5687DBB7516339D6CCB5593D96622AD82DF536971BA000004F3",
+     "collection": "XPUNKS",
+     "name": "XPUNKS #1267",
+     "markXrp": 96.508535
+    },
+    {
+     "id": "00081B58B1EB46DF0FF2C07C1407C0DA3C897B1ECB21F92995489703057B7667",
+     "collection": "XRP ARMY OG Collection",
+     "name": "ARMY #211",
+     "markXrp": 85.233171
+    },
+    {
+     "id": "0008271068A0E6F504732B8741A31D6A7965EED1A1F659110B20E2CC05CBD831",
+     "collection": "Teddy BG",
+     "name": "Teddy1160",
+     "markXrp": 81.2712
+    },
+    {
+     "id": "001813887D829B8285E64A3B355CD5E563C4F4AC9D7069424D788BD206173D35",
+     "collection": "SEAL on XRPL CTO - SCROLLS",
+     "name": "SCROLL #83",
+     "markXrp": 198.09855
+    }
+   ]
+  }
+ ]
+}

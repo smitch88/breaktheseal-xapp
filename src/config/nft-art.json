@@ -1,0 +1,698 @@
+{
+ "00080000A6414C83F356B54DDFC96BE86D1E099103968B7D9F01360305CA1382": {
+  "img": "/nfts/norahs/9f01360305ca1382.webp",
+  "name": "Unfigured Figure",
+  "uri": "ipfs://QmQj7wFt3txXUbsgBVpQ9c3XVthQazsdAVkhyWTKABxBWa",
+  "media": "ipfs://QmZxvXDEQcvUgaDYch7265f5NAQjVvoidMgVDWrbJyj1tP"
+ },
+ "000807D0AF09C1D4B4D1E8031467F3508DFFADABEA73255FF9C44B4B0655D9E8": {
+  "img": "/nfts/fattyseals/f9c44b4b0655d9e8.webp",
+  "name": "FattySeals #148",
+  "uri": "ipfs://bafybeid6gjf6gneqhnjb5x6r4pyaj6pqtfdozqr6kvq5g4w4hnilww6mdu/148.json",
+  "media": "ipfs://bafybeidum5nz4y62m2dxhnhxbr4oe4ouowvcukl32dnz7kuzgfcaeofxlm/148.png"
+ },
+ "00080BB8C9F057673FC8D5A78215B8BA9FD5A2A9B7F8540E75D8FA09059BF36D": {
+  "img": "/nfts/ouroboros/75d8fa09059bf36d.webp",
+  "name": "1240",
+  "uri": "ipfs://bafybeia6z74rdsxagxkbx5tbvd67rblerkrgehfxm22ifbih76ljnb42pa/1240.json",
+  "media": "ipfs://bafybeihtn4toky6o7itnka4rfciib6ueo7f2pvx7332b7rcxtghvzqhlfa/1240.png"
+ },
+ "00080FA04FCD4698F840FDD8480ADBEF2688636D233D4A15A82B8FBC05B5081E": {
+  "img": "/nfts/rituals-r3gxhxz/a82b8fbc05b5081e.webp",
+  "name": "Ritual 25",
+  "uri": "ipfs://bafybeihuscf7up7tledgbyru2d7f4n3d5fi2qsenmzn7quwtm66w6aeiwy/Ritual 25.json",
+  "media": "ipfs://bafybeih4ic5hjvu5a2nxpoffzdsrdnh7r374ejkoejreqityohtpr2r4zq/ritual-25.png"
+ },
+ "0008136A4525B177E40878AC72BEB69E64B3BA8AE329892A7BA12EAC051F1568": {
+  "img": "/nfts/xrpmf/7ba12eac051f1568.webp",
+  "name": "MEDUSA",
+  "uri": "ipfs://bafkreiapgoshfwmqwddo7sid6jskkdjjcr6hpnp4yt7irjneay4dhitwqa",
+  "media": "ipfs://bafkreiduwxjla6xtf4xatezcb2ylp4dlokx5kpwglnfsxco2ebvz7hy6hi"
+ },
+ "000813744525B177E40878AC72BEB69E64B3BA8AE329892ACCB2A14A051F154A": {
+  "img": "/nfts/xrpmf/ccb2a14a051f154a.webp",
+  "name": "MEDUSA",
+  "uri": "ipfs://bafkreifh6agpy3zjgkegmcsaoxqtrf7nwwctfpnsrczzexp3lmfhmkdpqe",
+  "media": "ipfs://bafkreiarh24upkpe6uo7vwjpa55rca5yibs7yoerde7c7r4sgsq6heayma"
+ },
+ "00081388070BD6653EE9A4855CC69D8AFCEE750690B118247078D89E06668B04": {
+  "img": "/nfts/xcainz-universe/7078d89e06668b04.webp",
+  "name": "My XRPL Collection #93",
+  "uri": "ipfs://bafybeibleylfa2s4uoti6trpuwuf5irvj66lk27aq4dgtgehw4s73xl6qy/93.json",
+  "media": "ipfs://bafybeieauat24qd7gqlpd24hlf7axpizjvsizry6h6ogerlnrabhjifmqa/93.png"
+ },
+ "00081388204B894F93926B7644FCFF34D61289D5C19F42295077316B05B657D0": {
+  "img": "/nfts/moneygrabbers/5077316b05b657d0.webp",
+  "name": "975",
+  "uri": "ipfs://bafybeidulirn4vs7t6uto4dqqcbwnfhil7fc7nvgut7eectldnlsym3way/975.json",
+  "media": "ipfs://bafybeichih67ia2yvzfzfyi47zjls6guvnbzn4jrad7inyietvxaeqm2zi/975.png"
+ },
+ "00081388204B894F93926B7644FCFF34D61289D5C19F42297177591305B65778": {
+  "img": "/nfts/moneygrabbers/7177591305b65778.webp",
+  "name": "838",
+  "uri": "ipfs://bafybeidulirn4vs7t6uto4dqqcbwnfhil7fc7nvgut7eectldnlsym3way/838.json",
+  "media": "ipfs://bafybeichih67ia2yvzfzfyi47zjls6guvnbzn4jrad7inyietvxaeqm2zi/838.png"
+ },
+ "0008138834302497C35BD63C1A3F065B8C6ADE4F1F7F5CD81527756F05CF57D4": {
+  "img": "/nfts/commonbird/1527756f05cf57d4.webp",
+  "name": "CBIRD514",
+  "uri": "ipfs://bafybeigy66jtncdnn5vcmztdfmt4jtfbqfdimjb4a6lm6m4c2ixmjxbe3u/CBIRD514.json",
+  "media": "ipfs://bafybeicads26xhglhd4s72pk4d3lywpls4laqfrt2z3lw5z43vx5yxn3su/cbird514.png"
+ },
+ "0008138843B6C87E1B3BEA3E2BC2B69C46E1B509154E36094D2BA28605E7BDEB": {
+  "img": "/nfts/digital-minds/4d2ba28605e7bdeb.webp",
+  "name": "The Whisper of Colors and Silence",
+  "uri": "ipfs://QmYt7psTej1Yc36Hfch4R5FYWjr3sSQ3SyHei5396tQms7",
+  "media": "ipfs://QmZqjQLg2T9FEZ5jiraSfBKAuwHFunth4k5qFrPahfB31V"
+ },
+ "000813886B4288D0F04E15B4765971931EFAFDC89FFFE29469937F0105A32F66": {
+  "img": "/nfts/mr-rabbit/69937f0105a32f66.webp",
+  "name": "11469",
+  "uri": "ipfs://bafybeigvljlnuqmjtudpktpxjxy3rj2j4tyry275ahigf3plygoh7muanu/11469.json",
+  "media": "ipfs://bafybeigyjvdskjwhhhhexn5fril6jb4os2j53pr4idyc32ldwg6k4pcpeq/11469.png"
+ },
+ "0008138882D0F98C64A1A0E6D15053589771AD08B8C13D539C0E4AB40000071A": {
+  "img": "/nfts/hogs/9c0e4ab40000071a.webp",
+  "name": "HOG #7847",
+  "uri": "ipfs://bafybeifi6awhcvqrzgsh37ribjk62ozzsrekql7p7rqnobuggu5jjl2d2i/7847.json",
+  "media": "ipfs://bafybeiac27xcgv3oer2j3p6xvuh4vr2pxlp6hdpywucqkiraw6y3h35cke/7847.png"
+ },
+ "000813889162C7FDCF752841C2A6F9270FF1159B177941EC0FBD5E74058F5ADA": {
+  "img": "/nfts/wbc-smile/0fbd5e74058f5ada.webp",
+  "name": "SMILE #862",
+  "uri": "ipfs://bafybeid6isvmwndihjncnnsmlut45caxtz3etud7cu7qpe2tf6yo2x6pre/SMILE #862.json",
+  "media": "ipfs://bafybeig6tjo57mtoym6g6rhiu42asreyno3romjtvqyagxe2os46zatexq/smile-#862.png"
+ },
+ "000813889162C7FDCF752841C2A6F9270FF1159B177941EC2C444385058F5EEB": {
+  "img": "/nfts/wbc-bang/2c444385058f5eeb.webp",
+  "name": "BANGlien-89",
+  "uri": "ipfs://bafybeiaav7p66bf6sgzd25ccuer72uddoyfivnuhgqjlo22xmfffqdkin4/BANGlien-89.json",
+  "media": "ipfs://bafybeicc5r67qrz4ixzkhexheokbq4skjs3drmj7a6xvk6sod6idojenpy/banglien-89.png"
+ },
+ "000813889162C7FDCF752841C2A6F9270FF1159B177941EC50F904AB058F5E0D": {
+  "img": "/nfts/wbc-bang/50f904ab058f5e0d.webp",
+  "name": "BANGlien-95",
+  "uri": "ipfs://bafybeiaav7p66bf6sgzd25ccuer72uddoyfivnuhgqjlo22xmfffqdkin4/BANGlien-95.json",
+  "media": "ipfs://bafybeicc5r67qrz4ixzkhexheokbq4skjs3drmj7a6xvk6sod6idojenpy/banglien-95.png"
+ },
+ "000813889162C7FDCF752841C2A6F9270FF1159B177941ECCC8CFA8E058F5EF2": {
+  "img": "/nfts/wbc-bang/cc8cfa8e058f5ef2.webp",
+  "name": "BANGlien-243",
+  "uri": "ipfs://bafybeiaav7p66bf6sgzd25ccuer72uddoyfivnuhgqjlo22xmfffqdkin4/BANGlien-243.json",
+  "media": "ipfs://bafybeicc5r67qrz4ixzkhexheokbq4skjs3drmj7a6xvk6sod6idojenpy/banglien-243.png"
+ },
+ "000813889AD3C6802A5FFCE6304F5EA7F4556F7998721F89052B501204081F77": {
+  "img": "/nfts/xrpfrensclub/052b501204081f77.webp",
+  "name": "FREN #2524",
+  "uri": "ipfs://bafybeietgm3zzea7zxbyse3qitcuj3zkmhwyw6xgys4ne5kftz5deh6et4/FREN #2524.json",
+  "media": "ipfs://bafybeihivjogpvxrvdxwd2xrbcec2v6jl226ohbwdlq7z4tnpavkiqxseu/fren-#2524.png"
+ },
+ "000813889AD3C6802A5FFCE6304F5EA7F4556F7998721F89A9940C0E04081F73": {
+  "img": "/nfts/xrpfrensclub/a9940c0e04081f73.webp",
+  "name": "FREN #2836",
+  "uri": "ipfs://bafybeietgm3zzea7zxbyse3qitcuj3zkmhwyw6xgys4ne5kftz5deh6et4/FREN #2836.json",
+  "media": "ipfs://bafybeihivjogpvxrvdxwd2xrbcec2v6jl226ohbwdlq7z4tnpavkiqxseu/fren-#2836.png"
+ },
+ "00081388A5753AFA2D401872105C78DC9D9B93ECABBBA2A2059AFF8405F3BCE9": {
+  "img": "/nfts/shitty-panther-club/059aff8405f3bce9.webp",
+  "name": "Panther 1735",
+  "uri": "ipfs://bafybeifinztrrwddw5xgslofgxil6527tyi4evp5fsipadfvecuhiqzg2m/Panther 1735.json",
+  "media": "ipfs://bafybeidvhxyw3stkurv737i5a5gms2xksffhl7ydggugb7r4z6zhzqde6u/panther-1735.png"
+ },
+ "00081388A5753AFA2D401872105C78DC9D9B93ECABBBA2A209E7A34A05F3BAAF": {
+  "img": "/nfts/shitty-panther-club/09e7a34a05f3baaf.webp",
+  "name": "Panther 6095",
+  "uri": "ipfs://bafybeifinztrrwddw5xgslofgxil6527tyi4evp5fsipadfvecuhiqzg2m/Panther 6095.json",
+  "media": "ipfs://bafybeidvhxyw3stkurv737i5a5gms2xksffhl7ydggugb7r4z6zhzqde6u/panther-6095.png"
+ },
+ "00081388A5753AFA2D401872105C78DC9D9B93ECABBBA2A2134F7EAD05F3C312": {
+  "img": "/nfts/shitty-panther-club/134f7ead05f3c312.webp",
+  "name": "Panther 5481",
+  "uri": "ipfs://bafybeifinztrrwddw5xgslofgxil6527tyi4evp5fsipadfvecuhiqzg2m/Panther 5481.json",
+  "media": "ipfs://bafybeidvhxyw3stkurv737i5a5gms2xksffhl7ydggugb7r4z6zhzqde6u/panther-5481.png"
+ },
+ "00081388A5753AFA2D401872105C78DC9D9B93ECABBBA2A2388A1C4205F3BBA7": {
+  "img": "/nfts/shitty-panther-club/388a1c4205f3bba7.webp",
+  "name": "Panther 4650",
+  "uri": "ipfs://bafybeifinztrrwddw5xgslofgxil6527tyi4evp5fsipadfvecuhiqzg2m/Panther 4650.json",
+  "media": "ipfs://bafybeidvhxyw3stkurv737i5a5gms2xksffhl7ydggugb7r4z6zhzqde6u/panther-4650.png"
+ },
+ "00081388A5753AFA2D401872105C78DC9D9B93ECABBBA2A23C97F35E05F3B6C3": {
+  "img": "/nfts/shitty-panther-club/3c97f35e05f3b6c3.webp",
+  "name": "Panther 107",
+  "uri": "ipfs://bafybeifinztrrwddw5xgslofgxil6527tyi4evp5fsipadfvecuhiqzg2m/Panther 107.json",
+  "media": "ipfs://bafybeidvhxyw3stkurv737i5a5gms2xksffhl7ydggugb7r4z6zhzqde6u/panther-107.png"
+ },
+ "00081388A5753AFA2D401872105C78DC9D9B93ECABBBA2A241B32AFB05F3C160": {
+  "img": "/nfts/shitty-panther-club/41b32afb05f3c160.webp",
+  "name": "Panther 1215",
+  "uri": "ipfs://bafybeifinztrrwddw5xgslofgxil6527tyi4evp5fsipadfvecuhiqzg2m/Panther 1215.json",
+  "media": "ipfs://bafybeidvhxyw3stkurv737i5a5gms2xksffhl7ydggugb7r4z6zhzqde6u/panther-1215.png"
+ },
+ "00081388A5753AFA2D401872105C78DC9D9B93ECABBBA2A2557C6CCE05F3C033": {
+  "img": "/nfts/shitty-panther-club/557c6cce05f3c033.webp",
+  "name": "Panther 307",
+  "uri": "ipfs://bafybeifinztrrwddw5xgslofgxil6527tyi4evp5fsipadfvecuhiqzg2m/Panther 307.json",
+  "media": "ipfs://bafybeidvhxyw3stkurv737i5a5gms2xksffhl7ydggugb7r4z6zhzqde6u/panther-307.png"
+ },
+ "00081388A5753AFA2D401872105C78DC9D9B93ECABBBA2A26ED494D805F3BE3D": {
+  "img": "/nfts/shitty-panther-club/6ed494d805f3be3d.webp",
+  "name": "Panther 1250",
+  "uri": "ipfs://bafybeifinztrrwddw5xgslofgxil6527tyi4evp5fsipadfvecuhiqzg2m/Panther 1250.json",
+  "media": "ipfs://bafybeidvhxyw3stkurv737i5a5gms2xksffhl7ydggugb7r4z6zhzqde6u/panther-1250.png"
+ },
+ "00081388A5753AFA2D401872105C78DC9D9B93ECABBBA2A27B73706105F3C0C6": {
+  "img": "/nfts/shitty-panther-club/7b73706105f3c0c6.webp",
+  "name": "Panther 6080",
+  "uri": "ipfs://bafybeifinztrrwddw5xgslofgxil6527tyi4evp5fsipadfvecuhiqzg2m/Panther 6080.json",
+  "media": "ipfs://bafybeidvhxyw3stkurv737i5a5gms2xksffhl7ydggugb7r4z6zhzqde6u/panther-6080.png"
+ },
+ "00081388A5753AFA2D401872105C78DC9D9B93ECABBBA2A2DBDD349E05F3B803": {
+  "img": "/nfts/shitty-panther-club/dbdd349e05f3b803.webp",
+  "name": "Panther 6199",
+  "uri": "ipfs://bafybeifinztrrwddw5xgslofgxil6527tyi4evp5fsipadfvecuhiqzg2m/Panther 6199.json",
+  "media": "ipfs://bafybeidvhxyw3stkurv737i5a5gms2xksffhl7ydggugb7r4z6zhzqde6u/panther-6199.png"
+ },
+ "00081388A5753AFA2D401872105C78DC9D9B93ECABBBA2A2E4644E5105F3AEB6": {
+  "img": "/nfts/shitty-panther-club/e4644e5105f3aeb6.webp",
+  "name": "Panther 5121",
+  "uri": "ipfs://bafybeifinztrrwddw5xgslofgxil6527tyi4evp5fsipadfvecuhiqzg2m/Panther 5121.json",
+  "media": "ipfs://bafybeidvhxyw3stkurv737i5a5gms2xksffhl7ydggugb7r4z6zhzqde6u/panther-5121.png"
+ },
+ "00081388BAD2ECAEBCADEF92D31DEC1D00D410366FF37ED8178CBDE004D0074E": {
+  "img": "/nfts/anti-social-media/178cbde004d0074e.webp",
+  "name": "Anti-Social #5101",
+  "uri": "https://arweave.net/0jVibnrcFhnts-ThyJQC9cx4t9LMZsqwvyzaChbXcss/5101.json",
+  "media": "https://arweave.net/0rkIR0gedENnWkXIHuT5WwVyiXHwuYnLcLahoRIQNBQ/5101.png"
+ },
+ "00081388BAD2ECAEBCADEF92D31DEC1D00D410366FF37ED8B7A72C8D04CFECE9": {
+  "img": "/nfts/anti-social-media/b7a72c8d04cfece9.webp",
+  "name": "Anti-Social #3588",
+  "uri": "https://arweave.net/0jVibnrcFhnts-ThyJQC9cx4t9LMZsqwvyzaChbXcss/3588.json",
+  "media": "https://arweave.net/0rkIR0gedENnWkXIHuT5WwVyiXHwuYnLcLahoRIQNBQ/3588.png"
+ },
+ "00081388BF1906026D1BF5D32779845C8C852492E26267C507EE1C8605A4DEF4": {
+  "img": "/nfts/xrpathsbyrogerin/07ee1c8605a4def4.webp",
+  "name": "XRPath #277",
+  "uri": "ipfs://bafybeiglmkpq6rbe3eaeqqtesx7e7qm2chtf23jsrannnqxbqxqgpupdsm/XRPath #277.json",
+  "media": "ipfs://bafybeidj4ubs5xbf73cqkrgfkv5qaug3q2ssc7ehx2mgqzchosnxccyz2m/xrpath-#277.png"
+ },
+ "00081388C182B4F213B82CCFA4C6F59AD76F0AFCFBDF04D57889816B00000490": {
+  "img": "/nfts/xshrooms/7889816b00000490.webp",
+  "name": "xShroom #5742",
+  "uri": "ipfs://bafybeieoyz3sghr27ybimhssgahaba5of6anmldjjtmufsxen22gmenjl4/5742.json",
+  "media": "ipfs://bafybeibeuzupumno4jmqk2okzad6ca4yedfm7iil4usqqdcjjlec76kxbm/5742.png"
+ },
+ "00081388CEBA8F5BD8F7434D18DBF016E0466EB3C330BAAF22C9520405B724E4": {
+  "img": "/nfts/king/22c9520405b724e4.webp",
+  "name": "KING #3066",
+  "uri": "ipfs://bafybeiewr7wcc35dnaqcmrrxsjqdapt4ofnwq5ongajrmoen6nl5ffl6yi/3066.json",
+  "media": "ipfs://bafybeib2kykxegfu3wllvngmbjl7igzyt5f5pnqi4k54lbwwlpryeermp4/3066.png"
+ },
+ "00081388CEBA8F5BD8F7434D18DBF016E0466EB3C330BAAF4473B23705B727B1": {
+  "img": "/nfts/king/4473b23705b727b1.webp",
+  "name": "KING #2477",
+  "uri": "ipfs://bafybeiewr7wcc35dnaqcmrrxsjqdapt4ofnwq5ongajrmoen6nl5ffl6yi/2477.json",
+  "media": "ipfs://bafybeib2kykxegfu3wllvngmbjl7igzyt5f5pnqi4k54lbwwlpryeermp4/2477.png"
+ },
+ "00081388CEBA8F5BD8F7434D18DBF016E0466EB3C330BAAF723F543505B727B3": {
+  "img": "/nfts/king/723f543505b727b3.webp",
+  "name": "KING #2427",
+  "uri": "ipfs://bafybeiewr7wcc35dnaqcmrrxsjqdapt4ofnwq5ongajrmoen6nl5ffl6yi/2427.json",
+  "media": "ipfs://bafybeib2kykxegfu3wllvngmbjl7igzyt5f5pnqi4k54lbwwlpryeermp4/2427.png"
+ },
+ "00081388DD41A117873752120FB88271AEC545DD5D1E9E5955DA2D0005DBDD66": {
+  "img": "/nfts/babyseal/55da2d0005dbdd66.webp",
+  "name": "BABYSEAL #90",
+  "uri": "ipfs://bafybeiglzxuddvzenwzguiq3e23jjgs3ybdpvf4cd3nautr6pqwtqmmgie/BABYSEAL #90.json",
+  "media": "ipfs://bafybeick3cd2kcqzpxg56ozrqttsojypimflj7sunam3upuohm6skiwik4/babyseal-#90.png"
+ },
+ "00081388DD41A117873752120FB88271AEC545DD5D1E9E5957B479BF05DBDD23": {
+  "img": "/nfts/babyseal/57b479bf05dbdd23.webp",
+  "name": "BABYSEAL #45",
+  "uri": "ipfs://bafybeiglzxuddvzenwzguiq3e23jjgs3ybdpvf4cd3nautr6pqwtqmmgie/BABYSEAL #45.json",
+  "media": "ipfs://bafybeick3cd2kcqzpxg56ozrqttsojypimflj7sunam3upuohm6skiwik4/babyseal-#45.png"
+ },
+ "00081388E4B1FEC868A27B165AADB008370A6B286D454162929F8E7205CB2CD8": {
+  "img": "/nfts/phnixs/929f8e7205cb2cd8.webp",
+  "name": "PHNIX987",
+  "uri": "ipfs://bafybeihqkmfqkngeo7jrb7ipgkkm35laogi2wshwxehw6ub4fzepgxyqae/PHNIX987.json",
+  "media": "ipfs://bafybeiccwfghm5m4uwt6gijmnrxkqera647da3vu6k4clgj336vmx7fvfm/phnix987.png"
+ },
+ "00081388E4B1FEC868A27B165AADB008370A6B286D454162C3B45E7505CB2BD9": {
+  "img": "/nfts/phnixs/c3b45e7505cb2bd9.webp",
+  "name": "PHNIX94",
+  "uri": "ipfs://bafybeihqkmfqkngeo7jrb7ipgkkm35laogi2wshwxehw6ub4fzepgxyqae/PHNIX94.json",
+  "media": "ipfs://bafybeiccwfghm5m4uwt6gijmnrxkqera647da3vu6k4clgj336vmx7fvfm/phnix94.png"
+ },
+ "00081388E4B1FEC868A27B165AADB008370A6B286D454162DB44679B05CB2EFF": {
+  "img": "/nfts/phnixs/db44679b05cb2eff.webp",
+  "name": "PHNIX41",
+  "uri": "ipfs://bafybeihqkmfqkngeo7jrb7ipgkkm35laogi2wshwxehw6ub4fzepgxyqae/PHNIX41.json",
+  "media": "ipfs://bafybeiccwfghm5m4uwt6gijmnrxkqera647da3vu6k4clgj336vmx7fvfm/phnix41.png"
+ },
+ "00081388EF7C422EF52CEB969960BEF4144D7BC3F862C467112FD790059EB3FA": {
+  "img": "/nfts/corruptions/112fd790059eb3fa.webp",
+  "name": "BOTTLE 47",
+  "uri": "ipfs://QmX5E62wL6XkFo785QT9p67LNrHWZYwq2hqJK8aM5UPzxn",
+  "media": "ipfs://QmR8gYXon8vJ11h5DJNwnYuube85AvukurSf9WzZjXwm5L"
+ },
+ "00081388EF7C422EF52CEB969960BEF4144D7BC3F862C4673319040A059EB971": {
+  "img": "/nfts/luckypunch/3319040a059eb971.webp",
+  "name": "1479",
+  "uri": "ipfs://bafybeiedioj4u34ogr4dtvr2g6vybfs7luzmgyu6bkrvol6ifjg3p247ve/1479.json",
+  "media": "ipfs://bafybeidbivsl53k6p6siud3e5lhfutggrm7vfrwvdox3af5qqurxqzq7hi/1479.png"
+ },
+ "00081388EF7C422EF52CEB969960BEF4144D7BC3F862C467648711AA059EB414": {
+  "img": "/nfts/corruptions/648711aa059eb414.webp",
+  "name": "BOTTLE 73",
+  "uri": "ipfs://QmSe2Bfw8K8Tv2jwRdSpx7Vv16S7cEMd3Kre4pUAxM9BZp",
+  "media": "ipfs://QmR8gYXon8vJ11h5DJNwnYuube85AvukurSf9WzZjXwm5L"
+ },
+ "00081388EF7C422EF52CEB969960BEF4144D7BC3F862C46764D80C34059EBB97": {
+  "img": "/nfts/luckypunch/64d80c34059ebb97.webp",
+  "name": "1818",
+  "uri": "ipfs://bafybeiedioj4u34ogr4dtvr2g6vybfs7luzmgyu6bkrvol6ifjg3p247ve/1818.json",
+  "media": "ipfs://bafybeidbivsl53k6p6siud3e5lhfutggrm7vfrwvdox3af5qqurxqzq7hi/1818.png"
+ },
+ "00081388EF7C422EF52CEB969960BEF4144D7BC3F862C467A82B2430059EA496": {
+  "img": "/nfts/bearchampdaf/a82b2430059ea496.webp",
+  "name": "1620",
+  "uri": "ipfs://bafybeihkah2ak6ixmyt7prsoahrxoclrzu72pgchmtlqvvs5ny2evf3ify/1620.json",
+  "media": "ipfs://bafybeigca6hbc6udcemspphgftr3ima26kafrkrpotcfmlr4uh3xkdgmpy/1620.png"
+ },
+ "00081388EF7C422EF52CEB969960BEF4144D7BC3F862C467F8B6C9A1059EAB05": {
+  "img": "/nfts/bearchampdaf/f8b6c9a1059eab05.webp",
+  "name": "1889",
+  "uri": "ipfs://bafybeihkah2ak6ixmyt7prsoahrxoclrzu72pgchmtlqvvs5ny2evf3ify/1889.json",
+  "media": "ipfs://bafybeigca6hbc6udcemspphgftr3ima26kafrkrpotcfmlr4uh3xkdgmpy/1889.png"
+ },
+ "00081388F5B3A66C6D6034928EE9C3F2434FEECB332E9D5F3409771C051A4B82": {
+  "img": "/nfts/baysedbirds/3409771c051a4b82.webp",
+  "name": "Baysed Birds #1253",
+  "uri": "ipfs://bafyreia7tj4x3jnnsuh7trhveuey4x5wwcffcyhszwhdl3n42ofxv4c2aq/metadata.json",
+  "media": "ipfs://bafybeihyhrm4uiosba6svxjmdvwvpypy76xgy5ij6b4cdl2uporze7uiiy/blob"
+ },
+ "00081388F5B3A66C6D6034928EE9C3F2434FEECB332E9D5F7AC1D5AF051A4913": {
+  "img": "/nfts/baysedbirds/7ac1d5af051a4913.webp",
+  "name": "Baysed Birds #632",
+  "uri": "ipfs://bafyreigmemi7yujqwvsxyw7t7p4xwpxbwqjinvpvyx6uvnioikb3dieqs4/metadata.json",
+  "media": "ipfs://bafybeicfsv52pmgpoae2hj7qfswicxrx6rmbwejfxuj6rp6xwxu3grputq/blob"
+ },
+ "0008170207397A8AA414511E6E0649C9980E185E1C19D7401FC19A5805E4798B": {
+  "img": "/nfts/fuzzycubs/1fc19a5805e4798b.webp",
+  "name": "Cub #2475",
+  "uri": "ipfs://bafkreidvogktrtk65ybb6xjgklybqt4vkpmpgw3cmqgm4cybxqzerpnpam",
+  "media": "ipfs://bafybeiblcan4zpumq5uut2q7xm7cbcliyizuw6nhv333k62uij4lmiokri"
+ },
+ "0008170207397A8AA414511E6E0649C9980E185E1C19D7404004E51405E478CF": {
+  "img": "/nfts/fuzzycubs/4004e51405e478cf.webp",
+  "name": "Cub #1960",
+  "uri": "ipfs://bafkreic75gnseuyc67wuwzzdcdqgbypw4begrcaxizvxypqpg3w6zb5vy4",
+  "media": "ipfs://bafybeihsv6u7c5dg2kw57c7svd425tuuahjccg27oq36tiro6twmqpxfcm"
+ },
+ "0008170207397A8AA414511E6E0649C9980E185E1C19D740DBFFC0A805E4703B": {
+  "img": "/nfts/fuzzycubs/dbffc0a805e4703b.webp",
+  "name": "Cub #2817",
+  "uri": "ipfs://bafkreibow5zofacjoapgmr3zddsz6cczfi7szt2pclul6vzbqlfbrjqiz4",
+  "media": "ipfs://bafkreihbygs5tqlzy3pu3yfvda3irxx55k4gozs5hi4wvq3r5pycosxowm"
+ },
+ "000817024409AFED2C9EC5604D4095464C0F0DC015198D2F48AECD7D000012E1": {
+  "img": "/nfts/xpepe/48aecd7d000012e1.webp",
+  "name": "xPEPE #4834",
+  "uri": "QmcL6Nb3kbnFKHTjwFZ7pbjdev2adtSQJq4hKfZxVRRqYk",
+  "media": "QmUoqwgAq5mFuj4hYn1mnnRyHdW8AqQJ9vSUkKb56q2fx9/4834.png"
+ },
+ "000817024409AFED2C9EC5604D4095464C0F0DC015198D2FCBE0D844000004AA": {
+  "img": "/nfts/xpepe/cbe0d844000004aa.webp",
+  "name": "xPEPE #1195",
+  "uri": "QmaZVYvwUExMjDDjNeNkDUW6uaictdE96xDqyJuDgbLCRM",
+  "media": "QmUoqwgAq5mFuj4hYn1mnnRyHdW8AqQJ9vSUkKb56q2fx9/1195.png"
+ },
+ "00081702D92E5D0C52405B8E9DD7EB6B2244453DA8D5BB4D5499D6C70000018B": {
+  "img": "/nfts/bearableguyclub-loadstar-ii/5499d6c70000018b.webp",
+  "name": "BearableGuy #4739",
+  "uri": "not on the ledger: named by hand from an indexer",
+  "media": "ipfs://QmQjT1g619jzVakHiKRCJY3xbaj1g8gXJvPANJEDY3cbfj"
+ },
+ "000817700B3E9130DD37345B2B3A5B1944D4617902ED50CC8709B37E05921F6A": {
+  "img": "/nfts/pixel-puppets-by-swadoki/8709b37e05921f6a.webp",
+  "name": "Pixel RED PUPPET #1270",
+  "uri": "ipfs://bafybeihcpaqdk5yyntmosfyqrwaz4rl5r37qyzja6mqqxwcayjse76xrca/Pixel RED PUPPET #1270.json",
+  "media": "ipfs://bafybeicg3wkni5xqw64zmyffdexldyn62qrmewb7pbft64g5u4vkfkj4gq/pixel-red-puppet-#1270.png"
+ },
+ "000817700B3E9130DD37345B2B3A5B1944D4617902ED50CC873651AD05921D3B": {
+  "img": "/nfts/pixel-puppets-by-swadoki/873651ad05921d3b.webp",
+  "name": "Pixel RED PUPPET #1027",
+  "uri": "ipfs://bafybeihcpaqdk5yyntmosfyqrwaz4rl5r37qyzja6mqqxwcayjse76xrca/Pixel RED PUPPET #1027.json",
+  "media": "ipfs://bafybeicg3wkni5xqw64zmyffdexldyn62qrmewb7pbft64g5u4vkfkj4gq/pixel-red-puppet-#1027.png"
+ },
+ "000817700B3E9130DD37345B2B3A5B1944D4617902ED50CCBAFC45F105921CEF": {
+  "img": "/nfts/pixel-puppets-by-swadoki/bafc45f105921cef.webp",
+  "name": "Pixel RED PUPPET #542",
+  "uri": "ipfs://bafybeihcpaqdk5yyntmosfyqrwaz4rl5r37qyzja6mqqxwcayjse76xrca/Pixel RED PUPPET #542.json",
+  "media": "ipfs://bafybeicg3wkni5xqw64zmyffdexldyn62qrmewb7pbft64g5u4vkfkj4gq/pixel-red-puppet-#542.png"
+ },
+ "0008177087D408DB95FAF41FF9AA29BB53EBCE2BFF08242C6DC00E0D00001FA3": {
+  "img": "/nfts/doodlepunkx/6dc00e0d00001fa3.webp",
+  "name": "Doodlepunkx #9138",
+  "uri": "https://marketplace-api.onxrp.com/api/metadata/0008177087D408DB95FAF41FF9AA29BB53EBCE2BFF08242C6DC00E0D00001FA3",
+  "media": "ipfs://QmPKifbif5zzwudPxNwa8X1V9FpKV6fdtuWVdw5g87ZCKH"
+ },
+ "00081B581189F5687DBB7516339D6CCB5593D96622AD82DF536971BA000004F3": {
+  "img": "/nfts/xpunks/536971ba000004f3.webp",
+  "name": "XPUNKS #1267",
+  "uri": "https://marketplace-api.onxrp.com/api/metadata/00081B581189F5687DBB7516339D6CCB5593D96622AD82DF536971BA000004F3",
+  "media": "ipfs://QmPLvdzqcpzgCiPJpP3Sb9QVnB1LHcRM1PQJGcEv7KREv1"
+ },
+ "00081B581189F5687DBB7516339D6CCB5593D96622AD82DFF40B66030000009C": {
+  "img": "/nfts/xpunks/f40b66030000009c.webp",
+  "name": "XPUNKS #156",
+  "uri": "https://marketplace-api.onxrp.com/api/metadata/00081B581189F5687DBB7516339D6CCB5593D96622AD82DFF40B66030000009C",
+  "media": "ipfs://QmX7cx2WYNMVEYjkjunyDC7fqoMj4iqn32zWAUFzYueQcT"
+ },
+ "00081B582D788E2A90F9834D78D203B978E3932B626DE03E0B3907EB0659AE50": {
+  "img": "/nfts/ledger-bears/0b3907eb0659ae50.webp",
+  "name": "Ledger Bears #530",
+  "uri": "ipfs://bafybeievakazzcpqtzk3anotjg3lcdpel6ohvehwhxf27hujvhtghcytye/530.json",
+  "media": "ipfs://bafybeidyifjmzccjtzsmnyu6nmq2qqhpxjwt65auzldwcr2x2ohma44hly/530.png"
+ },
+ "00081B582D788E2A90F9834D78D203B978E3932B626DE03E221ED8EC0659AE51": {
+  "img": "/nfts/ledger-bears/221ed8ec0659ae51.webp",
+  "name": "Ledger Bears #88",
+  "uri": "ipfs://bafybeievakazzcpqtzk3anotjg3lcdpel6ohvehwhxf27hujvhtghcytye/88.json",
+  "media": "ipfs://bafybeidyifjmzccjtzsmnyu6nmq2qqhpxjwt65auzldwcr2x2ohma44hly/88.png"
+ },
+ "00081B5843B6C87E1B3BEA3E2BC2B69C46E1B509154E360902EB494C05E7BEB1": {
+  "img": "/nfts/digital-minds/02eb494c05e7beb1.webp",
+  "name": " *Along the River of Imagination*",
+  "uri": "ipfs://Qma812peoqLH9ZYC4iUCPxUZ4AZeZtodAPWVjvt6gDfNDW",
+  "media": "ipfs://QmaDTjj6rjP9fYu9bbGHFgNiLpn5FU1eoUMsfwRAnCAVHK"
+ },
+ "00081B584CA11C2D88C2A5B4DE359E41DD0854B5BFE3BFF094520B4A04BAF3AE": {
+  "img": "/nfts/xrpl-friends/94520b4a04baf3ae.webp",
+  "name": "Capy #746",
+  "uri": "https://arweave.net/SFK19xrhZX41h-LolP-5AL_r5Vn7lhskGl9O6O-N2IE/746.json",
+  "media": "https://arweave.net/zdRYBeiAcyJ4ljCKbdUJT5tivHypgtOYP5UIEZg8vmk/746.webp"
+ },
+ "00081B584CA11C2D88C2A5B4DE359E41DD0854B5BFE3BFF0C146D65604BAF2BA": {
+  "img": "/nfts/xrpl-friends/c146d65604baf2ba.webp",
+  "name": "Capy #28",
+  "uri": "https://arweave.net/SFK19xrhZX41h-LolP-5AL_r5Vn7lhskGl9O6O-N2IE/28.json",
+  "media": "https://arweave.net/zdRYBeiAcyJ4ljCKbdUJT5tivHypgtOYP5UIEZg8vmk/28.webp"
+ },
+ "00081B58B1EB46DF0FF2C07C1407C0DA3C897B1ECB21F9292BE262DC057B7742": {
+  "img": "/nfts/xrp-army-og-collection/2be262dc057b7742.webp",
+  "name": "ARMY #180",
+  "uri": "ipfs://bafybeicy23ffyy4o2rqwfqlwulq37vx73lt6ywe2g2n74xwndnofqgdt2u/ARMY #180.json",
+  "media": "ipfs://bafybeihnloqrqmujvrvqexamu65hx6hjalvmr27bvs2mk75khmpdwksi7m/army-#180.png"
+ },
+ "00081B58B1EB46DF0FF2C07C1407C0DA3C897B1ECB21F92995489703057B7667": {
+  "img": "/nfts/xrp-army-og-collection/95489703057b7667.webp",
+  "name": "ARMY #211",
+  "uri": "ipfs://bafybeicy23ffyy4o2rqwfqlwulq37vx73lt6ywe2g2n74xwndnofqgdt2u/ARMY #211.json",
+  "media": "ipfs://bafybeihnloqrqmujvrvqexamu65hx6hjalvmr27bvs2mk75khmpdwksi7m/army-#211.png"
+ },
+ "00081F404CC39683E519C1EDCA5C45AA2243CC3AFA2D10468A31E99505EEC5FA": {
+  "img": "/nfts/platypus/8a31e99505eec5fa.webp",
+  "name": "PLATYPUS #744",
+  "uri": "ipfs://bafybeigqa3oslrbtueko23tewdocrc5cmjh54ksnbjaadlpve4nkft2jja/nft_744.json",
+  "media": "ipfs://bafybeigddpywews6edhbef54exevil2avavlidzsqec7b3cmxjk6fz4lxi/nft_744.png"
+ },
+ "00081F4072D67B49A7ED6E16B05851CF77CDC8475B5FD7384E95DE2D05A01D07": {
+  "img": "/nfts/when-pigs-fly/4e95de2d05a01d07.webp",
+  "name": "Pig #127",
+  "uri": "ipfs://bafybeif3uebxms6mtltkyjizcflbjdnxe5i3tc76qqrlei6fwt7ld2oiem/127.json",
+  "media": "ipfs://bafybeifglciedpweus6avcxqiax3awm5uipardcdmyi2c457h2sxlinv7i/127.png"
+ },
+ "00081F4072D67B49A7ED6E16B05851CF77CDC8475B5FD7389347532A05A01D0A": {
+  "img": "/nfts/when-pigs-fly/9347532a05a01d0a.webp",
+  "name": "Pig #222",
+  "uri": "ipfs://bafybeif3uebxms6mtltkyjizcflbjdnxe5i3tc76qqrlei6fwt7ld2oiem/222.json",
+  "media": "ipfs://bafybeifglciedpweus6avcxqiax3awm5uipardcdmyi2c457h2sxlinv7i/222.png"
+ },
+ "00081F4072D67B49A7ED6E16B05851CF77CDC8475B5FD738C112F12805A01D0C": {
+  "img": "/nfts/when-pigs-fly/c112f12805a01d0c.webp",
+  "name": "Pig #116",
+  "uri": "ipfs://bafybeif3uebxms6mtltkyjizcflbjdnxe5i3tc76qqrlei6fwt7ld2oiem/116.json",
+  "media": "ipfs://bafybeifglciedpweus6avcxqiax3awm5uipardcdmyi2c457h2sxlinv7i/116.png"
+ },
+ "000822603EA060FD1026C04B2D390CC132D07D600DA9B0822D358F2F0487DB8A": {
+  "img": "/nfts/xspectar-avatar-v1-collection/2d358f2f0487db8a.webp",
+  "name": "Avatar #9763",
+  "uri": "https://api.bidds.com/api/metadata/000822603EA060FD1026C04B2D390CC132D07D600DA9B0822D358F2F0487DB8A",
+  "media": "ipfs://QmPjkGnvFxK2dbd2LogGtZrPU6Y1QUTkHa5sJdPH3z2pgi"
+ },
+ "0008271005ECDB63C36C15BAAF49634CA2D7C65D9ADDD1DD0936F1C605A2E731": {
+  "img": "/nfts/blackmarketdawgs/0936f1c605a2e731.webp",
+  "name": "XDawg2258",
+  "uri": "ipfs://bafybeicqbqeuf3xdl2opbnzd7jevyulovy5vvr7icl6z64guvcjc4vuumq/XDawg2258.json",
+  "media": "ipfs://bafybeic6wamfai5v2c3jaji2dhca3jgaj7ylqja4mg3pkvzr4k7arrkdg4/xdawg2258.png"
+ },
+ "000827102E49E23D179BBCCBD1445A57C8F921DE02E6249798033A2C05DC88D3": {
+  "img": "/nfts/innerdreams/98033a2c05dc88d3.webp",
+  "name": "Whispers of Sacred Mind",
+  "uri": "ipfs://QmTR2ZRN8Q9tftxLgPhAXMwAm2dE4srpVsNG9KH3qadXVu",
+  "media": "ipfs://QmRT9UpFfg5aDhZ9eQqpgMiksnp3HiPxiwPDH9L6Kvmy1c"
+ },
+ "000827104E6C554F55EC93E26F475B788591A1AC47F30194938BDCA805CA360D": {
+  "img": "/nfts/izayoiverseart/938bdca805ca360d.webp",
+  "name": "IZAYOI #29",
+  "uri": "ipfs://QmadA3HRM21tmYmAqZ4ckG8qyQSiiS7ZQZsp7yzprzghCW",
+  "media": "ipfs://QmdLW7VPF7TcoRzfroVQYLXWdWBjdxyHSwc9KnPstgSg3K"
+ },
+ "0008271068A0E6F504732B8741A31D6A7965EED1A1F659110B20E2CC05CBD831": {
+  "img": "/nfts/teddybg/0b20e2cc05cbd831.webp",
+  "name": "Teddy1160",
+  "uri": "ipfs://bafybeidgolbw7dlshrifw7bq2e77jdteak2cb4sfvjgvg3tgnh3ctr2hwu/Teddy1160.json",
+  "media": "ipfs://bafybeigqi2l2rwpgptevf2nur3yvfjnnye3zgpbb4gt5ab4jwjmcr2ez4u/teddy1160.png"
+ },
+ "00082710D66F170849D02E1C6EE26DB6662D87190B9B0C5721560DEF057D7054": {
+  "img": "/nfts/yamada/21560def057d7054.webp",
+  "name": "YAMADA SKULL #369",
+  "uri": "ipfs://QmUeWGaZ8qQMmAgwDz4TMPK2g59kXUxSW36brUygtvkACY",
+  "media": "ipfs://QmVNcmRzc4M8AzYbL9gLSHUA4n5p66NYxAfrTy2fwpLCWL"
+ },
+ "00082710D66F170849D02E1C6EE26DB6662D87190B9B0C5790B693C6057D6F2B": {
+  "img": "/nfts/yamada/90b693c6057d6f2b.webp",
+  "name": "YAMADA SKULL #73",
+  "uri": "ipfs://QmQApduwQ7GukWfYMDtUNLXAMquzF2wzbtii742GnVsJV5",
+  "media": "ipfs://QmfPdCKLW5iNzLiUzysKtun6mLKXB3QxmmmdrcppRaGdKg"
+ },
+ "00082710F1F5584F5630E36D1FCE776B38684142E8FB74B609C6B493065232F8": {
+  "img": "/nfts/punx/09c6b493065232f8.webp",
+  "name": "Punx #134",
+  "uri": "ipfs://bafybeifhefie33rn7ul3o5kdrzcbytvsmuyoxjckyoyd5may4desrhxm6y/134.json",
+  "media": "ipfs://bafybeida4jgeoqv4v4wmwp6ue4vhq6gfexg47xcnod73osu52tbkcbkwlm/134.png"
+ },
+ "00083A98A79D12EF0431D0F5BAE8503287BFF5F4C4297EB40A8FEFF5000010DC": {
+  "img": "/nfts/zpunks/0a8feff5000010dc.webp",
+  "name": "zPunk #6912",
+  "uri": "ipfs://bafybeiepclnmldogdmy6b6uif5acsa5a2ems552cyjbhlysmjz7bnq2ttm/metadata.json",
+  "media": "ipfs://bafybeidksxbqswyfszeifntfonb75igce3qjxlcmpsjdvjzv5ux7c5wjxu/1679249452301.png"
+ },
+ "000A32C8397CCDAB554D69B034DBB4042C29C6B714F0504502F44AAE05E502CC": {
+  "img": "/nfts/soitbegins/02f44aae05e502cc.webp",
+  "name": "Honeypot #143",
+  "uri": "ipfs://bafybeichyb7jzpyu3kp7ib4hy34w6odhg45kko4lrqam5jhn27ils25dqy/143.json",
+  "media": "ipfs://bafybeif4q4oit6ekavefxb2g3u62nw2u7n4yffn2f4cbobca5al4gm5rna/1.png"
+ },
+ "000A32C8397CCDAB554D69B034DBB4042C29C6B714F050454D06D9A305E502CF": {
+  "img": "/nfts/soitbegins/4d06d9a305e502cf.webp",
+  "name": "Honeypot #126",
+  "uri": "ipfs://bafybeichyb7jzpyu3kp7ib4hy34w6odhg45kko4lrqam5jhn27ils25dqy/126.json",
+  "media": "ipfs://bafybeif4q4oit6ekavefxb2g3u62nw2u7n4yffn2f4cbobca5al4gm5rna/1.png"
+ },
+ "00180BB8FA5AFA0BDEE958DE271CE74E345760A6243BA6517158A31A0583512A": {
+  "img": "/nfts/mojicaeditions/7158a31a0583512a.webp",
+  "name": "Invincible",
+  "uri": "ipfs://bafybeieq5qy4wqwkgjmaldortxupwpop7o2jljkr5r5uraoyqgltnzjsya/6.json",
+  "media": "ipfs://bafybeicnwucjkcicrfgirxqs2oteyrzsxaoaaufhmg2irst7luh4pdtlwq/IMG_7913.jpeg"
+ },
+ "001813880C7C14716237C4A8AC7FDA9B4AF1D6642B556AE14B85789C0617FC03": {
+  "img": "/nfts/sexy-betzy/4b85789c0617fc03.webp",
+  "name": "Sexy Betzy #1567",
+  "uri": "https://art.thejumpoff.xyz/sexy-betzy-c88a63/1567.json",
+  "media": "https://art.thejumpoff.xyz/sexy-betzy-c88a63/v52/1567.png"
+ },
+ "001813880C7C14716237C4A8AC7FDA9B4AF1D6642B556AE183E90A9906180100": {
+  "img": "/nfts/sexy-betzy/83e90a9906180100.webp",
+  "name": "Sexy Betzy #1483",
+  "uri": "https://art.thejumpoff.xyz/sexy-betzy-c88a63/1483.json",
+  "media": "https://art.thejumpoff.xyz/sexy-betzy-c88a63/v52/1483.png"
+ },
+ "001813880C7C14716237C4A8AC7FDA9B4AF1D6642B556AE1984A56B80617FE1F": {
+  "img": "/nfts/sexy-betzy/984a56b80617fe1f.webp",
+  "name": "Sexy Betzy #1670",
+  "uri": "https://art.thejumpoff.xyz/sexy-betzy-c88a63/1670.json",
+  "media": "https://art.thejumpoff.xyz/sexy-betzy-c88a63/v52/1670.png"
+ },
+ "001813880C7C14716237C4A8AC7FDA9B4AF1D6642B556AE1D91A9170061800D7": {
+  "img": "/nfts/sexy-betzy/d91a9170061800d7.webp",
+  "name": "Sexy Betzy #1854",
+  "uri": "https://art.thejumpoff.xyz/sexy-betzy-c88a63/1854.json",
+  "media": "https://art.thejumpoff.xyz/sexy-betzy-c88a63/v52/1854.png"
+ },
+ "001813881F9C83FE46F4EEC59D5E8C0B017F1791F856B8826C70033E061115A4": {
+  "img": "/nfts/seal-on-xrpl-cto/6c70033e061115a4.webp",
+  "name": "seal-732",
+  "uri": "ipfs://bafybeiaqnwmi5kuk3o73mvqkrsjl3uniwelgp3mgquzbqufdaa26hveqby/SEAL 732.json",
+  "media": "ipfs://bafybeifixgca255dozaswvbr7tnwonxzrztalw45rcsqpku2zx5wotn7cu/seal-732.png"
+ },
+ "00181388208AE9E5739668CEE25874F9BBE7EB2452EC4B8D046DD51E06370784": {
+  "img": "/nfts/animal-fam/046dd51e06370784.webp",
+  "name": "ANIMAL FAM #434",
+  "uri": "ipfs://bafybeies3cjkqwdultyw6nmo7zcrfnopsaf466izq64e7l424igfrnkmzi/434.json",
+  "media": "ipfs://bafybeibxv7tpfbqxxmjite7zkdscwds6y7ghjriqsgzadmuo6xhbegjku4/434.png"
+ },
+ "00181388208AE9E5739668CEE25874F9BBE7EB2452EC4B8D261834ED06370A51": {
+  "img": "/nfts/animal-fam/261834ed06370a51.webp",
+  "name": "ANIMAL FAM #174",
+  "uri": "ipfs://bafybeies3cjkqwdultyw6nmo7zcrfnopsaf466izq64e7l424igfrnkmzi/174.json",
+  "media": "ipfs://bafybeibxv7tpfbqxxmjite7zkdscwds6y7ghjriqsgzadmuo6xhbegjku4/174.png"
+ },
+ "00181388208AE9E5739668CEE25874F9BBE7EB2452EC4B8D27484985063706E9": {
+  "img": "/nfts/animal-fam/27484985063706e9.webp",
+  "name": "ANIMAL FAM #247",
+  "uri": "ipfs://bafybeies3cjkqwdultyw6nmo7zcrfnopsaf466izq64e7l424igfrnkmzi/247.json",
+  "media": "ipfs://bafybeibxv7tpfbqxxmjite7zkdscwds6y7ghjriqsgzadmuo6xhbegjku4/247.png"
+ },
+ "00181388208AE9E5739668CEE25874F9BBE7EB2452EC4B8D84F8A6EE06370954": {
+  "img": "/nfts/animal-fam/84f8a6ee06370954.webp",
+  "name": "ANIMAL FAM #535",
+  "uri": "ipfs://bafybeies3cjkqwdultyw6nmo7zcrfnopsaf466izq64e7l424igfrnkmzi/535.json",
+  "media": "ipfs://bafybeibxv7tpfbqxxmjite7zkdscwds6y7ghjriqsgzadmuo6xhbegjku4/535.png"
+ },
+ "00181388208AE9E5739668CEE25874F9BBE7EB2452EC4B8DF4592CC70637082B": {
+  "img": "/nfts/animal-fam/f4592cc70637082b.webp",
+  "name": "ANIMAL FAM #169",
+  "uri": "ipfs://bafybeies3cjkqwdultyw6nmo7zcrfnopsaf466izq64e7l424igfrnkmzi/169.json",
+  "media": "ipfs://bafybeibxv7tpfbqxxmjite7zkdscwds6y7ghjriqsgzadmuo6xhbegjku4/169.png"
+ },
+ "001813887D829B8285E64A3B355CD5E563C4F4AC9D7069424D788BD206173D35": {
+  "img": "/nfts/seal-cto-scrolls/4d788bd206173d35.webp",
+  "name": "SCROLL #83",
+  "uri": "ipfs://bafybeiek7fib37lsdglgybdrveiq6ypdxxvvbk7nwhvr3hbfdjbw3ywlfu/83.json",
+  "media": "ipfs://bafybeiggoea7sd4cjavstx6r7ognso7wcpoanwhy2pxgjlr5j2r4iksucm/83.png"
+ },
+ "001813887D829B8285E64A3B355CD5E563C4F4AC9D70694256FAD82906173E90": {
+  "img": "/nfts/seal-cto-scrolls/56fad82906173e90.webp",
+  "name": "SCROLL #430",
+  "uri": "ipfs://bafybeiek7fib37lsdglgybdrveiq6ypdxxvvbk7nwhvr3hbfdjbw3ywlfu/430.json",
+  "media": "ipfs://bafybeiggoea7sd4cjavstx6r7ognso7wcpoanwhy2pxgjlr5j2r4iksucm/430.png"
+ },
+ "001813887D829B8285E64A3B355CD5E563C4F4AC9D7069425E376C4C06173FB3": {
+  "img": "/nfts/seal-cto-scrolls/5e376c4c06173fb3.webp",
+  "name": "SCROLL #721",
+  "uri": "ipfs://bafybeiek7fib37lsdglgybdrveiq6ypdxxvvbk7nwhvr3hbfdjbw3ywlfu/721.json",
+  "media": "ipfs://bafybeiggoea7sd4cjavstx6r7ognso7wcpoanwhy2pxgjlr5j2r4iksucm/721.png"
+ },
+ "001813887D829B8285E64A3B355CD5E563C4F4AC9D70694273DAFADC06173E43": {
+  "img": "/nfts/seal-cto-scrolls/73dafadc06173e43.webp",
+  "name": "SCROLL #353",
+  "uri": "ipfs://bafybeiek7fib37lsdglgybdrveiq6ypdxxvvbk7nwhvr3hbfdjbw3ywlfu/353.json",
+  "media": "ipfs://bafybeiggoea7sd4cjavstx6r7ognso7wcpoanwhy2pxgjlr5j2r4iksucm/353.png"
+ },
+ "001813887D829B8285E64A3B355CD5E563C4F4AC9D706942BEF22B0C06173E73": {
+  "img": "/nfts/seal-cto-scrolls/bef22b0c06173e73.webp",
+  "name": "SCROLL #401",
+  "uri": "ipfs://bafybeiek7fib37lsdglgybdrveiq6ypdxxvvbk7nwhvr3hbfdjbw3ywlfu/401.json",
+  "media": "ipfs://bafybeiggoea7sd4cjavstx6r7ognso7wcpoanwhy2pxgjlr5j2r4iksucm/401.png"
+ },
+ "001813887D829B8285E64A3B355CD5E563C4F4AC9D706942C977ED3206173E95": {
+  "img": "/nfts/seal-cto-scrolls/c977ed3206173e95.webp",
+  "name": "SCROLL #435",
+  "uri": "ipfs://bafybeiek7fib37lsdglgybdrveiq6ypdxxvvbk7nwhvr3hbfdjbw3ywlfu/435.json",
+  "media": "ipfs://bafybeiggoea7sd4cjavstx6r7ognso7wcpoanwhy2pxgjlr5j2r4iksucm/435.png"
+ },
+ "001813887D829B8285E64A3B355CD5E563C4F4AC9D706942D56C909606173DF9": {
+  "img": "/nfts/seal-cto-scrolls/d56c909606173df9.webp",
+  "name": "SCROLL #279",
+  "uri": "ipfs://bafybeiek7fib37lsdglgybdrveiq6ypdxxvvbk7nwhvr3hbfdjbw3ywlfu/279.json",
+  "media": "ipfs://bafybeiggoea7sd4cjavstx6r7ognso7wcpoanwhy2pxgjlr5j2r4iksucm/279.png"
+ },
+ "00181388E5F69D23A43D8D61C60FE558C8DA604BCE1BE1D602A30CAD06595112": {
+  "img": "/nfts/ramp-reapers/02a30cad06595112.webp",
+  "name": "RAMPREAPERS #48",
+  "uri": "ipfs://bafybeif5dumx34hrca5rhyz6y6haluix6bksuf7qnvquafhrlqx2f2oek4/48.json",
+  "media": "ipfs://bafybeibrjisckwy5cxs452j7lzq6d4xqik4ghcp4aryrckmdzrz5de7b54/48.webp"
+ },
+ "00181388E5F69D23A43D8D61C60FE558C8DA604BCE1BE1D602CFAB7E06594EE3": {
+  "img": "/nfts/ramp-reapers/02cfab7e06594ee3.webp",
+  "name": "RAMPREAPERS #412",
+  "uri": "ipfs://bafybeif5dumx34hrca5rhyz6y6haluix6bksuf7qnvquafhrlqx2f2oek4/412.json",
+  "media": "ipfs://bafybeibrjisckwy5cxs452j7lzq6d4xqik4ghcp4aryrckmdzrz5de7b54/412.webp"
+ },
+ "00181B582531081A737B46B80556D4904EE401652D2DEC1B1D1E52360666EC9C": {
+  "img": "/nfts/maxonxrpl/1d1e52360666ec9c.webp",
+  "name": "MAX #230",
+  "uri": "ipfs://bafybeigpnh7hws774xbrcha4e42jww3mkhut3jfidtmvlkgvlvienfymyi/230.json",
+  "media": "ipfs://bafybeibt7nsaksgzdgy5jc4ckczuk7x56g5h3v64bpqj64y7pwxzymzcje/MAX-230.webp"
+ },
+ "00181B582531081A737B46B80556D4904EE401652D2DEC1B340423390666EC9D": {
+  "img": "/nfts/maxonxrpl/340423390666ec9d.webp",
+  "name": "MAX #108",
+  "uri": "ipfs://bafybeigpnh7hws774xbrcha4e42jww3mkhut3jfidtmvlkgvlvienfymyi/108.json",
+  "media": "ipfs://bafybeibt7nsaksgzdgy5jc4ckczuk7x56g5h3v64bpqj64y7pwxzymzcje/MAX-108.webp"
+ },
+ "00181B582531081A737B46B80556D4904EE401652D2DEC1BC28A83FB0666EB5F": {
+  "img": "/nfts/maxonxrpl/c28a83fb0666eb5f.webp",
+  "name": "MAX #551",
+  "uri": "ipfs://bafybeigpnh7hws774xbrcha4e42jww3mkhut3jfidtmvlkgvlvienfymyi/551.json",
+  "media": "ipfs://bafybeibt7nsaksgzdgy5jc4ckczuk7x56g5h3v64bpqj64y7pwxzymzcje/MAX-551.webp"
+ },
+ "00181F40C9F057673FC8D5A78215B8BA9FD5A2A9B7F8540E9D510CB3059BF81B": {
+  "img": "/nfts/smoki-pixel-editions/9d510cb3059bf81b.webp",
+  "name": "317",
+  "uri": "ipfs://bafybeihkx4ml2sob6iwitz3xpznonvkocj7ahxuomfoyjykxdiqtfd5jri/317.json",
+  "media": "ipfs://bafybeias6ju52ov5g7nfjzujhydj5l7arglklcjevc7iygiyigkusdpnom/317.png"
+ },
+ "00181F40EB467BD9E06C744DD0BB103B109BFD2699310F8A0AB759C106304A26": {
+  "img": "/nfts/round-tripprx-beyond/0ab759c106304a26.webp",
+  "name": "695",
+  "uri": "ipfs://bafybeieggoqwcrnxcowndmduqir7lyc5dkcica35ln6qabdomyemp2f3hu/695.json",
+  "media": "ipfs://bafybeigoosx7qs362otbrlapud6q4ysptsqexqimi2dvwprjso6y6ebama/695.png"
+ },
+ "00181F40EB467BD9E06C744DD0BB103B109BFD2699310F8A664E9DC506304A2A": {
+  "img": "/nfts/round-tripprx-beyond/664e9dc506304a2a.webp",
+  "name": "587",
+  "uri": "ipfs://bafybeieggoqwcrnxcowndmduqir7lyc5dkcica35ln6qabdomyemp2f3hu/587.json",
+  "media": "ipfs://bafybeigoosx7qs362otbrlapud6q4ysptsqexqimi2dvwprjso6y6ebama/587.png"
+ },
+ "0018271083C7EEA26CA6F03D38153D17E10866C269B9F1DF370084FD063D7962": {
+  "img": "/nfts/dropchan/370084fd063d7962.webp",
+  "name": "dropchan #1633",
+  "uri": "ipfs://QmeGvGwo6K2wbi52yCHqVCFPiSVao4dQcUnE6X4SW1V5Sf/1633.json",
+  "media": "ipfs://bafybeiauklsuqrcpm7q2u7f376tnashxsz3howdtzk2zuthp5bawxmij64/1633.svg"
+ },
+ "0018271083C7EEA26CA6F03D38153D17E10866C269B9F1DF7DD35486063D6FEB": {
+  "img": "/nfts/dropchan/7dd35486063d6feb.webp",
+  "name": "dropchan #8853",
+  "uri": "ipfs://QmeGvGwo6K2wbi52yCHqVCFPiSVao4dQcUnE6X4SW1V5Sf/8853.json",
+  "media": "ipfs://bafybeiauklsuqrcpm7q2u7f376tnashxsz3howdtzk2zuthp5bawxmij64/8853.svg"
+ },
+ "00182710EF7C422EF52CEB969960BEF4144D7BC3F862C46768CB7242059EBDBB": {
+  "img": "/nfts/food-and-liquor/68cb7242059ebdbb.webp",
+  "name": "Forever Lovers",
+  "uri": "ipfs://bafybeia2y5mxstiftxxdmoib5scbzinvlp4ezx427brhiqvhndndjvxu3i/80.json",
+  "media": "ipfs://QmVoysbm2mchSzoSP9ks4nmei8CyvCFgr5sBKim8xQezG7"
+ },
+ "00182710EF7C422EF52CEB969960BEF4144D7BC3F862C467752B8121059EBD9A": {
+  "img": "/nfts/food-and-liquor/752b8121059ebd9a.webp",
+  "name": "Forever Lovers",
+  "uri": "ipfs://bafybeia2y5mxstiftxxdmoib5scbzinvlp4ezx427brhiqvhndndjvxu3i/47.json",
+  "media": "ipfs://QmVoysbm2mchSzoSP9ks4nmei8CyvCFgr5sBKim8xQezG7"
+ },
+ "00182710EF7C422EF52CEB969960BEF4144D7BC3F862C467794B863E059EBD8F": {
+  "img": "/nfts/food-and-liquor/794b863e059ebd8f.webp",
+  "name": "Forever Lovers",
+  "uri": "ipfs://bafybeia2y5mxstiftxxdmoib5scbzinvlp4ezx427brhiqvhndndjvxu3i/36.json",
+  "media": "ipfs://QmVoysbm2mchSzoSP9ks4nmei8CyvCFgr5sBKim8xQezG7"
+ },
+ "00182AF8AED7E25A9085DF5E80EA66DD1E058557537FC91C00501F9A05A9C550": {
+  "img": "/nfts/pixel-scrappy/00501f9a05a9c550.webp",
+  "name": "Pixel Scrappy #300",
+  "uri": "ipfs://bafybeid7e5yfl4x2mr5hlhs2z574ohmmcx4eewarnwbv7a3euln7sgz3de/300.json",
+  "media": "ipfs://bafybeiceri2arlkqfeq2zmpidifkpscv5nt6gzlgwkjfdd74ys7kiixmpe/300.png"
+ }
+}

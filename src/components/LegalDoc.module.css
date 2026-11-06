@@ -1,0 +1,18 @@
+.doc{max-width:68ch;display:grid;gap:14px;padding-bottom:24px;font-size:16px;line-height:1.6;color:var(--doc-text,#d6d7e0)}
+.doc>*{min-width:0}
+.doc section{display:grid;gap:10px;margin-top:22px;scroll-margin-top:16px}
+.doc section>*{min-width:0}
+.doc h2{font:400 clamp(22px,4vw,28px)/1.15 var(--d);text-transform:uppercase;letter-spacing:.2px;color:var(--text)}
+.doc p{margin:0;overflow-wrap:anywhere}
+.doc ul{margin:0;padding-left:20px;display:grid;gap:8px}
+.doc li{overflow-wrap:anywhere}
+.doc li::marker{color:var(--doc-mark,var(--y))}
+.doc a{color:var(--text);text-decoration:underline;text-underline-offset:2px}
+.doc code{font:500 13px var(--m);background:var(--panel2);padding:1px 5px;border-radius:3px}
+.doc mark{background:var(--y);color:var(--yink);font-weight:700;padding:0 4px;border-radius:2px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.doc .note{border:1px solid var(--y);background:var(--panel);color:var(--text);padding:12px 14px;border-radius:3px}
+.toc{border:1px solid var(--divider);background:var(--panel);border-radius:3px}
+.toc summary{min-height:44px;display:flex;align-items:center;padding:0 14px;font-weight:700;cursor:pointer}
+.toc nav{display:grid;gap:2px;padding:0 14px 12px}
+.doc .toc a{min-height:36px;display:flex;align-items:center;text-decoration:none;color:var(--doc-toc,#c6c8d4)}
+.doc .toc a:hover{color:var(--doc-mark,var(--y))}
