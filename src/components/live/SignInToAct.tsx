@@ -14,8 +14,8 @@ export function SignInToAct({ text = "Connect the wallet that paid to sell, clai
   if (useXapp().shell) return null;
   return (
     <>
-      <p className="fine">{noOrphan(text)}</p>
-      <button className="btn full" onClick={() => connect()}>
+      <p className="fine webonly">{noOrphan(text)}</p>
+      <button className="btn full webonly" onClick={() => connect()}>
         Connect your wallet
       </button>
     </>

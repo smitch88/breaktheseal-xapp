@@ -68,9 +68,10 @@ function AnyWallet({ tx }: { tx: Readonly<Record<string, unknown>> }) {
 }
 
 /**
- * The one transaction a player signs. In Joey for a Joey sign-in. For Xaman, its QR on desktop, its app link on a phone, or the
- * request itself opened inside Xaman when running as an xApp. The plain details for any other wallet are always there. It only
- * asks: the server moves a pull forward when the ledger says it happened, never because this sheet did.
+ * The one transaction a player signs. In Joey for a Joey sign-in. For Xaman, its QR on desktop, its app link on a phone, or, inside
+ * the xApp, the request itself, opened only when the player presses Approve under the sheet's plain explanation and fees. Nothing opens
+ * a request on its own. The plain details for any other wallet are always there. It only asks: the server moves a pull forward when
+ * the ledger says it happened, never because this sheet did.
  */
 export function WalletSheet({ title, intro, wallet, tx, onClose, onCheck, onRetry, declined = "You said no in your wallet, so nothing moved.", children }: { title: string; intro: string; wallet: WalletLink | null; tx: Readonly<Record<string, unknown>>; onClose: () => void; onCheck?: () => void; onRetry?: () => void; declined?: string; children?: React.ReactNode }) {
   const check = useRef(onCheck);
@@ -97,7 +98,8 @@ export function WalletSheet({ title, intro, wallet, tx, onClose, onCheck, onRetr
   const after = useRef(lookUp);
   after.current = lookUp;
 
-  // Xaman says when a request was signed, so the page looks at the ledger right away. Polling still covers a dropped socket.
+  // Xaman's status socket says when a request was signed, so the page looks at the ledger right away. Xaman's own request status is
+  // only ever read on one of its signals, never on a timer; the page's own check reads our ledger record, so a dropped socket is still covered.
   useEffect(() => {
     if (!wallet?.ws) return;
     let socket: WebSocket | null = null;
@@ -111,7 +113,7 @@ export function WalletSheet({ title, intro, wallet, tx, onClose, onCheck, onRetr
         } else if (signal) setEnded(signal);
       };
     } catch {
-      /* The poll still covers it. */
+      /* The page's ledger check still covers it. */
     }
     return () => socket?.close();
   }, [wallet?.ws]);
@@ -131,6 +133,7 @@ export function WalletSheet({ title, intro, wallet, tx, onClose, onCheck, onRetr
   const { active, shell } = useXapp();
   const inXapp = active && !!wallet;
   const [refused, setRefused] = useState<string | null>(null);
+  // Only ever from the Approve button: the sheet above it has already said what this is and what it costs.
   const openInXaman = useCallback(() => {
     if (!uuid) return;
     setRefused(null);
@@ -144,9 +147,6 @@ export function WalletSheet({ title, intro, wallet, tx, onClose, onCheck, onRetr
       () => setRefused("Xaman didn't open the request. Try again."),
     );
   }, [uuid]);
-  useEffect(() => {
-    if (inXapp) openInXaman();
-  }, [inXapp, openInXaman]);
 
   const mode = sheetMode({ signedWith, inXapp, hasWallet: !!wallet, ended });
   const saidNo = shell ? declined.replace("You said no in your wallet", "You declined in Xaman") : declined;
@@ -176,7 +176,7 @@ export function WalletSheet({ title, intro, wallet, tx, onClose, onCheck, onRetr
         <>
           {refused ? <p className="freshness">{noOrphan(refused)}</p> : null}
           <button className="btn full" onClick={openInXaman}>
-            Open in Xaman
+            Approve in Xaman
           </button>
         </>
       ) : mode === "link" && wallet ? (

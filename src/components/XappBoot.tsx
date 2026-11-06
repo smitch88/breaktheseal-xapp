@@ -3,45 +3,38 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { inXamanWebview, launchToken, refusalText, xappSdk } from "@/lib/auth/xapp-host";
+import { launchToken, refusalText, xappSdk } from "@/lib/auth/xapp-host";
 import { dispatch } from "@/lib/demo/store";
 import { noOrphan } from "@/lib/format";
 import { LEGAL_LINKS } from "@/lib/legal/links";
-import { WELCOMED_KEY, welcomeNeeded } from "@/lib/xapp-copy";
+import { infoNeeded } from "@/lib/xapp-copy";
+import { inXapp } from "@/lib/xapp-style";
 import { Logo } from "./Logo.tsx";
-import { XappAbout } from "./XappShell.tsx";
+import { XappAbout, XappInfoSheet } from "./XappShell.tsx";
 import { useXapp } from "./XappHost.tsx";
 import { launchXapp } from "./XappSignIn.tsx";
 
-const welcomed = {
-  get: () => {
-    try {
-      return window.localStorage.getItem(WELCOMED_KEY);
-    } catch {
-      return null;
-    }
-  },
-  set: () => {
-    try {
-      window.localStorage.setItem(WELCOMED_KEY, "1");
-    } catch {
-      /* Shown again next launch, which is the safe side. */
-    }
-  },
+type View = { name: "opening" } | { name: "welcome"; info: boolean } | { name: "refused"; text: string; info: boolean };
+
+/** Whether this player still needs the info sheet, from Xaman's userstore through the server. Any failure shows it. */
+const askInfo = async (): Promise<boolean> => {
+  const res = await fetch("/api/auth/xapp/info", { cache: "no-store" }).catch(() => null);
+  return infoNeeded(res?.ok ? await res.json().catch(() => null) : null);
 };
 
 /**
- * Where Xaman opens the app. It says what this is, who runs it and the risk, and asks for nothing: no sign-in, no signature. The first
- * launch on a phone stays on that screen until the player taps through; later ones go straight to the packs. Outside Xaman this page
- * is just a way to the home page, and spends nothing.
+ * Where Xaman opens the app. The account comes from Xaman's launch: no sign-in, no wallet to pick, no signature. Until the launch is
+ * known this draws nothing of its own, and Xaman's loader stays up (readyGate). Every launch then lands here, on what this is, the risk,
+ * About, and Support, Terms and Privacy, and waits for a tap before the packs. A player's first launch opens the info sheet over it,
+ * until they press Got it, which Xaman's userstore remembers. Outside the xApp this page is just a way to the home page, and spends nothing.
  */
 export function XappBoot({ network, seal, cards }: { network: "MAINNET" | "TESTNET"; seal: boolean; cards: boolean }) {
   const router = useRouter();
-  const { refresh } = useXapp();
-  const [view, setView] = useState<{ name: "opening" } | { name: "welcome" } | { name: "refused"; text: string }>({ name: "opening" });
+  const { refresh, settle } = useXapp();
+  const [view, setView] = useState<View>({ name: "opening" });
 
   useEffect(() => {
-    if (!inXamanWebview()) {
+    if (!inXapp()) {
       router.replace("/");
       return;
     }
@@ -49,15 +42,18 @@ export function XappBoot({ network, seal, cards }: { network: "MAINNET" | "TESTN
     const token = launchToken(window.location.search, navigator.userAgent);
     window.history.replaceState(null, "", "/xapp");
     let live = true;
-    const onward = () => (welcomeNeeded(welcomed.get()) ? setView({ name: "welcome" }) : router.replace("/packs"));
+    const onward = async () => {
+      const info = await askInfo();
+      if (live) setView({ name: "welcome", info });
+    };
     void (async () => {
       // Back here from Terms or Support, with the token long gone from the address: the launch this page already made still stands.
       // Sending an empty token would end it.
       if (!token) {
         const on = await refresh();
         if (!live) return;
-        if (on) onward();
-        else setView({ name: "refused", text: refusalText(undefined, network) });
+        if (on) await onward();
+        else setView({ name: "refused", text: refusalText(undefined, network), info: false });
         return;
       }
       const body = await launchXapp(token);
@@ -65,11 +61,11 @@ export function XappBoot({ network, seal, cards }: { network: "MAINNET" | "TESTN
       await refresh();
       if (body.state === "ready" && body.account) {
         dispatch({ type: "connect", address: body.account, wallet: "xaman" });
-        onward();
+        await onward();
         return;
       }
       dispatch({ type: "signout" });
-      setView({ name: "refused", text: refusalText(body.state, network) });
+      setView({ name: "refused", text: refusalText(body.state, network), info: false });
     })();
     return () => {
       live = false;
@@ -78,10 +74,24 @@ export function XappBoot({ network, seal, cards }: { network: "MAINNET" | "TESTN
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // The launch is known and this screen is drawn: now Xaman may take its loader down.
+  useEffect(() => {
+    if (view.name !== "opening") settle();
+  }, [view.name, settle]);
+
+  // Nothing of ours while the launch is open: no chooser, no sign-in, no loader. Xaman's own loader covers it.
+  if (view.name === "opening") return <main className="pg xboot" aria-busy="true" />;
+
+  const showInfo = (info: boolean) => setView((v) => (v.name === "opening" ? v : { ...v, info }));
   return (
     <main className="pg xboot">
-      <div className="logo">
-        <Logo />
+      <div className="xbootbar">
+        <div className="logo">
+          <Logo />
+        </div>
+        <button type="button" className="xaboutbtn" onClick={() => showInfo(true)}>
+          About
+        </button>
       </div>
       <XappAbout seal={seal} cards={cards} />
       {view.name === "refused" ? (
@@ -91,20 +101,10 @@ export function XappBoot({ network, seal, cards }: { network: "MAINNET" | "TESTN
             Close
           </button>
         </>
-      ) : view.name === "welcome" ? (
-        <button
-          className="btn full"
-          onClick={() => {
-            welcomed.set();
-            router.replace("/packs");
-          }}
-        >
+      ) : (
+        <button className="btn full" onClick={() => router.replace("/packs")}>
           See the packs
         </button>
-      ) : (
-        <div className="waitrow" role="status">
-          <i className="spin" aria-hidden="true" /> Opening your account
-        </div>
       )}
       <p className="xlegal">
         {LEGAL_LINKS.map((l) => (
@@ -113,6 +113,7 @@ export function XappBoot({ network, seal, cards }: { network: "MAINNET" | "TESTN
           </Link>
         ))}
       </p>
+      {view.info ? <XappInfoSheet seal={seal} cards={cards} onClose={() => showInfo(false)} onGotIt={() => void fetch("/api/auth/xapp/info", { method: "POST" }).catch(() => {})} /> : null}
     </main>
   );
 }

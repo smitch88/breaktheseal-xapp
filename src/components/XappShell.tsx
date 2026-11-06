@@ -2,14 +2,16 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { shellBack } from "@/lib/again";
 import { useDemo } from "@/lib/demo/store";
 import { noOrphan } from "@/lib/format";
-import { LEGAL_LINKS, OPERATOR, SUPPORT_CHANNELS } from "@/lib/legal/links";
-import { aboutFine, aboutLine } from "@/lib/xapp-copy";
+import { INFO_LINKS, infoUrl, openOutside } from "@/lib/auth/xapp-host";
+import { LEGAL_LINKS, OPERATOR, SUPPORT_CHANNELS, SUPPORT_EMAIL } from "@/lib/legal/links";
+import { aboutFine, aboutLine, independence, infoLine } from "@/lib/xapp-copy";
 import { usePendingCount } from "@/lib/live/hooks";
 import { useRails } from "./Providers.tsx";
+import { Sheet } from "./Sheet.tsx";
 import { useXapp } from "./XappHost.tsx";
 
 const icon = (d: React.ReactNode) => (
@@ -64,7 +66,7 @@ export function XappShell() {
   );
 }
 
-/** What this is, who runs it, and that it isn't Xaman's own. The first thing anyone reads inside Xaman. */
+/** What this is, who makes it, and that it isn't Xaman's own. The first thing anyone reads inside Xaman. */
 export function XappAbout({ seal, cards }: { seal: boolean; cards: boolean }) {
   return (
     <section className="xabout">
@@ -75,7 +77,7 @@ export function XappAbout({ seal, cards }: { seal: boolean; cards: boolean }) {
   );
 }
 
-/** The small line under every page: who runs this, the risk, and the three links Xaman asks for. */
+/** The small line under every page: who makes this and that Xaman doesn't, the risk, and the three links Xaman asks for. */
 export function XappFoot() {
   if (!useXapp().shell) return null;
   return (
@@ -88,7 +90,7 @@ export function XappFoot() {
         ))}
       </p>
       <p className="fine">
-        {noOrphan(`Third-party app by ${OPERATOR}. 18+. Pack results are random, so only spend what you can afford to lose.`)} XRP price:{" "}
+        {noOrphan(`${independence(OPERATOR)} 18+. Pack results are random, so only spend what you can afford to lose.`)} XRP price:{" "}
         <a href="https://xrpl.to" target="_blank" rel="noopener">
           Data by xrpl.to
         </a>
@@ -98,8 +100,10 @@ export function XappFoot() {
   );
 }
 
-/** The Help tab's other pages: how it all works, the odds, and the proof. The site has them in its footer, which Xaman doesn't show. */
-const HELP_TOPICS = [
+/** The Help tab's pages: the terms and privacy first, then how it all works, the odds, and the proof. The site has them in its footer, which Xaman doesn't show. */
+export const HELP_TOPICS = [
+  { href: "/terms", label: "Terms" },
+  { href: "/privacy", label: "Privacy" },
   { href: "/how", label: "How packs work" },
   { href: "/rates", label: "Rarity rates" },
   { href: "/fair", label: "How the draw works" },
@@ -107,13 +111,25 @@ const HELP_TOPICS = [
 
 /** Tap-to-reach support, inside Xaman, on top of the support page, and the way to every other help page. */
 export function XappSupport() {
-  if (!useXapp().shell) return null;
+  const { shell } = useXapp();
+  const [copied, setCopied] = useState(false);
+  if (!shell) return null;
+  const copy = () => void navigator.clipboard?.writeText(SUPPORT_EMAIL).then(() => setCopied(true), () => {});
   return (
     <section className="xabout">
-      <p>{noOrphan(`Break the Seal is a third-party app run by ${OPERATOR}. Xaman and XRPL Labs can't help with your order, so contact us directly.`)}</p>
+      <p>{noOrphan(`${independence(OPERATOR)} Xaman Support can't help with your order, so contact us directly.`)}</p>
+      {/* An email link stays in the webview, which hands it to the phone's mail app. The address is there to copy as well. */}
+      <div className="xmail">
+        <a className="btn full" href={`mailto:${SUPPORT_EMAIL}`}>
+          Email {SUPPORT_EMAIL}
+        </a>
+        <button type="button" className="btn ol" onClick={copy} aria-label={`Copy ${SUPPORT_EMAIL}`}>
+          {copied ? "Copied" : "Copy"}
+        </button>
+      </div>
       <div className="xreach">
-        {SUPPORT_CHANNELS.map((c, i) => (
-          <a key={c.href} className={`btn${i ? " ol" : ""} full`} href={c.href} target="_blank" rel="noopener">
+        {SUPPORT_CHANNELS.map((c) => (
+          <a key={c.href} className="btn ol full" href={c.href} target="_blank" rel="noopener">
             {c.label}
           </a>
         ))}
@@ -127,5 +143,40 @@ export function XappSupport() {
         ))}
       </nav>
     </section>
+  );
+}
+
+/**
+ * The first-launch info sheet inside Xaman, and the same sheet from About: what this is, who makes it, and Support, the Privacy Policy
+ * and the Terms, which open in the phone's browser through Xaman's openBrowser. Got it is the only thing that marks it read.
+ */
+export function XappInfoSheet({ seal, cards, onClose, onGotIt }: { seal: boolean; cards: boolean; onClose: () => void; onGotIt: () => void }) {
+  return (
+    <Sheet onClose={onClose} label="About Break the Seal" className="xinfo">
+      {(close) => (
+        <>
+          <h3>About Break the Seal</h3>
+          <p>{noOrphan(infoLine({ seal, cards }))}</p>
+          <p className="fine">{noOrphan(independence(OPERATOR))}</p>
+          <div className="xinfolinks">
+            {INFO_LINKS.map((l) => (
+              <button key={l.path} type="button" className="btn ol full" onClick={() => void openOutside(infoUrl(l.path, window.location.origin))}>
+                {l.label}
+              </button>
+            ))}
+          </div>
+          <button
+            type="button"
+            className="btn full"
+            onClick={() => {
+              onGotIt();
+              close();
+            }}
+          >
+            Got it
+          </button>
+        </>
+      )}
+    </Sheet>
   );
 }

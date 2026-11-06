@@ -1,8 +1,10 @@
+import { inXapp } from "../xapp-style.ts";
+
 /**
- * The browser side of running in Xaman. Only Xaman's own webview has both `ReactNativeWebView` and its `xumm/xapp` user agent;
- * Joey's in-app browser has the first and not the second. This check is not trust: it keeps every other browser from running
- * any of this, including on a link someone crafted with their own token. Who is signed in is decided on the server, and the
- * SDK is only loaded here, so the site outside Xaman never fetches it.
+ * The browser side of running in Xaman. Whether a page is the xApp is decided before first paint (`inXapp`, from Xaman's user agent or
+ * its launch address), and that is layout, not trust: who is signed in is decided on the server, from a launch token it spent with
+ * Xaman itself. The SDK is only loaded inside the xApp, so the website never fetches it. It reaches Xaman over React Native's bridge
+ * in Xaman's webview, or over the frame's parent in Xaman's sandbox and xAppBuilder, and says so with an Error when neither answers.
  */
 export type SignOutcome = "signed" | "declined";
 
@@ -14,9 +16,6 @@ interface XappSdk {
   on(event: "payload", fn: (data: unknown) => void): unknown;
   off(event: "payload", fn: (data: unknown) => void): unknown;
 }
-
-export const isXamanHost = (bridge: unknown, userAgent: string) => typeof bridge !== "undefined" && /xumm\/xapp/i.test(userAgent);
-export const inXamanWebview = () => typeof window !== "undefined" && isXamanHost((window as unknown as { ReactNativeWebView?: unknown }).ReactNativeWebView, navigator.userAgent);
 
 /**
  * Xaman silently drops any message from an xApp under 1500ms after the last one it took, and the SDK still reports success. A
@@ -54,7 +53,7 @@ export function pacedHost(sdk: XappSdk, now: () => number = Date.now, wait: (ms:
 
 let loaded: Promise<XappSdk> | undefined;
 export function xappSdk(): Promise<XappSdk> | null {
-  if (!inXamanWebview()) return null;
+  if (!inXapp()) return null;
   loaded ??= import("xumm-xapp-sdk").then((m) => pacedHost(new m.xApp() as unknown as XappSdk));
   return loaded;
 }
@@ -124,18 +123,36 @@ export function externalUrl(href: string | null | undefined, origin: string): st
   }
 }
 
-/** Where a tapped link has to go instead of this webview: leaving the site, opening a window, or an email. A plain link inside the app stays in it. */
+/** Xaman's `openBrowser` opens only https addresses and drops anything else without a word, so a plain http link goes as https. */
+const https = (href: string) => href.replace(/^http:/i, "https:");
+
+/**
+ * Where a tapped link has to go instead of this webview: leaving the site, or opening a window. A plain link inside the app stays in
+ * it, and so does an email link: Xaman's webview hands any address that isn't a web page to the phone, which opens its mail app.
+ */
 export function xappLink(href: string | null | undefined, target: string | null | undefined, origin: string): string | null {
   if (!href) return null;
-  if (/^mailto:/i.test(href)) return href;
   const out = externalUrl(href, origin);
-  if (out || target !== "_blank") return out;
+  if (out) return https(out);
+  if (target !== "_blank") return null;
   try {
     const url = new URL(href, origin);
-    return /^https?:$/.test(url.protocol) ? url.href : null;
+    return /^https?:$/.test(url.protocol) ? https(url.href) : null;
   } catch {
     return null;
   }
+}
+
+/**
+ * Open another site in the phone's browser, through Xaman, which asks the player first. Where no Xaman answers, as on a desktop
+ * browser opened from a launch link, it opens in a new tab instead, so a link never does nothing.
+ */
+export async function openOutside(url: string, deps: { sdk?: Promise<Pick<XappSdk, "openBrowser">> | null; fallback?: (url: string) => void } = {}): Promise<"xaman" | "tab"> {
+  const sdk = await ("sdk" in deps ? deps.sdk : xappSdk());
+  const sent = sdk ? await Promise.resolve(sdk.openBrowser({ url })).catch((e: unknown) => (e instanceof Error ? e : new Error(String(e)))) : null;
+  if (sdk && !(sent instanceof Error)) return "xaman";
+  (deps.fallback ?? ((u: string) => void window.open(u, "_blank", "noopener")))(url);
+  return "tab";
 }
 
 /** What the player reads when a launch can't go on. Closing and opening the xApp is what gets a new token from Xaman. */
@@ -155,3 +172,49 @@ export function refusalText(state: string | undefined, network: "MAINNET" | "TES
       return "This session has ended. Close Break the Seal and open it again from Xaman.";
   }
 }
+
+/**
+ * Xaman's `ready()`, once, when the first real screen can draw. With the console's "Xaman loader till SDK ready() is called" on, Xaman
+ * keeps its own loader up until then, so nothing of ours shows before the launch is known: no chooser and no loader of our own. Xaman
+ * calls an xApp slow at about 6 seconds, so if the launch hasn't answered by READY_FALLBACK_MS the app shows itself anyway.
+ */
+export const READY_FALLBACK_MS = 4500;
+
+export function readyGate(o: { readonly ready: () => unknown; readonly reveal?: () => void; readonly fallbackMs?: number; readonly setTimer?: (fn: () => void, ms: number) => unknown; readonly clearTimer?: (t: unknown) => void }) {
+  const setTimer = o.setTimer ?? ((fn: () => void, ms: number) => setTimeout(fn, ms));
+  const clearTimer = o.clearTimer ?? ((t: unknown) => clearTimeout(t as ReturnType<typeof setTimeout>));
+  let done = false;
+  let timer: unknown = null;
+  const settle = () => {
+    if (done) return;
+    done = true;
+    if (timer !== null) clearTimer(timer);
+    o.reveal?.();
+    void o.ready();
+  };
+  timer = setTimer(settle, o.fallbackMs ?? READY_FALLBACK_MS);
+  return {
+    /** The launch is known and its screen is drawn. Only the first call, or the fallback, does anything. */
+    settle,
+    get settled() {
+      return done;
+    },
+    /** The page went away first: no ready and no reveal. */
+    cancel() {
+      if (done) return;
+      done = true;
+      if (timer !== null) clearTimer(timer);
+    },
+  };
+}
+
+/** What a press that needs a wallet shows. Inside the xApp it is never the website's chooser: the account comes from Xaman's launch. */
+export const connectView = (s: { readonly open: boolean; readonly xapp: boolean }): "none" | "xapp" | "chooser" => (!s.open ? "none" : s.xapp ? "xapp" : "chooser");
+
+/** The first-launch info sheet's three links. Xaman asks that they open in the phone's browser, through openBrowser. */
+export const INFO_LINKS = [
+  { path: "/support", label: "Support" },
+  { path: "/privacy", label: "Privacy Policy" },
+  { path: "/terms", label: "Terms" },
+] as const;
+export const infoUrl = (path: string, origin: string): string => https(new URL(path, origin).href);

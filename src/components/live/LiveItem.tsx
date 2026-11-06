@@ -19,6 +19,7 @@ import { PrizeActions } from "./PrizeActions.tsx";
 import { SignInToAct } from "./SignInToAct.tsx";
 import { LiveSellSheet } from "./SellSheet.tsx";
 import { SellWindow } from "./SellWindow.tsx";
+import { SHIP_INTRO } from "@/lib/live/sign-copy";
 import { WalletSheet } from "./WalletSheet.tsx";
 
 type Accept = { tx: Readonly<Record<string, unknown>>; wallet: WalletLink | null };
@@ -51,7 +52,7 @@ function ShipSheet({ ref_, onClose, onDone }: { ref_: LiveRef; onClose: () => vo
   usePoll(check, 3000, !asked);
   if (asked) {
     return (
-      <WalletSheet title="Approve the address" intro="This isn't a sign-in. Approving says this card ships to the address you just entered. It costs only the network fee, and your card doesn't move until it's on the ledger." wallet={asked.wallet} tx={asked.tx} onClose={onClose} onCheck={() => void check()} declined="You said no in your wallet, so your card stays in your stash.">
+      <WalletSheet title="Approve the address" intro={SHIP_INTRO} wallet={asked.wallet} tx={asked.tx} onClose={onClose} onCheck={() => void check()} declined="You said no in your wallet, so your card stays in your stash.">
         {problem ? <p className="freshness">{problem}</p> : null}
       </WalletSheet>
     );
@@ -59,7 +60,7 @@ function ShipSheet({ ref_, onClose, onDone }: { ref_: LiveRef; onClose: () => vo
   return (
     <Sheet onClose={onClose} label="Ship this card">
       <h3>Ship this card</h3>
-      <p className="fine">{noOrphan("Your wallet approves the address next. If this card has an NFT, the NFT is retired first. Your name and address go to the third-party card vault and the carrier that ship it, and never onto the ledger. A shipped card can't be sold back here.")}</p>
+      <p className="fine">{noOrphan("Your wallet approves the address next, for only the network fee. We charge nothing to ship. If this card has an NFT, the NFT is retired first. Your name and address go to the third-party card vault and the carrier that ship it, and never onto the ledger. A shipped card can't be sold back here.")}</p>
       <input aria-label="Full name" placeholder="Full name" autoComplete="off" value={form.name} onChange={set("name")} />
       <input aria-label="Street address" placeholder="Street address" autoComplete="off" value={form.street} onChange={set("street")} />
       <div className="two">

@@ -8,7 +8,7 @@ import { useDemo } from "@/lib/demo/store";
 import { LIVE_CARD, LIVE_MULTI, LIVE_NFT, REFUND_REASONS, afterLook, api, multiApi, type LiveBundle, type LiveCard, type LiveOrder, type WalletLink, networkLabel, xrpText } from "@/lib/live/client";
 import { usePoll, useRipConfig } from "@/lib/live/hooks";
 import { checkoutQty } from "@/lib/live/multi";
-import { TERMS_KEY, qtyKey, quickStart, session } from "@/lib/again";
+import { qtyKey, session } from "@/lib/again";
 import { REFUSED_HOLD_MS, checkoutView, packAvailability, readRefusal } from "@/lib/live/restock";
 import type { PackRef } from "@/lib/rails/types";
 import { CheckoutBar, CheckoutDetails } from "../CheckoutParts.tsx";
@@ -16,14 +16,15 @@ import { useConfirmAccount, useConnect, useRails } from "../Providers.tsx";
 import { useXapp } from "../XappHost.tsx";
 import { QtyPicker, useQtyRoom } from "./QtyPicker.tsx";
 import { RestockLine, RestockMark, useHeldCheckout } from "./Restock.tsx";
+import { payIntro } from "@/lib/live/sign-copy";
 import { WalletSheet } from "./WalletSheet.tsx";
 
-type Props = { pack: PackRef; name: string; price: number; back: string; xrpUsd: number; stage: React.ReactNode; qty?: number; go?: boolean };
+type Props = { pack: PackRef; name: string; price: number; back: string; xrpUsd: number; stage: React.ReactNode; qty?: number };
 
 type Made = { kind: "nft"; order: LiveOrder; tx: Readonly<Record<string, unknown>>; wallet: WalletLink | null } | { kind: "card"; order: LiveCard; tx: Readonly<Record<string, unknown>>; wallet: WalletLink | null } | { kind: "multi"; bundle: LiveBundle; tx: Readonly<Record<string, unknown>>; wallet: WalletLink | null };
 
 /** Checkout on real rails: open the order on the server, sign one payment in the wallet, and watch the ledger. */
-export function LiveCheckout({ pack, name, price, back, xrpUsd, stage, qty: firstQty = 1, go = false }: Props) {
+export function LiveCheckout({ pack, name, price, back, xrpUsd, stage, qty: firstQty = 1 }: Props) {
   const router = useRouter();
   const connect = useConnect();
   const confirm = useConfirmAccount();
@@ -83,9 +84,8 @@ export function LiveCheckout({ pack, name, price, back, xrpUsd, stage, qty: firs
       setBusy(true);
       setProblem(null);
       setNotice(null);
-      // Remembered for this session only: the next Open on this pack keeps the size, and inside Xaman can skip straight to the wallet.
+      // Remembered for this session only: the next Open on this pack keeps the size.
       session.set(qtyKey(pack), String(qty));
-      if (agreed && signedIn && demo.address) session.set(TERMS_KEY, demo.address);
       void (async () => {
         if (qty > 1) {
           const m = await api<{ bundle: LiveBundle; tx: Record<string, unknown>; wallet: WalletLink | null; max?: number; open?: LiveBundle }>("/api/rip/bundles", { ...(pack.kind === "nft" ? { price: pack.price } : { code: pack.code }), qty, acceptedTerms: agreed });
@@ -148,28 +148,6 @@ export function LiveCheckout({ pack, name, price, back, xrpUsd, stage, qty: firs
         setSheet(true);
       })();
     });
-
-  // Open, tapped on the pack page inside Xaman, by the account that ticked the terms box this session: straight to its wallet request, once.
-  // It waits for the price and the room, so the order is the size the player picked. The wallet still asks them to sign.
-  const quick = useRef(false);
-  const [auto, setAuto] = useState(false);
-  const ready = xrp !== null && view === "pay" && !made && (!room.on || room.max !== null);
-  useEffect(() => {
-    if (!ready || !quickStart({ go, shell, address: signedIn ? demo.address : null, agreedBy: session.get(TERMS_KEY), started: quick.current })) return;
-    quick.current = true;
-    // A reload of this page is an ordinary checkout again.
-    const url = new URL(window.location.href);
-    url.searchParams.delete("go");
-    window.history.replaceState(window.history.state, "", url.pathname + url.search);
-    setAgreed(true);
-    setAuto(true);
-  }, [ready, go, shell, signedIn, demo.address]);
-  useEffect(() => {
-    if (!auto || !agreed) return;
-    setAuto(false);
-    start();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [auto, agreed]);
 
   const told = useRef(new Set<string>());
   const settle = (status: string, reason: string | undefined) => {
@@ -275,7 +253,7 @@ export function LiveCheckout({ pack, name, price, back, xrpUsd, stage, qty: firs
                 ) : null}
                 <div>
                   <dt>From</dt>
-                  <dd>{demo.signed ? shortAddress(demo.address) : "Your wallet, once connected"}</dd>
+                  <dd>{demo.signed ? shortAddress(demo.address) : shell ? "Your Xaman account" : "Your wallet, once connected"}</dd>
                 </div>
               </CheckoutDetails>
               <CheckoutBar agreed={agreed} onAgree={setAgreed} problem={problem}>
@@ -288,7 +266,7 @@ export function LiveCheckout({ pack, name, price, back, xrpUsd, stage, qty: firs
         </div>
       </div>
       {made && sheet ? (
-        <WalletSheet title={made.kind === "multi" ? "Approve one payment" : "Approve the payment"} intro={made.kind === "multi" ? `${payXrp === null ? "" : `${xrpText(payXrp)} XRP`} to Break the Seal for ${made.bundle.qty} x ${name}, in one payment.${label ? " Testnet XRP only." : ""} You sign once. This page moves on as soon as the ledger has it.` : `${payXrp === null ? "" : `${xrpText(payXrp)} XRP`} to Break the Seal for one ${name}.${label ? " Testnet XRP only." : ""} This page moves on as soon as the ledger has it.`} wallet={made.wallet} tx={made.tx} onClose={() => setSheet(false)} onCheck={() => void look()} onRetry={start} declined="You said no in your wallet, so nothing was charged.">
+        <WalletSheet title={made.kind === "multi" ? "Approve one payment" : "Approve the payment"} intro={payIntro({ xrp: payXrp === null ? null : xrpText(payXrp), name, qty: made.kind === "multi" ? made.bundle.qty : 1, testnet: !!label })} wallet={made.wallet} tx={made.tx} onClose={() => setSheet(false)} onCheck={() => void look()} onRetry={start} declined="You said no in your wallet, so nothing was charged.">
           <div className="waitrow" role="status">
             <i className="spin" aria-hidden="true" /> Waiting for your payment
           </div>

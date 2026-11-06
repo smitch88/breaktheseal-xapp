@@ -35,17 +35,6 @@ export const qtyKey = (pack: PackRef): string => `seal:qty:${pack.kind === "nft"
 /** A remembered choice, read back: anything odd is 1, and it never reaches past what the pack can take right now. */
 export const keptQty = (raw: string | null | undefined, max: number | null): number => clampQty(parseQty(raw), max ?? 1);
 
-/** The wallet whose terms consent this session already holds. */
-export const TERMS_KEY = "seal:terms";
-
-/**
- * Whether checkout can go straight to the wallet's request. Only inside Xaman, only from the pack page's Open (`go`), only for the signed-in
- * account that ticked the 18+ and terms box earlier this session, and only once. Anything else shows checkout as it always has.
- */
-export function quickStart(s: { readonly go: boolean; readonly shell: boolean; readonly address: string | null; readonly agreedBy: string | null; readonly started: boolean }): boolean {
-  return s.go && s.shell && !s.started && !!s.address && s.agreedBy === s.address;
-}
-
 /** Where a pack's buy button would be, when it can't be pressed. Each one gets plain words and a way back to the shelf. */
 export type BuyState = "open" | "checking" | "held" | "restocking" | "soldout" | "unavailable" | "full";
 export function buyState(s: { readonly availability: "open" | "checking" | "restocking"; readonly held: boolean; readonly soldOut?: boolean; readonly disabledLabel?: string; readonly roomOn: boolean; readonly roomMax: number | null }): BuyState {

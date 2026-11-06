@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { test } from "node:test";
 import fc from "fast-check";
-import { XAPP_HEAD_SCRIPT, XAPP_STYLES, XAPP_STYLE_KEY, xappStyle } from "../src/lib/xapp-style.ts";
+import { XAPP_HEAD_SCRIPT, XAPP_MARK_KEY, XAPP_STYLES, XAPP_STYLE_KEY, xappMarked, xappStyle } from "../src/lib/xapp-style.ts";
 
 const XAMAN = "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148 xumm/xapp:3.4.0";
 const anyCase = (s: string) => fc.array(fc.boolean(), { minLength: s.length, maxLength: s.length }).map((up) => [...s].map((c, i) => (up[i] ? c.toUpperCase() : c)).join(""));
@@ -63,6 +63,32 @@ test("head script: inside Xaman the launch's style is set before paint and kept 
       // The launch page drops its query, and the next page has none: it reads the kept style.
       const next = runHead({ ua: XAMAN, search: "", stored: launch.stored });
       assert.equal(next.dataset.xstyle, xappStyle(style));
+    }),
+  );
+});
+
+test("head script: Xaman's sandbox frame, with no Xaman user agent, is the xApp from its launch address, and the tab stays so", () => {
+  fc.assert(
+    fc.property(fc.uuid({ version: 4 }), fc.constantFrom("LIGHT", "DARK", "MOONLIGHT", "ROYAL"), (token, style) => {
+      const launch = runHead({ ua: "Mozilla/5.0 (Macintosh) AppleWebKit/605.1.15 Safari/605.1.15", search: `?xAppToken=${token}&xAppStyle=${style}` });
+      assert.equal(launch.dataset.xapp, "1");
+      assert.equal(launch.dataset.xstyle, style.toLowerCase());
+      assert.equal(launch.stored.get(XAPP_MARK_KEY), "1");
+      const next = runHead({ ua: "Mozilla/5.0 (Macintosh) AppleWebKit/605.1.15 Safari/605.1.15", search: "", stored: launch.stored });
+      // Held unshown until the launch is known: XappHost's ready gate shows it and calls Xaman's ready().
+      assert.deepEqual(next.dataset, { xapp: "1", xpending: "1", xstyle: style.toLowerCase() });
+    }),
+  );
+});
+
+test("head script: it makes exactly the decision xappMarked makes, on any user agent, address and stored mark", () => {
+  const ua = fc.oneof(fc.string(), fc.constantFrom(XAMAN, "xumm/xapp:4.0.0 (ott:11111111-2222-4333-8444-555555555555)", "Mozilla/5.0 JoeyWallet/2.1"));
+  const search = fc.oneof(fc.string(), fc.uuid({ version: 4 }).map((t) => `?xAppToken=${t}`), fc.uuid().map((t) => `?a=1&xAppToken=${t.toUpperCase()}&xAppStyle=LIGHT`), fc.constantFrom("", "?xAppToken=", "?xAppToken=x"));
+  fc.assert(
+    fc.property(ua, search, fc.option(fc.constantFrom("1", "0", "yes"), { nil: undefined }), (userAgent, query, mark) => {
+      const stored = new Map<string, string>(mark === undefined ? [] : [[XAPP_MARK_KEY, mark]]);
+      const { dataset } = runHead({ ua: userAgent, search: query, stored });
+      assert.equal(dataset.xapp === "1", xappMarked({ userAgent, search: query, stored: mark ?? null }));
     }),
   );
 });

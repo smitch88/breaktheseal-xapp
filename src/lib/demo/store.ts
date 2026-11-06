@@ -1,6 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
+import { deviceStore } from "../xapp-style.ts";
 import { EMPTY, reduce, revive, type DemoAction, type DemoState } from "./state.ts";
 
 const KEY = "seal-rips-demo-v1";
@@ -13,7 +14,7 @@ function load() {
   if (loaded || typeof window === "undefined") return;
   loaded = true;
   try {
-    state = revive(window.localStorage.getItem(KEY));
+    state = revive(deviceStore().getItem(KEY));
   } catch {
     state = EMPTY;
   }
@@ -23,7 +24,7 @@ export function dispatch(action: DemoAction): DemoState {
   load();
   state = reduce(state, action);
   try {
-    window.localStorage.setItem(KEY, JSON.stringify(state));
+    deviceStore().setItem(KEY, JSON.stringify(state));
   } catch {
     /* Private window or full storage: the demo keeps working for this visit. */
   }

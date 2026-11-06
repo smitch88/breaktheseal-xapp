@@ -1,13 +1,13 @@
 "use client";
 
-import { createContext, useCallback, useContext, useEffect, useState } from "react";
-import { inXamanWebview, xappLink, xappSdk } from "@/lib/auth/xapp-host";
-import { storedXappStyle } from "@/lib/xapp-style";
+import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
+import { openOutside, readyGate, xappLink, xappSdk } from "@/lib/auth/xapp-host";
+import { inXapp } from "@/lib/xapp-style";
 
 interface Xapp {
   /** True only inside Xaman's webview, with a launch the server confirmed. */
   readonly active: boolean;
-  /** Running in Xaman's webview at all: the app's own small shell shows instead of the site's. Layout only, and never trust. */
+  /** Running as the xApp at all (Xaman's user agent or its launch address): the app's own small shell shows instead of the site's. Layout only, and never trust. */
   readonly shell: boolean;
   /** The account Xaman opened this launch on. */
   readonly account: string | null;
@@ -16,9 +16,11 @@ interface Xapp {
   /** The server has answered at least once, so no launch means the launch has ended, not that it hasn't arrived yet. */
   readonly checked: boolean;
   readonly refresh: () => Promise<boolean>;
+  /** The launch is known and its first screen is drawn: the page shows, and Xaman hears ready(). Once; later calls do nothing. */
+  readonly settle: () => void;
 }
 
-const XappContext = createContext<Xapp>({ active: false, shell: false, account: null, proven: false, checked: false, refresh: async () => false });
+const XappContext = createContext<Xapp>({ active: false, shell: false, account: null, proven: false, checked: false, refresh: async () => false, settle: () => {} });
 export const useXapp = () => useContext(XappContext);
 
 function Host({ children }: { children: React.ReactNode }) {
@@ -32,19 +34,28 @@ function Host({ children }: { children: React.ReactNode }) {
     return !!body?.xapp;
   }, []);
 
-  useEffect(() => {
-    if (!inXamanWebview()) return;
-    // The root layout's head script marks <html> before first paint, but a dynamic 404 (notFound() from /admin) is served as an error
-    // document that never runs it, and the site's header and footer would show beside the shell. Mark it here too.
-    document.documentElement.dataset.xapp = "1";
-    document.documentElement.dataset.xstyle ??= storedXappStyle();
-    setShell(true);
-    void xappSdk()?.then((sdk) => sdk.ready());
-    // On /xapp the launch itself asks, once the server has seen the token. Asking now could answer last and read as no launch.
-    if (window.location.pathname !== "/xapp") void refresh();
-  }, [refresh]);
+  const gate = useRef<ReturnType<typeof readyGate> | null>(null);
+  const settle = useCallback(() => gate.current?.settle(), []);
+  const [answered, setAnswered] = useState(false);
 
-  // A webview can't come back from another site, so nothing here navigates it there: every way out goes through Xaman.
+  useEffect(() => {
+    // The root layout's head script marks <html> before first paint. A dynamic 404 (notFound() from /admin) is served as an error
+    // document that never runs it, so this makes the same decision again and marks the page itself.
+    if (!inXapp()) return;
+    setShell(true);
+    // ready() waits for the launch, so Xaman's own loader stays up until there's a real screen, and never past Xaman's slow mark.
+    gate.current = readyGate({ ready: () => xappSdk()?.then((sdk) => sdk.ready()), reveal: () => void delete document.documentElement.dataset.xpending });
+    // On /xapp the launch itself asks, once the server has seen the token, and settles when its screen is drawn. Asking now could
+    // answer last and read as no launch. Any other page settles once the server has said whether a launch stands.
+    if (window.location.pathname !== "/xapp") void refresh().then(() => setAnswered(true));
+    return () => gate.current?.cancel();
+  }, [refresh]);
+  // After the answer has been drawn, not before.
+  useEffect(() => {
+    if (answered) settle();
+  }, [answered, settle]);
+
+  // A webview can't come back from another site, so nothing here navigates it there: every way out goes through Xaman's openBrowser.
   useEffect(() => {
     if (!shell) return;
     const onClick = (e: MouseEvent) => {
@@ -52,13 +63,13 @@ function Host({ children }: { children: React.ReactNode }) {
       const url = xappLink(link?.getAttribute("href"), link?.getAttribute("target"), window.location.origin);
       if (!url) return;
       e.preventDefault();
-      void xappSdk()?.then((sdk) => sdk.openBrowser({ url }));
+      void openOutside(url);
     };
     document.addEventListener("click", onClick, true);
     return () => document.removeEventListener("click", onClick, true);
   }, [shell]);
 
-  return <XappContext.Provider value={{ ...launch, shell, refresh }}>{children}</XappContext.Provider>;
+  return <XappContext.Provider value={{ ...launch, shell, refresh, settle }}>{children}</XappContext.Provider>;
 }
 
 /** With the flag off this renders only its children, and nothing below it knows the xApp exists. */

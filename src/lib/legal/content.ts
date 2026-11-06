@@ -9,6 +9,7 @@ import { sha256Hex } from "../rip/draw.ts";
 import { placesInWords, restrictedPlaces } from "../rip/places.ts";
 import { SEAL_ISSUER } from "../rip/tokens.ts";
 import { OFFICIAL_DOMAIN, cardRailsSet } from "../site.ts";
+import { independence } from "../xapp-copy.ts";
 import { OPERATOR, SUPPORT_EMAIL } from "./links.ts";
 
 export const FACTS = {
@@ -52,7 +53,8 @@ export const TERMS: LegalDocument = {
   path: "/terms",
   title: "Terms",
   intro: [
-    `These terms cover your use of Break the Seal at ${F.domain}. Break the Seal is run by ${F.entity}, called "we" here. By connecting a wallet or paying for a pack, you agree to them.`,
+    `These terms cover your use of Break the Seal at ${F.domain} and inside the Xaman app. Break the Seal is run by ${F.entity}, called "we" here. By connecting a wallet or paying for a pack, you agree to them.`,
+    independence(F.entity),
     `Effective ${F.effective}.`,
   ],
   sections: [
@@ -299,7 +301,8 @@ export const TERMS: LegalDocument = {
           items: [
             "A third-party graded card vault, reached through its API, which holds the cards and answers for its packs and buybacks. It doesn't run or endorse Break the Seal.",
             "NFT marketplaces. You choose whether to use one after you claim an NFT, on its terms and with its fees. Collections can also charge a transfer fee on resale.",
-            "Xaman and other wallets, the XRP Ledger, Solana, and the servers and explorers we link to.",
+            "Xaman and other wallets, the XRP Ledger, Solana, and the servers and explorers we link to. XRPL Labs, which makes Xaman, doesn't run, support or endorse Break the Seal, and can't help with an order.",
+            "Relay (relay.link), which converts the XRP paid for a card pack into the dollars that buy the card. It works with our own wallets, never yours.",
             "xrpl.to, which supplies NFT floors and XRP price data shown on the site. [Data by xrpl.to](https://xrpl.to).",
           ],
         },
@@ -353,7 +356,7 @@ export const TERMS: LegalDocument = {
     {
       id: "contact",
       heading: "Contact",
-      blocks: [`${F.entity}, ${F.address}. ${F.supportEmail}.`],
+      blocks: [`${F.entity}, ${F.address}. ${F.supportEmail}. ${independence(F.entity)}`],
     },
   ],
 };
@@ -423,9 +426,9 @@ export const PRIVACY: LegalDocument = {
           items: [
             "`seal_session` keeps you signed in for 2 hours. It holds your wallet address and wallet type, is signed by us, and scripts on the page can't read it.",
             "`seal_challenge` lasts about 6 minutes while a sign-in is happening.",
-            "`seal-rips-demo-v1` in your browser's local storage holds your demo pulls and the address you last connected. It stays on your device until you clear it.",
+            "`seal-rips-demo-v1` in your browser's local storage holds your demo pulls and the address you last connected. It stays on your device until you clear it. Inside the Xaman app it's kept in session storage instead, and goes when the app closes.",
             "`seal.joey.via` and `seal.wallet.sent` in your browser's storage remember how you connected Joey and what you were last asked to sign, so a reload doesn't ask twice. If you use Joey's phone app, WalletConnect keeps its session data there too. All of this stays on your device.",
-            "`seal_xapp` is a cookie set only if you open the site inside the Xaman app. It remembers that session.",
+            "`seal_xapp` is a cookie set only if you open Break the Seal inside the Xaman app. It holds the account Xaman opened it on and the token Xaman issues for that visit, is signed by us, scripts on the page can't read it, and it lasts at most 24 hours. `seal:xapp` and `seal:xstyle` in session storage remember that the tab is inside Xaman and which of Xaman's color styles it uses, and go when the app closes. Inside Xaman nothing else about you is kept on your phone: that you've read the About sheet is kept in Xaman's own storage for this app, under your Xaman account.",
           ],
         },
         "We use no other cookies. Signing out removes the session cookie.",
@@ -437,7 +440,7 @@ export const PRIVACY: LegalDocument = {
       blocks: [
         {
           items: [
-            "Xaman, when you use it: each transaction you're asked to sign, which names your wallet, along with your order ID. Its QR codes and status updates load from Xaman directly, so it also sees your internet address.",
+            "Xaman, when you use it: each transaction you're asked to sign, which names your wallet, along with your order ID. Its QR codes and status updates load from Xaman directly, so it also sees your internet address. Inside the Xaman app, Xaman also keeps, for us, whether you've read the About sheet.",
             "Joey, when you use it: each transaction you're asked to sign, which names your wallet, along with your order ID. If you use Joey's phone app, those requests also pass through WalletConnect, which sees your internet address.",
             "The XRPL servers we read from, which see the wallet addresses we look up.",
             "The service providers that host the site and store its data. They process this data for us.",
@@ -506,7 +509,7 @@ export const PRIVACY: LegalDocument = {
 export const SUPPORT: LegalDocument = {
   path: "/support",
   title: "Support",
-  intro: [`Email ${F.supportEmail}. We answer during ${F.supportHours}. Your stash stays where it is while you wait.`],
+  intro: [`Email ${F.supportEmail}. We answer during ${F.supportHours}. Your stash stays where it is while you wait.`, `${independence(F.entity)} Xaman's own support can't help with an order here, so write to us.`],
   sections: [
     {
       id: "include",

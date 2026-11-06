@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { dispatch, readDemo, useDemo } from "@/lib/demo/store";
 import { noOrphan, shortAddress, usd2 } from "@/lib/format";
 import { chain } from "@/lib/rails";
@@ -11,7 +11,7 @@ import type { PackRef } from "@/lib/rails/types";
 import { useRipConfig } from "@/lib/live/hooks";
 import { clampQty } from "@/lib/live/multi";
 import { DEMO_MULTI } from "@/lib/live/client";
-import { TERMS_KEY, qtyKey, quickStart, session } from "@/lib/again";
+import { qtyKey, session } from "@/lib/again";
 import { QtyPicker, useQtyRoom } from "./live/QtyPicker.tsx";
 import { CheckoutBar, CheckoutDetails } from "./CheckoutParts.tsx";
 import { LiveCheckout } from "./live/LiveCheckout.tsx";
@@ -19,7 +19,7 @@ import { useConnect, useRails } from "./Providers.tsx";
 import { useXapp } from "./XappHost.tsx";
 import { Sheet } from "./Sheet.tsx";
 
-type Props = { pack: PackRef; name: string; price: number; art: string; back: string; xrpUsd: number; stage: React.ReactNode; qty?: number; go?: boolean };
+type Props = { pack: PackRef; name: string; price: number; art: string; back: string; xrpUsd: number; stage: React.ReactNode; qty?: number };
 
 const HOLD_SECONDS = 120;
 const newId = () => `o${Date.now().toString(36)}${Math.random().toString(36).slice(2, 7)}`;
@@ -35,7 +35,7 @@ export function CheckoutFlow(props: Props) {
   return config.cardsOn ? <LiveCheckout {...props} /> : <DemoCheckout {...props} />;
 }
 
-function DemoCheckout({ pack, name, price, art, back, xrpUsd, stage, qty: firstQty = 1, go = false }: Props) {
+function DemoCheckout({ pack, name, price, art, back, xrpUsd, stage, qty: firstQty = 1 }: Props) {
   const router = useRouter();
   const { shell } = useXapp();
   const connect = useConnect();
@@ -57,10 +57,8 @@ function DemoCheckout({ pack, name, price, art, back, xrpUsd, stage, qty: firstQ
 
   const pay = () =>
     connect(() => {
-      // The same session memory as a real checkout: the size for next time, and, inside Xaman, who already agreed.
+      // The same session memory as a real checkout: the size for next time.
       session.set(qtyKey(pack), String(qty));
-      const now = readDemo();
-      if (agreed && now.address) session.set(TERMS_KEY, now.address);
       const id = newId();
       if (qty > 1) for (let i = 0; i < qty; i++) {
         dispatch({ type: "order_new", order: { id: `${id}-${i}`, pack, name, price, art, back, quote: single } });
@@ -99,25 +97,6 @@ function DemoCheckout({ pack, name, price, art, back, xrpUsd, stage, qty: firstQ
   };
 
   const closeDeclined = useCallback(() => setDeclined(false), []);
-
-  // As on real rails: Open on the pack page inside Xaman, by the account that agreed this session, goes straight to the (mock) request, once.
-  const quick = useRef(false);
-  const [auto, setAuto] = useState(false);
-  useEffect(() => {
-    if (!quickStart({ go, shell, address: demo.signed ? demo.address : null, agreedBy: session.get(TERMS_KEY), started: quick.current })) return;
-    quick.current = true;
-    const url = new URL(window.location.href);
-    url.searchParams.delete("go");
-    window.history.replaceState(window.history.state, "", url.pathname + url.search);
-    setAgreed(true);
-    setAuto(true);
-  }, [go, shell, demo.signed, demo.address]);
-  useEffect(() => {
-    if (!auto || !agreed) return;
-    setAuto(false);
-    pay();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [auto, agreed]);
 
   if (xaman) {
     return (
@@ -192,7 +171,7 @@ function DemoCheckout({ pack, name, price, art, back, xrpUsd, stage, qty: firstQ
             </div>
             <div>
               <dt>From</dt>
-              <dd>{demo.signed ? shortAddress(demo.address) : "Your wallet, once connected"}</dd>
+              <dd>{demo.signed ? shortAddress(demo.address) : shell ? "Your Xaman account" : "Your wallet, once connected"}</dd>
             </div>
             <div>
               <dt>Price held for</dt>

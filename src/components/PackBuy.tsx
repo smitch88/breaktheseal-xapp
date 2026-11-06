@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { TERMS_KEY, buyState, cameAgain, keptQty, qtyKey, session } from "@/lib/again";
+import { buyState, cameAgain, keptQty, qtyKey, session } from "@/lib/again";
 import type { NftPrice } from "@/config/nft-packs";
 import { usd2 } from "@/lib/format";
 import { clampQty } from "@/lib/live/multi";
@@ -14,9 +14,8 @@ import { useConnect, useRails } from "./Providers.tsx";
 import { useXapp } from "./XappHost.tsx";
 
 /**
- * Try and Open. Opening asks for a wallet first, then goes to Checkout. The quantity is remembered for this pack for the session, and a page
- * reached by Open another brings the buy area into view. Inside Xaman, Open from there goes straight to the wallet's request when this
- * session's account already ticked the terms box; checkout decides that, and the wallet still asks for the signature.
+ * Try and Open. Opening asks for a wallet first, then goes to Checkout, which shows the price and fees and asks for the payment only when
+ * Pay is pressed. The quantity is remembered for this pack for the session, and a page reached by Open another brings the buy area into view.
  */
 export function PackBuy({ href, tryHref, price, soldOut, disabledLabel, nftPrice, cardCode, eachXrp }: { href: string; tryHref: string; price: number; soldOut?: boolean; disabledLabel?: string; nftPrice?: NftPrice; cardCode?: string; eachXrp?: number }) {
   const router = useRouter();
@@ -29,14 +28,11 @@ export function PackBuy({ href, tryHref, price, soldOut, disabledLabel, nftPrice
   const pack: PackRef | null = nftPrice !== undefined ? { kind: "nft", price: nftPrice } : cardCode ? { kind: "card", code: cardCode } : null;
   const room = useQtyRoom(pack);
   const [wanted, setWanted] = useState(1);
-  const [again, setAgain] = useState(false);
   const key = pack ? qtyKey(pack) : null;
   // After hydration, so the server's page and the first paint agree: the last choice for this pack, and the buy area in view after Open another.
   useEffect(() => {
     if (key) setWanted(keptQty(session.get(key), 99));
-    const back = cameAgain(window.location.search);
-    setAgain(back);
-    if (back) document.getElementById("buy")?.scrollIntoView({ block: "center" });
+    if (cameAgain(window.location.search)) document.getElementById("buy")?.scrollIntoView({ block: "center" });
   }, [key]);
   const choose = (n: number) => {
     setWanted(n);
@@ -45,8 +41,6 @@ export function PackBuy({ href, tryHref, price, soldOut, disabledLabel, nftPrice
   // A limit that falls while the page is open takes the choice down with it.
   const qty = room.on ? clampQty(wanted, room.max ?? 1) : 1;
   const base = qty > 1 ? `${href}&qty=${qty}` : href;
-  // Only inside Xaman, and only when this session's account already agreed: checkout checks both again before it asks the wallet.
-  const openHref = shell && again && session.get(TERMS_KEY) ? `${base}&go=1` : base;
   const state = buyState({ availability, held, soldOut, disabledLabel, roomOn: room.on, roomMax: room.max });
   const shelf = (
     <Link className="btn ol" href="/packs">
@@ -71,7 +65,7 @@ export function PackBuy({ href, tryHref, price, soldOut, disabledLabel, nftPrice
       );
     }
     return (
-      <button className="btn" disabled={state === "checking"} onClick={() => connect(() => router.push(openHref))}>
+      <button className="btn" disabled={state === "checking"} onClick={() => connect(() => router.push(base))}>
         Open · {usd2(price * qty)}
       </button>
     );

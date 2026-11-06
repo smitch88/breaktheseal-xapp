@@ -13,7 +13,7 @@ import { recentPulls, type PullFeed } from "./recent-pulls.ts";
 import { learnNames } from "./nft-meta.ts";
 import { adminAddresses, allowedWallets, isHouseWallet, railsConfig } from "./mode.ts";
 import { PLACE_REFUSAL, checkPlace, restrictedPlaces } from "./places.ts";
-import { isUserToken, pushTokenKey, readRequest, requestSignature, type WalletRequest } from "./xaman.ts";
+import { isUserToken, pushTokenKey, readRequest, requestPlayerSignature, type WalletRequest } from "./xaman.ts";
 import { readRequestState } from "../wallet/xaman-socket.ts";
 import type { WalletKind } from "../auth/tokens.ts";
 
@@ -204,7 +204,7 @@ export async function walletRequest(req: Request, g: { rails: Rails; address: st
   // only ever goes to Xaman, and if Xaman won't take it the plain link still works: that's the whole fallback.
   const stored = inXapp || txjson.Account !== g.address || txjson.TransactionType === "AccountSet" ? null : await r.secrets.get(pushTokenKey(g.address)).catch(() => null);
   const userToken = isUserToken(stored) ? stored : null;
-  const made = (await requestSignature({ ...ask, userToken }).catch(() => null)) ?? (userToken ? await requestSignature(ask).catch(() => null) : null);
+  const made = (await requestPlayerSignature({ ...ask, userToken }).catch(() => null)) ?? (userToken ? await requestPlayerSignature(ask).catch(() => null) : null);
   if (made) await r.secrets.put(key, JSON.stringify({ request: made, at: Date.now(), xapp: inXapp })).catch(() => {});
   return made;
 }

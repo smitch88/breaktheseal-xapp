@@ -29,16 +29,33 @@ async function launchWorld(opts: { flag?: string; replayable?: boolean; env?: Re
   const otts = new Map<string, { app: string; data: Record<string, unknown>; spent: boolean }>();
   const ottCalls: string[] = [];
   const base = globalThis.fetch;
+  // Xaman's userstore, one per player, picked by the JWT its authorize endpoint issued for that launch.
+  const userdata = new Map<string, Record<string, unknown>>();
   globalThis.fetch = (async (url: string | URL, init?: RequestInit) => {
-    const m = /\/api\/v1\/platform\/xapp\/ott\/(.+)$/.exec(String(url));
+    const headers = (init?.headers ?? {}) as Record<string, string>;
+    const store = /\/api\/v1\/jwt\/userdata\/([a-z0-9]+)$/.exec(String(url));
+    if (store) {
+      const jwt = String(headers.authorization ?? "").replace(/^Bearer /, "");
+      if (!jwt.startsWith("jwt-for-") || w.xaman.mode === "down") return new Response(JSON.stringify({ error: { code: 401 } }), { status: 401 });
+      const mine = userdata.get(jwt) ?? {};
+      userdata.set(jwt, mine);
+      if (init?.method === "POST") {
+        mine[store[1]] = JSON.parse(String(init.body));
+        return new Response(JSON.stringify({ persisted: true }));
+      }
+      return new Response(JSON.stringify({ data: { [store[1]]: mine[store[1]] } }));
+    }
+    // A launch token resolves once, at either of Xaman's endpoints: the JWT authorize one (as its SDK does) or the platform one.
+    const viaJwt = /\/api\/v1\/jwt\/authorize$/.test(String(url));
+    const m = viaJwt ? [null, headers["x-api-ott"]] : /\/api\/v1\/platform\/xapp\/ott\/(.+)$/.exec(String(url));
     if (!m) return base(url as never, init);
-    ottCalls.push(m[1]);
+    ottCalls.push(m[1] as string);
     if (w.xaman.mode === "down") throw new Error("Xaman timed out");
-    const hit = otts.get(m[1]);
-    const key = (init?.headers as Record<string, string>)["x-api-key"];
+    const hit = otts.get(m[1] as string);
+    const key = headers["x-api-key"];
     if (!hit || hit.app !== key || (hit.spent && !opts.replayable)) return new Response(JSON.stringify({ error: { reference: "r", code: 404 } }), { status: 404 });
     hit.spent = true;
-    return new Response(JSON.stringify(hit.data));
+    return new Response(JSON.stringify(viaJwt ? { ott: hit.data, app: { name: "Break the Seal" }, jwt: `jwt-for-${String(hit.data.user)}` } : hit.data));
   }) as typeof fetch;
   const launch = (data: Record<string, unknown> = {}, app = API_KEY) => {
     const token = randomUUID();
@@ -55,7 +72,7 @@ async function launchWorld(opts: { flag?: string; replayable?: boolean; env?: Re
   };
   const post = (as: Client, body: unknown, origin?: string | null) => w.call("POST", "/api/auth/xapp", { as, body, origin });
   const status = (as: Client) => w.call("POST", "/api/auth/xapp/status", { as });
-  return { w, launch, signedBy, post, status, ottCalls, otts };
+  return { w, launch, signedBy, post, status, ottCalls, otts, userdata };
 }
 
 const sessionOf = (c: Client) => readToken(c.jar.get("seal_session"), SECRET, ["session"], Math.floor(Date.now() / 1000));
@@ -105,6 +122,34 @@ test("pressing to confirm asks for a SignIn bound to that account and network, a
   const sent = w.xaman.calls.at(-1)!;
   assert.deepEqual(sent.txjson, { TransactionType: "SignIn" });
   assert.deepEqual(sent.options, { submit: false, expire: 5, signers: [PLAYER], force_network: "MAINNET" });
+});
+
+test("the info sheet: shown once per player, remembered in Xaman's userstore with that launch's JWT, and shown again whenever it can't be read", async () => {
+  const { w, launch, post, userdata } = await launchWorld();
+  const info = (c: Client) => w.call("GET", "/api/auth/xapp/info", { as: c });
+  const gotIt = (c: Client, origin?: string | null) => w.call("POST", "/api/auth/xapp/info", { as: c, origin });
+  // No launch, no JWT: it shows, and nothing is kept.
+  const nobody = w.client();
+  assert.deepEqual((await info(nobody)).body, { show: true });
+  assert.deepEqual((await gotIt(nobody)).body, { saved: false });
+  const alice = w.client();
+  assert.equal((await post(alice, { token: launch({ user: "alice" }) })).status, 200);
+  assert.deepEqual((await info(alice)).body, { show: true }, "first launch");
+  assert.equal((await gotIt(alice, "https://evil.test")).status, 403, "another site can't mark it read");
+  assert.deepEqual((await gotIt(alice)).body, { saved: true });
+  assert.deepEqual(userdata.get("jwt-for-alice"), { btsinfo: { seen: true } });
+  assert.deepEqual((await info(alice)).body, { show: false }, "the same player, after Got it");
+  // A new launch for the same player on another phone: still read.
+  const alicePhone2 = w.client();
+  await post(alicePhone2, { token: launch({ user: "alice" }) });
+  assert.deepEqual((await info(alicePhone2)).body, { show: false });
+  // Someone else hasn't seen it.
+  const bob = w.client();
+  await post(bob, { token: launch({ user: "bob" }) });
+  assert.deepEqual((await info(bob)).body, { show: true });
+  // Xaman not answering: it shows again rather than being skipped.
+  w.xaman.mode = "down";
+  assert.deepEqual((await info(alice)).body, { show: true });
 });
 
 test("the launch cookie is httpOnly and says only that Xaman confirmed this launch", async () => {

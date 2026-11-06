@@ -74,30 +74,34 @@ function useAccountProof(onDone: () => void) {
   return { view, start, check, reopen: (uuid: string) => void reopenInXaman(uuid).catch(() => {}) };
 }
 
-/** Before what the server does with no transaction from the wallet: a sale, a redeem, an offer, a shipping address. Nothing is sent to Xaman until the button is pressed. */
+/**
+ * Before what the server does with no transaction from the wallet: a sale, a redeem, an offer, a shipping address. It says what the
+ * approval is and that it costs nothing, and nothing is sent to Xaman until the button is pressed. Not a sign-in: the account is the
+ * one Xaman opened the app on, and this only asks that account to approve.
+ */
 export function ConfirmAccountSheet({ onClose, onDone }: { onClose: () => void; onDone: () => void }) {
   const { account } = useXapp();
   const { view, start, check, reopen } = useAccountProof(onDone);
   return (
-    <Sheet top onClose={onClose} label="Confirm your account">
-      <h3>Confirm your account</h3>
-      <p className="fine">{noOrphan(`Break the Seal does this without a transaction from you, so first it needs this signature from ${shortAddress(account)}. It shows the account is yours and moves no funds. It lasts two hours.`)}</p>
+    <Sheet top onClose={onClose} label="Approve in Xaman first">
+      <h3>Approve in Xaman first</h3>
+      <p className="fine">{noOrphan(`Selling back, cashing out, claiming and shipping are carried out by Break the Seal, not by a transaction from your wallet. So before the first one, Xaman asks ${shortAddress(account)} to approve them. Approving sends nothing, costs nothing and can't move your funds. It covers the next two hours.`)}</p>
       {view.name === "again" ? <p className="freshness">{noOrphan(view.text)}</p> : null}
       {view.name === "waiting" ? (
         <>
           <p className="fine">{noOrphan("Approve the request in Xaman.")}</p>
           {view.note ? <p className="freshness">{noOrphan(view.note)}</p> : null}
           <button className="btn full" onClick={() => reopen(view.uuid)}>
-            Open in Xaman
+            Show the request again
           </button>
           <button className="linky" onClick={() => void check()}>
-            I signed. Check again.
+            I approved it. Check again.
           </button>
         </>
       ) : (
         <>
           <button className="btn full" disabled={view.name === "working"} onClick={() => void start()}>
-            {view.name === "again" ? "Try again" : "Confirm in Xaman"}
+            {view.name === "again" ? "Try again" : "Approve in Xaman"}
           </button>
           <button className="btn ol full" onClick={onClose}>
             Not now

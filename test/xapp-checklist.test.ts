@@ -3,7 +3,7 @@ import { test } from "node:test";
 import fc from "fast-check";
 import { refusalText } from "../src/lib/auth/xapp-host.ts";
 import { OPERATOR } from "../src/lib/legal/links.ts";
-import { aboutFine, aboutLine, welcomeNeeded } from "../src/lib/xapp-copy.ts";
+import { aboutFine, aboutLine, independence } from "../src/lib/xapp-copy.ts";
 
 /** Xaman's review list, as the first screen inside Xaman has to meet it. */
 const SIGN_IN = /\b(log ?in|log ?out|sign ?in|sign ?out|disconnect|reconnect|connect)\b/i;
@@ -29,7 +29,8 @@ test("first screen: who runs it, that Xaman doesn't, who holds the cards, and th
   fc.assert(
     fc.property(fc.boolean(), (cards) => {
       const fine = aboutFine({ cards, operator: OPERATOR });
-      assert.ok(fine.startsWith(`A third-party app by ${OPERATOR}, not made or endorsed by Xaman or XRPL Labs.`));
+      assert.ok(fine.startsWith(independence(OPERATOR)));
+      assert.equal(independence(OPERATOR), `Break the Seal is developed by ${OPERATOR}. It isn't affiliated with or endorsed by XRPL Labs or Xaman.`);
       assert.equal(/third-party graded card vault/.test(fine), cards);
       assert.match(fine, /can be worth less than you paid\.$/);
       for (const bad of [SIGN_IN, CARD_SOURCE, BRITISH, /partner/i]) assert.doesNotMatch(fine, bad);
@@ -37,10 +38,6 @@ test("first screen: who runs it, that Xaman doesn't, who holds the cards, and th
   );
 });
 
-test("first screen: shown until this phone has tapped through it once", () => {
-  assert.equal(welcomeNeeded("1"), false);
-  fc.assert(fc.property(fc.option(fc.string().filter((s) => s !== "1"), { nil: undefined }), (raw) => assert.equal(welcomeNeeded(raw), true)));
-});
 
 test("an ended session says how to get back, in plain words, and never asks to sign in or connect", () => {
   for (const s of ["wrong-network", "read-only", "no-account", "wrong-account", "unavailable", "invalid", "used", undefined]) {

@@ -3,6 +3,7 @@
 import { useCallback, useState } from "react";
 import { api, networkLabel, type LiveRef, type WalletLink } from "@/lib/live/client";
 import { useConfirmAccount, useRails } from "../Providers.tsx";
+import { acceptIntro } from "@/lib/live/sign-copy";
 import { WalletSheet } from "./WalletSheet.tsx";
 
 type Accept = { tx: Readonly<Record<string, unknown>>; wallet: WalletLink | null };
@@ -67,7 +68,7 @@ export function useAccept(ref: LiveRef, load: () => Promise<void> | void) {
   const close = useCallback(() => setAccept(null), []);
 
   const sheet = accept ? (
-    <WalletSheet title="Accept in your wallet" intro={`This offer is free and only your wallet can take it.${networkLabel(mode) ? " Testnet only." : ""} Your wallet may hold 0.2 XRP in reserve while you own the NFT.`} wallet={accept.wallet} tx={accept.tx} onClose={close} onCheck={() => void load()} onRetry={() => void claim()} declined="You said no in your wallet. Your offer is still open, and you don't have to take it.">
+    <WalletSheet title="Accept in your wallet" intro={acceptIntro(!!networkLabel(mode))} wallet={accept.wallet} tx={accept.tx} onClose={close} onCheck={() => void load()} onRetry={() => void claim()} declined="You said no in your wallet. Your offer is still open, and you don't have to take it.">
       <button className="linky" onClick={() => void takeBack()}>
         Take back the offer
       </button>

@@ -32,7 +32,6 @@ export function ConnectSheet({ onClose, onDone }: { onClose: () => void; onDone:
   const { mode } = useRails();
   const live = useRef(true);
   const socket = useRef<WebSocket | null>(null);
-  const poll = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
     live.current = true;
@@ -51,15 +50,12 @@ export function ConnectSheet({ onClose, onDone }: { onClose: () => void; onDone:
     return () => {
       live.current = false;
       socket.current?.close();
-      if (poll.current) clearInterval(poll.current);
     };
   }, []);
 
   const stopWatching = () => {
     socket.current?.close();
     socket.current = null;
-    if (poll.current) clearInterval(poll.current);
-    poll.current = null;
   };
 
   const checkXaman = useCallback(async () => {
@@ -106,7 +102,8 @@ export function ConnectSheet({ onClose, onDone }: { onClose: () => void; onDone:
       return;
     }
     setView({ name: "xaman", qr: body.qr, open: body.open, ws: body.ws });
-    // Live status from Xaman tells us when to check. The server does the actual verifying.
+    // Xaman's status socket says when to check, as its docs ask, never a timer. The server does the actual verifying. A phone coming
+    // back from Xaman checks once, and "I signed. Check again." is always there.
     try {
       const ws = new WebSocket(body.ws);
       ws.onmessage = (e) => {
@@ -115,9 +112,8 @@ export function ConnectSheet({ onClose, onDone }: { onClose: () => void; onDone:
       };
       socket.current = ws;
     } catch {
-      /* The slower check below still covers it. */
+      /* The check on coming back, and the button, still cover it. */
     }
-    poll.current = setInterval(() => void checkXaman(), 8000);
   };
 
   const useDemo = async () => {

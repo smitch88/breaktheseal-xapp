@@ -3,6 +3,8 @@
  * and Skip goes straight to the results. It only moves a pointer over prizes the server already fixed, so leaving at any point loses
  * nothing. Where it stands is kept per device; losing that only means landing on the results sooner, or seeing a pull again.
  */
+import { deviceStore } from "./xapp-style.ts";
+
 export type FlowStep = { readonly view: "bite" | "reveal"; readonly at: number } | { readonly view: "summary" };
 
 export const SUMMARY: FlowStep = { view: "summary" };
@@ -60,7 +62,8 @@ const seenKey = (id: string) => `seal-rips-opened-${id}`;
 /** What this device saved for an order, the newer key first. Storage can be missing or throw: then there's nothing saved. */
 export function readStep(id: string): FlowStep | null {
   try {
-    return parseStep(window.localStorage.getItem(flowKey(id))) ?? fromSeen(Number(window.localStorage.getItem(seenKey(id))));
+    const box = deviceStore();
+    return parseStep(box.getItem(flowKey(id))) ?? fromSeen(Number(box.getItem(seenKey(id))));
   } catch {
     return null;
   }
@@ -68,7 +71,7 @@ export function readStep(id: string): FlowStep | null {
 
 export function writeStep(id: string, step: FlowStep): void {
   try {
-    window.localStorage.setItem(flowKey(id), encodeStep(step));
+    deviceStore().setItem(flowKey(id), encodeStep(step));
   } catch {
     /* Private window or full storage: this visit still works. */
   }

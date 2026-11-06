@@ -7,14 +7,14 @@ import { deriveAddress, deriveKeypair, generateSeed } from "ripple-keypairs";
 import { memoryNonceStore } from "../src/lib/auth/nonces.ts";
 import { createAuthService, type XamanClient } from "../src/lib/auth/service.ts";
 import { readToken, signToken } from "../src/lib/auth/tokens.ts";
-import { externalUrl, inXamanWebview, isXamanHost, launchToken, outcomeOf, pacedHost, refusalText, sheetMode, xappLink, xappSdk } from "../src/lib/auth/xapp-host.ts";
+import { externalUrl, launchToken, openOutside, outcomeOf, pacedHost, refusalText, sheetMode, xappLink, xappSdk } from "../src/lib/auth/xapp-host.ts";
 import { createXappClient } from "../src/lib/auth/xapp-client.ts";
 import { ripAgainHref } from "../src/lib/live/client.ts";
 import { XAPP_TTL_S, createXappService, ottShape, readOtt, xappEnabled, xappNetwork, type XappXaman } from "../src/lib/auth/xapp.ts";
 import { SUPPORT } from "../src/lib/legal/content.ts";
 import { inlineParts, plainText } from "../src/lib/legal/inline.ts";
 import { requestSignature } from "../src/lib/rip/xaman.ts";
-import { XAPP_HEAD_SCRIPT } from "../src/lib/xapp-style.ts";
+import { XAPP_HEAD_SCRIPT, inXapp, xappMarked } from "../src/lib/xapp-style.ts";
 
 const SECRET = "test-secret-not-a-real-one";
 const address = () => deriveAddress(deriveKeypair(generateSeed()).publicKey);
@@ -232,17 +232,22 @@ test("no Xaman credentials: nothing is confirmed", async () => {
 
 test("Xaman's API client: key and secret go in headers, only to the OTT path, and 4xx or an error body is a refusal", async () => {
   const calls: { url: string; headers: Record<string, string> }[] = [];
+  // The JWT authorize endpoint answers no launch data here, so every case below is the platform endpoint's, as before.
   const respond = (status: number, body: unknown) =>
     (async (url: string, init: RequestInit) => {
       calls.push({ url: String(url), headers: init.headers as Record<string, string> });
-      return new Response(JSON.stringify(body), { status });
+      return new Response(JSON.stringify(String(url).includes("/jwt/") ? {} : body), { status: String(url).includes("/jwt/") ? 401 : status });
     }) as unknown as typeof fetch;
   const token = randomUUID();
   const data = answered();
-  assert.deepEqual(await createXappClient("KEY", "SECRET", respond(200, data)).getOtt(token), { kind: "data", data });
-  assert.equal(calls[0].url, `https://xumm.app/api/v1/platform/xapp/ott/${token}`);
+  assert.deepEqual(await createXappClient("KEY", "SECRET", respond(200, data)).getOtt(token), { kind: "data", data, jwt: null });
+  assert.equal(calls[0].url, "https://xumm.app/api/v1/jwt/authorize");
+  assert.equal(calls[0].headers["x-api-ott"], token);
   assert.equal(calls[0].headers["x-api-key"], "KEY");
-  assert.equal(calls[0].headers["x-api-secret"], "SECRET");
+  assert.equal(calls[0].headers["x-api-secret"], undefined, "the secret never goes to the JWT endpoint");
+  assert.equal(calls[1].url, `https://xumm.app/api/v1/platform/xapp/ott/${token}`);
+  assert.equal(calls[1].headers["x-api-key"], "KEY");
+  assert.equal(calls[1].headers["x-api-secret"], "SECRET");
   for (const status of [400, 401, 403, 404, 410]) assert.deepEqual(await createXappClient("K", "S", respond(status, {})).getOtt(token), { kind: "refused" });
   assert.deepEqual(await createXappClient("K", "S", respond(200, { error: { reference: "x", code: 812 } })).getOtt(token), { kind: "refused" });
   for (const status of [429, 500, 503]) await assert.rejects(createXappClient("K", "S", respond(status, {})).getOtt(token));
@@ -294,11 +299,17 @@ test("links: only those leaving this site go to the phone's browser", () => {
   fc.assert(fc.property(fc.webPath(), (p) => assert.equal(externalUrl(p.startsWith("//") ? `/x${p}` : p || "/", o), null)));
 });
 
-test("no tap leaves the webview: off-site links, new windows and email go through Xaman, and plain in-app links stay", () => {
+/** Xaman's own check before openBrowser opens anything (src/common/utils/string.ts, isValidURL): anything else is dropped without a word. */
+const XAMAN_OPENS = /^https:\/\/[a-zA-Z0-9][a-zA-Z0-9-.]+[a-zA-Z0-9].[a-zA-Z]{1,}[?/]{0,3}[^\r\n\t]+/;
+
+test("no tap leaves the webview: off-site links and new windows go through Xaman as https, email goes to the phone, plain in-app links stay", () => {
   const origin = "https://breaktheseal.rip";
   assert.equal(xappLink("https://xrpl.to", null, origin), "https://xrpl.to/");
   assert.equal(xappLink("/api/rip/log", "_blank", origin), "https://breaktheseal.rip/api/rip/log");
-  assert.equal(xappLink("mailto:gm@bearish.af", "_blank", origin), "mailto:gm@bearish.af");
+  // Xaman's openBrowser drops mailto. Left to the webview, an email link goes to the phone's mail app.
+  assert.equal(xappLink("mailto:gm@bearish.af", "_blank", origin), null);
+  assert.equal(xappLink("http://example.com/a", null, origin), "https://example.com/a");
+  for (const out of ["https://discord.gg/bearish", "https://x.com/bearish_af", "https://xrpl.to", "https://livenet.xrpl.org/transactions/AB"]) assert.match(xappLink(out, "_blank", origin) ?? "", XAMAN_OPENS, out);
   for (const inside of ["/packs", "/terms#refunds", "#who", "/collection/rip_1"]) assert.equal(xappLink(inside, null, origin), null);
   for (const nothing of [null, undefined, "", "javascript:alert(1)"]) assert.equal(xappLink(nothing, "_blank", origin), null);
   fc.assert(
@@ -310,10 +321,11 @@ test("no tap leaves the webview: off-site links, new windows and email go throug
   );
 });
 
-test("the shell's one fact about Xaman's user agent is what the head script checks, and it matches nothing else", () => {
+test("the shell's facts about Xaman, its user agent and its launch address, are what the head script checks", () => {
   const layout = readFileSync(new URL("../src/app/layout.tsx", import.meta.url), "utf8");
   assert.match(layout, /__html: XAPP_HEAD_SCRIPT/);
-  assert.match(XAPP_HEAD_SCRIPT, /indexOf\("xumm\/xapp"\)<0\)return;/);
+  assert.match(XAPP_HEAD_SCRIPT, /indexOf\("xumm\/xapp"\)>=0/);
+  assert.match(XAPP_HEAD_SCRIPT, /get\("xAppToken"\)/);
   const css = readFileSync(new URL("../src/app/xapp.css", import.meta.url), "utf8").replace(/\/\*[\s\S]*?\*\//g, "");
   // The site is untouched: every rule either needs the attribute or styles the shell's own classes.
   for (const rule of css.match(/[^{}]+(?=\{)/g) ?? []) for (const sel of rule.split(",")) assert.match(sel.trim(), /^(html\[data-xapp\]|\.x[a-z])/, sel);
@@ -352,18 +364,48 @@ test("the launch token comes from the address, or from Xaman's user agent", () =
   assert.equal(launchToken("", `Mozilla/5.0 (ott:${ott})`), "", "only Xaman's own user agent counts");
 });
 
-test("only Xaman's own webview counts as Xaman: any other React Native browser, like Joey's, gets the plain site", () => {
-  const ua = "xumm/xapp:5.4.0.123 (ott:11111111-2222-4333-8444-555555555555)";
-  assert.equal(isXamanHost({ postMessage() {} }, ua), true);
-  assert.equal(isXamanHost(undefined, ua), false, "the user agent alone is anyone's to type");
+const OTT = "11111111-2222-4333-8444-555555555555";
+const JOEY_UA = "Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 JoeyWallet/2.1";
+
+test("the xApp is Xaman's user agent or Xaman's launch address, in a frame or not, and kept for the tab; Joey's browser and the website are not", () => {
+  // Xaman's webview, whatever page it's on.
+  for (const ua of [`xumm/xapp:4.1.0 (ott:${OTT})`, "Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 xumm/xapp:3.4.0", "XUMM/XAPP:5.4.1"]) assert.equal(xappMarked({ userAgent: ua, search: "", stored: null }), true, ua);
+  // Xaman's sandbox and xAppBuilder frame the app: the bridge isn't there and the user agent can't be counted on, but the launch address is.
+  assert.equal(xappMarked({ userAgent: "Mozilla/5.0 (Macintosh) Safari", search: `?xAppToken=${OTT}&xAppStyle=ROYAL`, stored: null }), true);
+  assert.equal(xappMarked({ userAgent: "Mozilla/5.0", search: `?xAppToken=${mock}`, stored: null }), true, "the mock token Xaman's SDK uses for app review");
+  // The launch page drops its query; later pages in that tab stay the xApp.
+  assert.equal(xappMarked({ userAgent: "Mozilla/5.0", search: "", stored: "1" }), true);
+  assert.equal(xappMarked({ userAgent: JOEY_UA, search: "", stored: null }), false, "Joey's in-app browser gets the website");
   fc.assert(
-    fc.property(fc.string(), (other) => {
-      fc.pre(!/xumm\/xapp/i.test(other));
-      assert.equal(isXamanHost({ postMessage() {} }, other), false);
-    }),
+    fc.property(
+      fc.string().filter((ua) => !/xumm\/xapp/i.test(ua)),
+      fc.oneof(fc.constant(""), fc.string(), fc.constantFrom("?xAppToken=", "?xAppToken=x", "?xAppToken=not-a-uuid", "?xappToken=" + OTT, "?token=" + OTT)),
+      fc.option(fc.string().filter((v) => v !== "1"), { nil: null }),
+      (userAgent, search, stored) => {
+        fc.pre(!/xAppToken=[0-9a-f-]{36}/i.test(search));
+        assert.equal(xappMarked({ userAgent, search, stored }), false);
+      },
+    ),
   );
-  assert.equal(inXamanWebview(), false);
+  fc.assert(fc.property(fc.uuid({ version: 4 }), fc.string(), (token, userAgent) => assert.equal(xappMarked({ userAgent, search: `?xAppToken=${token}`, stored: null }), true)));
+  // In node there is no page: nothing is the xApp, and the SDK never loads.
+  assert.equal(inXapp(), false);
   assert.equal(xappSdk(), null);
+});
+
+test("a link out opens through Xaman's openBrowser, and only where no Xaman answers does it open a tab, so a link never does nothing", async () => {
+  const url = "https://discord.gg/bearish";
+  const tabs: string[] = [];
+  const fallback = (u: string) => void tabs.push(u);
+  const asked: string[] = [];
+  const host = (answer: unknown) => Promise.resolve({ openBrowser: ({ url: u }: { url: string }) => (asked.push(u), answer) });
+  assert.equal(await openOutside(url, { sdk: host(true), fallback }), "xaman");
+  assert.deepEqual([asked, tabs], [[url], []]);
+  // The SDK reports a host it can't reach by returning an Error after its retries, not by throwing.
+  assert.equal(await openOutside(url, { sdk: host(new Error("could not contact Xumm App Host")), fallback }), "tab");
+  assert.equal(await openOutside(url, { sdk: Promise.resolve({ openBrowser: () => Promise.reject(new Error("x")) }), fallback }), "tab");
+  assert.equal(await openOutside(url, { sdk: null, fallback }), "tab");
+  assert.deepEqual(tabs, [url, url, url]);
 });
 
 /** Xaman's onMessage, from its source: a message under 1500ms after the last accepted one is dropped with no error. Times are floored to the second. */
@@ -455,12 +497,13 @@ test("the wallet sheet: a request that ended is never offered again; outside the
   );
 });
 
-test("audit, property: whatever a link says, the only things handed to Xaman's browser are http, https and mailto, and a same-site link stays put", () => {
+test("audit, property: whatever a link says, the only thing handed to Xaman's browser is https, and a same-site link stays put", () => {
   const origin = "https://breaktheseal.rip";
   fc.assert(
-    fc.property(fc.oneof(fc.webUrl(), fc.string(), fc.constantFrom("javascript:alert(1)", "JaVaScRiPt:alert(1)", "data:text/html,x", "file:///etc/passwd", "xumm://x", "//evil.test/a", "\\\\evil.test", "/\\evil.test", "/packs", "tel:1")), fc.constantFrom(null, undefined, "_blank", "_self"), (href, target) => {
+    fc.property(fc.oneof(fc.webUrl(), fc.string(), fc.constantFrom("javascript:alert(1)", "JaVaScRiPt:alert(1)", "data:text/html,x", "file:///etc/passwd", "xumm://x", "//evil.test/a", "\\\\evil.test", "/\\evil.test", "/packs", "tel:1", "mailto:a@b.c")), fc.constantFrom(null, undefined, "_blank", "_self"), (href, target) => {
       const out = xappLink(href, target, origin);
-      if (out !== null) assert.match(out, /^(https?:|mailto:)/i);
+      if (out !== null) assert.match(out, /^https:\/\//);
+      if (/^mailto:/i.test(href)) assert.equal(out, null);
       if (/^\s*javascript:|^data:|^file:|^xumm:|^tel:/i.test(href)) assert.equal(out, null);
       if (href === "/packs" && target !== "_blank") assert.equal(out, null);
       if (href.startsWith("//evil.test")) assert.equal(out, "https://evil.test/a");

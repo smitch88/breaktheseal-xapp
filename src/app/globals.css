@@ -561,3 +561,5 @@ a.fine{text-decoration:underline}
 .mgrid .stop .hint{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .note a{text-decoration:underline}
 .mgrid .sellwin{text-align:left;margin:6px 0}
+/* The xApp's last resort, if its script never runs: a page held unshown for the launch shows itself (xapp.css, data-xpending). */
+@keyframes xshow{to{visibility:visible}}

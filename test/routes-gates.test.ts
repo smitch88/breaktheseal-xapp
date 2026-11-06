@@ -61,6 +61,7 @@ const COVERED: Readonly<Record<string, string>> = {
   "/api/rip/pulls": "recent-pulls",
   "/api/rip/tick": "routes-gates",
   "/api/rip/wallet-request": "routes-joey",
+  "/api/auth/xapp/info": "routes-xapp",
 };
 
 test("every route file has a test home: a new route can't ship untested", () => {

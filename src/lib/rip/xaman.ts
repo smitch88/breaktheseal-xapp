@@ -1,4 +1,5 @@
 import { randomBytes } from "node:crypto";
+import { playerTxRefusal } from "./player-tx.ts";
 
 export const XAMAN_API = "https://xumm.app/api/v1/platform";
 
@@ -28,6 +29,16 @@ export async function readRequest(input: { apiKey: string; apiSecret: string; uu
   const res = await fetchImpl(`${XAMAN_API}/payload/${encodeURIComponent(input.uuid)}`, { method: "GET", headers: { "x-api-key": input.apiKey, "x-api-secret": input.apiSecret, accept: "application/json" }, cache: "no-store", signal: AbortSignal.timeout(10000) });
   if (!res.ok) throw new Error(`Xaman ${res.status}`);
   return res.json();
+}
+
+/**
+ * A request a player is asked to sign, from the site or the xApp: only the four kinds a player ever signs (player-tx.ts), so no request
+ * for anything that hands over or ends an account can leave this server. The owner's own deploy kit asks through requestSignature.
+ */
+export async function requestPlayerSignature(input: Parameters<typeof requestSignature>[0]): Promise<WalletRequest> {
+  const refused = playerTxRefusal(input.txjson);
+  if (refused) throw new Error(refused);
+  return requestSignature(input);
 }
 
 export async function requestSignature(input: { apiKey: string; apiSecret: string; txjson: Readonly<Record<string, unknown>>; instruction: string; returnUrl: string | null; network: "TESTNET" | "MAINNET"; identifier: string; expireMinutes?: number; userToken?: string | null; fetchImpl?: typeof fetch }): Promise<WalletRequest> {

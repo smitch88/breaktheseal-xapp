@@ -1,7 +1,9 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
+import { connectView } from "@/lib/auth/xapp-host";
 import { dispatch, readDemo } from "@/lib/demo/store";
+import { inXapp as pageIsXapp } from "@/lib/xapp-style";
 import type { RailsMode } from "@/lib/live/client";
 import { ConnectSheet } from "./ConnectSheet.tsx";
 import { KeyboardInset } from "./KeyboardInset.tsx";
@@ -119,7 +121,8 @@ function SiteProviders({ xrpUsd, rails, children }: { xrpUsd: number; rails: Rai
           <ProofContext.Provider value={prove}>
             {children}
             <KeyboardInset />
-            {open ? shell ? <XappNoLaunch onClose={close} /> : <ConnectSheet onClose={close} onDone={done} /> : null}
+            {/* Inside Xaman this is never the website's Xaman-or-Joey chooser, even before the shell knows it's the xApp: the page's own mark decides too. */}
+            {{ none: null, xapp: <XappNoLaunch onClose={close} />, chooser: <ConnectSheet onClose={close} onDone={done} /> }[connectView({ open, xapp: shell || (open && pageIsXapp()) })]}
             {proving ? <ConfirmAccountSheet onClose={() => setProving(false)} onDone={proved} /> : null}
           </ProofContext.Provider>
         </ConnectContext.Provider>

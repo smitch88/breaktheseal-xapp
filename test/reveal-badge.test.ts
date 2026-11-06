@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import fc from "fast-check";
-import { AGAIN, againHref, buyState, cameAgain, keptQty, packHref, pullPack, qtyKey, quickStart, shellBack } from "../src/lib/again.ts";
+import { AGAIN, againHref, buyState, cameAgain, keptQty, packHref, pullPack, qtyKey, shellBack } from "../src/lib/again.ts";
 import { revealNext } from "../src/lib/live/proof.ts";
 import { awardBack, multipleText, orderBackXrp, pullMultiple, totalMultiple } from "../src/lib/pull-multiple.ts";
 import { sellWindowLine } from "../src/lib/sellback.ts";
@@ -172,17 +172,6 @@ test("the picker keeps the last choice, within what the pack can take now", () =
       assert.ok(Number.isInteger(q) && q >= 1 && q <= Math.max(1, max ?? 1));
     }),
   );
-});
-
-test("checkout skips to the wallet's request only inside Xaman, from Open, for the account that agreed, once", () => {
-  const yes = { go: true, shell: true, address: "rAbc", agreedBy: "rAbc", started: false };
-  assert.equal(quickStart(yes), true);
-  assert.equal(quickStart({ ...yes, shell: false }), false);
-  assert.equal(quickStart({ ...yes, go: false }), false);
-  assert.equal(quickStart({ ...yes, started: true }), false);
-  assert.equal(quickStart({ ...yes, agreedBy: null }), false);
-  assert.equal(quickStart({ ...yes, agreedBy: "rOther" }), false);
-  assert.equal(quickStart({ ...yes, address: null, agreedBy: null }), false);
 });
 
 test("a pack that can't be opened says so, and only an open one has a live button", () => {

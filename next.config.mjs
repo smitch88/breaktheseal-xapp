@@ -21,6 +21,16 @@ const config = {
     imageSizes: [96, 128, 256, 384],
     formats: ["image/webp"],
   },
+  // Xaman opens the xApp on its launch URL, /xapp, with the launch token and style in the query. A launch that lands on any other page
+  // (the console's xApp URL set to the site's root, say) goes to /xapp with its query kept, so the account still comes from the token
+  // and the website's wallet chooser never shows inside Xaman.
+  async redirects() {
+    const launch = [{ type: "query", key: "xAppToken" }];
+    return [
+      { source: "/", has: launch, destination: "/xapp", permanent: false },
+      { source: "/:path((?!xapp$|api/|_next/).+)", has: launch, destination: "/xapp", permanent: false },
+    ];
+  },
   async headers() {
     return [
       {

@@ -4,6 +4,9 @@
  * frame, 16px body text, 40px touch targets. The dark color sits on a fixed layer painted with the rest of the page.
  */
 html[data-xapp],html[data-xapp] body{background:transparent}
+/* Until the launch is known nothing of ours shows, not even a loader: Xaman's own loader covers it (see readyGate). If the page's
+   script never runs, it shows itself after 5 seconds anyway (xshow, in globals.css). */
+html[data-xapp][data-xpending] body{visibility:hidden;animation:xshow 0s linear 5s forwards}
 html[data-xapp] body::after{content:"";position:fixed;inset:0;z-index:-1;background:var(--canvas)}
 html[data-xapp]{--xtab:60px;--xsafe:env(safe-area-inset-bottom,0px)}
 
@@ -30,7 +33,12 @@ html[data-xapp] .packp.cop{padding-bottom:16px}
 html[data-xapp] .app:has(.cobar){padding-bottom:calc(var(--cobar,0px) + var(--xtab) + var(--xsafe))}
 .xboot{display:grid;gap:16px;padding-top:24px}
 .xabout{display:grid;gap:8px;padding:14px 0 6px}.xabout h2{font:400 26px/1.1 var(--d);text-transform:uppercase}.xabout p{margin:0}
-.xreach{display:grid;gap:10px;margin:8px 0}
+.xreach{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:0 0 8px}
+.xmail{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;margin:8px 0 0}
+.xbootbar{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.xaboutbtn{min-height:44px;min-width:44px;padding:0 14px;border:1px solid var(--divider);border-radius:3px;background:var(--panel);color:var(--text);font:700 16px var(--b)}
+.xinfolinks{display:grid;gap:10px;margin:4px 0 6px}
+.xinfo h3{margin-bottom:6px}.xinfo p{margin:0 0 10px;font-size:16px}
 .xtopics{display:grid;margin:6px 0 0;border-top:1px solid var(--divider)}html[data-xapp] .xtopics a{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:52px;padding:0 2px;margin:0;border-bottom:1px solid var(--divider);font-weight:700;font-size:16px;color:var(--text)}.xtopics svg{flex:none;color:var(--muted)}
 .xfoot{padding:14px var(--gr) 18px var(--g);border-top:1px solid var(--divider);margin-top:22px}
 .xlegal{display:flex;flex-wrap:wrap;gap:0 16px;margin:0}.xlegal a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;font-size:16px;text-decoration:underline}

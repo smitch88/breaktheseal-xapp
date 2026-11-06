@@ -10,6 +10,7 @@ import { useConfirmAccount, useRails } from "../Providers.tsx";
 import { useXapp } from "../XappHost.tsx";
 import { RestockLine, usePackAvailability } from "./Restock.tsx";
 import { LiveSellSheet } from "./SellSheet.tsx";
+import { trustIntro } from "@/lib/live/sign-copy";
 import { WalletSheet } from "./WalletSheet.tsx";
 
 type Trust = { tx: Readonly<Record<string, unknown>>; wallet: WalletLink | null };
@@ -120,7 +121,7 @@ export function PrizeActions({ ref_, order, onChange, onSold }: { ref_: LiveRef;
       {trust ? (
         <WalletSheet
           title="Set up SEAL in your wallet"
-          intro={`Your wallet needs a trust line before it can hold SEAL. Issuer: ${prize.issuer ?? ""}. It sends nothing and holds 0.2 XRP in reserve. Say no and your prize stays in your stash.`}
+          intro={trustIntro(prize.issuer)}
           wallet={trust.wallet}
           tx={trust.tx}
           onClose={() => setTrust(null)}

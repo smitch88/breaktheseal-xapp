@@ -12,7 +12,7 @@ import { SEO, pageMeta } from "@/lib/seo";
 
 export const metadata = pageMeta(SEO.checkout);
 
-type Props = { searchParams: Promise<{ pack?: string; nft?: string; qty?: string; go?: string }> };
+type Props = { searchParams: Promise<{ pack?: string; nft?: string; qty?: string }> };
 
 function PickFirst() {
   return (
@@ -28,9 +28,8 @@ function PickFirst() {
 }
 
 export default async function CheckoutPage({ searchParams }: Props) {
-  const { pack, nft, qty: qtyRaw, go: goRaw } = await searchParams;
+  const { pack, nft, qty: qtyRaw } = await searchParams;
   // Only a hint from the pack page's Open: checkout itself decides whether it may skip to the wallet's request.
-  const go = goRaw === "1";
   // A quantity in a link is only ever what to show first. The server decides what it can sell, and with the switch off there is no such thing.
   const qty = multiConfig(process.env) ? parseQty(qtyRaw) : 1;
   const market = await getMarket();
@@ -47,7 +46,6 @@ export default async function CheckoutPage({ searchParams }: Props) {
         back={`/nft/${view.price}`}
         xrpUsd={market.xrpUsd}
         qty={qty}
-        go={go}
         stage={
           /* eslint-disable-next-line @next/next/no-img-element */
           <img className="solo" src={view.art} alt="" />
@@ -60,5 +58,5 @@ export default async function CheckoutPage({ searchParams }: Props) {
   const found = catalog.machines.find((m) => m.code === pack);
   if (!found || found.stock === 0) return <PickFirst />;
   const [m] = await catalogSource.withFans([found]);
-  return <CheckoutFlow pack={{ kind: "card", code: m.code }} name={m.name} price={m.price} art="/assets/stage-pack.webp" back={`/packs/${m.code}`} xrpUsd={market.xrpUsd} qty={qty} go={go} stage={<Fan machine={m} big />} />;
+  return <CheckoutFlow pack={{ kind: "card", code: m.code }} name={m.name} price={m.price} art="/assets/stage-pack.webp" back={`/packs/${m.code}`} xrpUsd={market.xrpUsd} qty={qty} stage={<Fan machine={m} big />} />;
 }

@@ -15,7 +15,7 @@ export type ChallengeToken =
 export type SessionToken = { readonly k: "session"; readonly a: string; readonly w: WalletKind; readonly exp: number };
 
 /** A launch inside Xaman that Xaman's API confirmed. It names an account and a spent token. It is not a session and signs no one in. */
-export type XappToken = { readonly k: "xapp"; readonly a: string; readonly h: string; readonly exp: number };
+export type XappToken = { readonly k: "xapp"; readonly a: string; readonly h: string; readonly exp: number; readonly j?: string };
 
 export type Token = ChallengeToken | SessionToken | XappToken;
 

@@ -79,8 +79,9 @@ function ConnectFirst({ title }: { title: string }) {
   const connect = useConnect();
   // Inside Xaman the launch names the account, so there's no sign-in to offer: only the word that the launch has ended.
   if (useXapp().shell) return <XappEnded />;
+  // webonly: inside Xaman it's hidden from the first paint, before the shell has even started.
   return (
-    <div className="emptyc">
+    <div className="emptyc webonly">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src="/assets/vault.webp" alt="A serious seal guards a vault door" />
       <h3>{title}</h3>
@@ -163,7 +164,7 @@ export function CollectionView({ examples }: { examples: readonly Item[] }) {
           </h1>
         </div>
         <div className="acts">
-          <button className="btn" onClick={() => connect()}>
+          <button className="btn webonly" onClick={() => connect()}>
             Connect to see yours
           </button>
           <Link className="btn ol" href="/packs">
@@ -600,7 +601,7 @@ export function ProfileView() {
       ) : shell ? (
         <XappEnded />
       ) : (
-        <div className="emptyc">
+        <div className="emptyc webonly">
           <h3>Connect to see your profile</h3>
           <button className="btn" onClick={() => connect()}>
             Connect

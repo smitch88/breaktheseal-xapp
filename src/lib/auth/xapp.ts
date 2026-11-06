@@ -17,6 +17,8 @@ export const XAPP_COOKIE = "seal_xapp";
 /** How long a launch is remembered, so a sign-in can be asked for again without a new token. Same as Xaman's own xApp JWT. */
 export const XAPP_TTL_S = 24 * 3600;
 const OTT_SPENT_TTL_S = 24 * 3600;
+/** A cookie holds about 4 KB, and Xaman's JWTs are well under this. A longer one isn't kept: the info sheet then just shows again. */
+const MAX_JWT = 2048;
 /** The token the SDK treats as a browser pretending to be an xApp ("e.g. Apple review"). Never ours to accept. */
 const MOCK_OTT = "00000000-1337-4000-9000-000000000000";
 const UUID_V4 = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
@@ -28,7 +30,8 @@ export const xappEnabled = (env: Readonly<Record<string, string | undefined>>) =
 export const xappNetwork = (railsMode: string): XappNetwork => (railsMode === "testnet" ? "TESTNET" : "MAINNET");
 
 export interface XappXaman {
-  getOtt(token: string): Promise<{ readonly kind: "refused" } | { readonly kind: "data"; readonly data: unknown }>;
+  /** `jwt`: Xaman's JWT for this player and app, when the token was resolved where Xaman issues one. Only ever used for their userstore. */
+  getOtt(token: string): Promise<{ readonly kind: "refused" } | { readonly kind: "data"; readonly data: unknown; readonly jwt?: string | null }>;
   createSignIn(input: { nonce: string; account: string; network: XappNetwork }): Promise<{ readonly uuid: string }>;
 }
 
@@ -99,6 +102,11 @@ export function createXappService(deps: XappDeps) {
       return readMarker(rawMarker)?.a ?? null;
     },
 
+    /** Xaman's JWT for this launch's player, for their userstore, or null. */
+    userstoreJwt(rawMarker: string | null | undefined): string | null {
+      return readMarker(rawMarker)?.j ?? null;
+    },
+
     /** With a token: a new launch, and no sign request. Without one: the player pressed to confirm, so ask the account this browser's launch named. */
     async start(input: { token?: unknown; marker?: string | null; session?: string | null }): Promise<XappStart> {
       const known = readMarker(input.marker);
@@ -116,7 +124,9 @@ export function createXappService(deps: XappDeps) {
       if (!fresh) return { state: "used" };
       const read = readOtt(answer.data, deps.network);
       if (!read.ok) return { state: read.state };
-      return ready(read.account, input.session, signToken({ k: "xapp", a: read.account, h: ottHash(token), exp: now() + XAPP_TTL_S }, deps.secret));
+      // Xaman's JWT rides in the signed, httpOnly launch cookie, for the userstore only. It never decides who anyone is.
+      const jwt = typeof answer.jwt === "string" && answer.jwt.length <= MAX_JWT ? answer.jwt : null;
+      return ready(read.account, input.session, signToken({ k: "xapp", a: read.account, h: ottHash(token), exp: now() + XAPP_TTL_S, ...(jwt ? { j: jwt } : {}) }, deps.secret));
     },
 
     /** Today's check, untouched, plus one rule: the signature must be from the account this launch named. */
