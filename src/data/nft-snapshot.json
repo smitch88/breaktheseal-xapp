@@ -1,0 +1,551 @@
+{
+ "asOf": "2026-11-01T19:46:48.785Z",
+ "xrpUsd": 1.2455,
+ "collections": {
+  "blackmarketdawgs": {
+   "slug": "blackmarketdawgs",
+   "name": "Black Market Dawgs",
+   "floor": 2,
+   "items": 9786,
+   "samples": [
+    {
+     "id": "0008271005ECDB63C36C15BAAF49634CA2D7C65D9ADDD1DD0936F1C605A2E731",
+     "name": "XDawg2258",
+     "img": "/nfts/blackmarketdawgs/0936f1c605a2e731.webp"
+    },
+    {
+     "id": "0008271005ECDB63C36C15BAAF49634CA2D7C65D9ADDD1DD1F45EBDD05A2E63C",
+     "name": "XDawg4211",
+     "img": "/nfts/blackmarketdawgs/1f45ebdd05a2e63c.webp"
+    },
+    {
+     "id": "0008271005ECDB63C36C15BAAF49634CA2D7C65D9ADDD1DD275956FA05A2E855",
+     "name": "XDawg9246",
+     "img": "/nfts/blackmarketdawgs/275956fa05a2e855.webp"
+    },
+    {
+     "id": "0008271005ECDB63C36C15BAAF49634CA2D7C65D9ADDD1DD28773DA505A2E014",
+     "name": "XDawg2164",
+     "img": "/nfts/blackmarketdawgs/28773da505a2e014.webp"
+    },
+    {
+     "id": "0008271005ECDB63C36C15BAAF49634CA2D7C65D9ADDD1DD3D27DCBC05A2C81B",
+     "name": "XDawg3112",
+     "img": "/nfts/blackmarketdawgs/3d27dcbc05a2c81b.webp"
+    },
+    {
+     "id": "0008271005ECDB63C36C15BAAF49634CA2D7C65D9ADDD1DD5FB2FE3905A2DC98",
+     "name": "XDawg74",
+     "img": "/nfts/blackmarketdawgs/5fb2fe3905a2dc98.webp"
+    }
+   ]
+  },
+  "babyseal": {
+   "slug": "babyseal",
+   "name": "BABYSEAL",
+   "floor": 2.99,
+   "items": 307,
+   "samples": [
+    {
+     "id": "00081388DD41A117873752120FB88271AEC545DD5D1E9E5955DA2D0005DBDD66",
+     "name": "BABYSEAL #90",
+     "img": "/nfts/babyseal/55da2d0005dbdd66.webp"
+    },
+    {
+     "id": "00081388DD41A117873752120FB88271AEC545DD5D1E9E5957B479BF05DBDD23",
+     "name": "BABYSEAL #45",
+     "img": "/nfts/babyseal/57b479bf05dbdd23.webp"
+    },
+    {
+     "id": "00081388DD41A117873752120FB88271AEC545DD5D1E9E59F197739905DBDCFD",
+     "name": "BABYSEAL #76",
+     "img": "/nfts/babyseal/f197739905dbdcfd.webp"
+    },
+    {
+     "id": "00081388DD41A117873752120FB88271AEC545DD5D1E9E5944EEADB305DBDD17",
+     "name": "BABYSEAL #196",
+     "img": "/nfts/babyseal/44eeadb305dbdd17.webp"
+    },
+    {
+     "id": "00081388DD41A117873752120FB88271AEC545DD5D1E9E59AEC04D5305DBDCB7",
+     "name": "BABYSEAL #193",
+     "img": "/nfts/babyseal/aec04d5305dbdcb7.webp"
+    },
+    {
+     "id": "00081388DD41A117873752120FB88271AEC545DD5D1E9E59EDE2DA1F05DBDD83",
+     "name": "BABYSEAL #237",
+     "img": "/nfts/babyseal/ede2da1f05dbdd83.webp"
+    }
+   ]
+  },
+  "anti-social-media": {
+   "slug": "anti-social-media",
+   "name": "Anti-Social Media",
+   "floor": 7,
+   "items": 7770,
+   "samples": [
+    {
+     "id": "00081388BAD2ECAEBCADEF92D31DEC1D00D410366FF37ED8178CBDE004D0074E",
+     "name": "Anti-Social #5101",
+     "img": "/nfts/anti-social-media/178cbde004d0074e.webp"
+    },
+    {
+     "id": "00081388BAD2ECAEBCADEF92D31DEC1D00D410366FF37ED81D8F50B304CFFB1F",
+     "name": "Anti-Social #3124",
+     "img": "/nfts/anti-social-media/1d8f50b304cffb1f.webp"
+    },
+    {
+     "id": "00081388BAD2ECAEBCADEF92D31DEC1D00D410366FF37ED85FE09E8404D001F2",
+     "name": "Anti-Social #5760",
+     "img": "/nfts/anti-social-media/5fe09e8404d001f2.webp"
+    },
+    {
+     "id": "00081388BAD2ECAEBCADEF92D31DEC1D00D410366FF37ED893E55EE204D00450",
+     "name": "Anti-Social #413",
+     "img": "/nfts/anti-social-media/93e55ee204d00450.webp"
+    },
+    {
+     "id": "00081388BAD2ECAEBCADEF92D31DEC1D00D410366FF37ED89657B7FD04D00259",
+     "name": "Anti-Social #4786",
+     "img": "/nfts/anti-social-media/9657b7fd04d00259.webp"
+    },
+    {
+     "id": "00081388BAD2ECAEBCADEF92D31DEC1D00D410366FF37ED8ABA206EB04D00547",
+     "name": "Anti-Social #3097",
+     "img": "/nfts/anti-social-media/aba206eb04d00547.webp"
+    }
+   ]
+  },
+  "luckypunch": {
+   "slug": "luckypunch",
+   "name": "Mouse: Lucky Punch",
+   "floor": 19,
+   "items": 2000,
+   "samples": [
+    {
+     "id": "00081388EF7C422EF52CEB969960BEF4144D7BC3F862C467C1075A84059EB9E7",
+     "name": "1927",
+     "img": "/nfts/luckypunch/c1075a84059eb9e7.webp"
+    },
+    {
+     "id": "00081388EF7C422EF52CEB969960BEF4144D7BC3F862C467B2F99DB1059EB81C",
+     "name": "889",
+     "img": "/nfts/luckypunch/b2f99db1059eb81c.webp"
+    },
+    {
+     "id": "00081388EF7C422EF52CEB969960BEF4144D7BC3F862C46706243906059EBA65",
+     "name": "627",
+     "img": "/nfts/luckypunch/06243906059eba65.webp"
+    },
+    {
+     "id": "00081388EF7C422EF52CEB969960BEF4144D7BC3F862C4672D8A1DD3059EBA3A",
+     "name": "1851",
+     "img": "/nfts/luckypunch/2d8a1dd3059eba3a.webp"
+    },
+    {
+     "id": "00081388EF7C422EF52CEB969960BEF4144D7BC3F862C46754F002AC059EBA0F",
+     "name": "327",
+     "img": "/nfts/luckypunch/54f002ac059eba0f.webp"
+    },
+    {
+     "id": "00081388EF7C422EF52CEB969960BEF4144D7BC3F862C4675DDA44BF059EBD1E",
+     "name": "873",
+     "img": "/nfts/luckypunch/5dda44bf059ebd1e.webp"
+    }
+   ]
+  },
+  "animal-fam": {
+   "slug": "animal-fam",
+   "name": "Animal Fam",
+   "floor": 58,
+   "items": 1589,
+   "samples": [
+    {
+     "id": "00181388208AE9E5739668CEE25874F9BBE7EB2452EC4B8DF4592CC70637082B",
+     "name": "ANIMAL FAM #169",
+     "img": "/nfts/animal-fam/f4592cc70637082b.webp"
+    },
+    {
+     "id": "00181388208AE9E5739668CEE25874F9BBE7EB2452EC4B8D27484985063706E9",
+     "name": "ANIMAL FAM #247",
+     "img": "/nfts/animal-fam/27484985063706e9.webp"
+    },
+    {
+     "id": "00181388208AE9E5739668CEE25874F9BBE7EB2452EC4B8D8B1F9773063706D7",
+     "name": "ANIMAL FAM #170",
+     "img": "/nfts/animal-fam/8b1f9773063706d7.webp"
+    },
+    {
+     "id": "00181388208AE9E5739668CEE25874F9BBE7EB2452EC4B8DA41E81DB0637093F",
+     "name": "ANIMAL FAM #184",
+     "img": "/nfts/animal-fam/a41e81db0637093f.webp"
+    },
+    {
+     "id": "00181388208AE9E5739668CEE25874F9BBE7EB2452EC4B8D2224CEC90637082D",
+     "name": "ANIMAL FAM #317",
+     "img": "/nfts/animal-fam/2224cec90637082d.webp"
+    },
+    {
+     "id": "00181388208AE9E5739668CEE25874F9BBE7EB2452EC4B8DFD9CAC76063706DC",
+     "name": "ANIMAL FAM #107",
+     "img": "/nfts/animal-fam/fd9cac76063706dc.webp"
+    }
+   ]
+  },
+  "shitty-panther-club": {
+   "slug": "shitty-panther-club",
+   "name": "Panther",
+   "floor": 13.8,
+   "items": 6969,
+   "samples": [
+    {
+     "id": "00081388A5753AFA2D401872105C78DC9D9B93ECABBBA2A2AE6AD03E05F3B3A3",
+     "name": "Panther 1377",
+     "img": "/nfts/shitty-panther-club/ae6ad03e05f3b3a3.webp"
+    },
+    {
+     "id": "00081388A5753AFA2D401872105C78DC9D9B93ECABBBA2A209E7A34A05F3BAAF",
+     "name": "Panther 6095",
+     "img": "/nfts/shitty-panther-club/09e7a34a05f3baaf.webp"
+    },
+    {
+     "id": "00081388A5753AFA2D401872105C78DC9D9B93ECABBBA2A20EA7F5AA05F3AD0F",
+     "name": "Panther 1365",
+     "img": "/nfts/shitty-panther-club/0ea7f5aa05f3ad0f.webp"
+    },
+    {
+     "id": "00081388A5753AFA2D401872105C78DC9D9B93ECABBBA2A2388A1C4205F3BBA7",
+     "name": "Panther 4650",
+     "img": "/nfts/shitty-panther-club/388a1c4205f3bba7.webp"
+    },
+    {
+     "id": "00081388A5753AFA2D401872105C78DC9D9B93ECABBBA2A241B32AFB05F3C160",
+     "name": "Panther 1215",
+     "img": "/nfts/shitty-panther-club/41b32afb05f3c160.webp"
+    },
+    {
+     "id": "00081388A5753AFA2D401872105C78DC9D9B93ECABBBA2A27B73706105F3C0C6",
+     "name": "Panther 6080",
+     "img": "/nfts/shitty-panther-club/7b73706105f3c0c6.webp"
+    }
+   ]
+  },
+  "monx": {
+   "slug": "monx",
+   "name": "monx",
+   "floor": 39,
+   "items": 777,
+   "samples": [
+    {
+     "id": "0008138823C41E7E9527F6C7BC5D44BA131E1644862BE9B5D09ABE36063B9520",
+     "name": "Monx #405",
+     "img": "/nfts/monx/d09abe36063b9520.webp"
+    },
+    {
+     "id": "0008138823C41E7E9527F6C7BC5D44BA131E1644862BE9B5FB1D3233063B9623",
+     "name": "Monx #482",
+     "img": "/nfts/monx/fb1d3233063b9623.webp"
+    },
+    {
+     "id": "0008138823C41E7E9527F6C7BC5D44BA131E1644862BE9B50286653F063B9517",
+     "name": "Monx #319",
+     "img": "/nfts/monx/0286653f063b9517.webp"
+    },
+    {
+     "id": "0008138823C41E7E9527F6C7BC5D44BA131E1644862BE9B508154B64063B944E",
+     "name": "Monx #332",
+     "img": "/nfts/monx/08154b64063b944e.webp"
+    },
+    {
+     "id": "0008138823C41E7E9527F6C7BC5D44BA131E1644862BE9B546610132063B9424",
+     "name": "Monx #442",
+     "img": "/nfts/monx/46610132063b9424.webp"
+    },
+    {
+     "id": "0008138823C41E7E9527F6C7BC5D44BA131E1644862BE9B5571FE2B0063B96A2",
+     "name": "Monx #221",
+     "img": "/nfts/monx/571fe2b0063b96a2.webp"
+    }
+   ]
+  },
+  "bearchampdaf": {
+   "slug": "bearchampdaf",
+   "name": "The Bear Champ - Dead As Fuck",
+   "floor": 135,
+   "items": 2208,
+   "samples": [
+    {
+     "id": "00081388EF7C422EF52CEB969960BEF4144D7BC3F862C467C0EB41EE059EA454",
+     "name": "1495",
+     "img": "/nfts/bearchampdaf/c0eb41ee059ea454.webp"
+    },
+    {
+     "id": "00081388EF7C422EF52CEB969960BEF4144D7BC3F862C467F8B6C9A1059EAB05",
+     "name": "1889",
+     "img": "/nfts/bearchampdaf/f8b6c9a1059eab05.webp"
+    },
+    {
+     "id": "00081388EF7C422EF52CEB969960BEF4144D7BC3F862C467A82B2430059EA496",
+     "name": "1620",
+     "img": "/nfts/bearchampdaf/a82b2430059ea496.webp"
+    },
+    {
+     "id": "00081388EF7C422EF52CEB969960BEF4144D7BC3F862C4670CEB76EF059EAA53",
+     "name": "1365",
+     "img": "/nfts/bearchampdaf/0ceb76ef059eaa53.webp"
+    },
+    {
+     "id": "00081388EF7C422EF52CEB969960BEF4144D7BC3F862C4675234F43C059EA8A2",
+     "name": "576",
+     "img": "/nfts/bearchampdaf/5234f43c059ea8a2.webp"
+    },
+    {
+     "id": "00081388EF7C422EF52CEB969960BEF4144D7BC3F862C467C200E58E059EA7F4",
+     "name": "550",
+     "img": "/nfts/bearchampdaf/c200e58e059ea7f4.webp"
+    }
+   ]
+  },
+  "bored-apes-xrp-club": {
+   "slug": "bored-apes-xrp-club",
+   "name": "Bored Apes XRP Club",
+   "floor": 33.9,
+   "items": 9997,
+   "samples": [
+    {
+     "id": "00081388A47691FB124F91B5FF0F5246AED2B5275385689F98E1354800001DAE",
+     "name": "Bored Apes XRP Club #7608",
+     "img": "/nfts/bored-apes-xrp-club/98e1354800001dae.webp"
+    }
+   ]
+  },
+  "xpunks": {
+   "slug": "xpunks",
+   "name": "XPUNKS",
+   "floor": 95,
+   "items": 9512,
+   "samples": [
+    {
+     "id": "00081B581189F5687DBB7516339D6CCB5593D96622AD82DF4E072A1C0000038D",
+     "name": "XPUNKS #909",
+     "img": "/nfts/xpunks/4e072a1c0000038d.webp"
+    },
+    {
+     "id": "00081B581189F5687DBB7516339D6CCB5593D96622AD82DF62F83D4000000AD9",
+     "name": "XPUNKS #2777",
+     "img": "/nfts/xpunks/62f83d4000000ad9.webp"
+    },
+    {
+     "id": "00081B581189F5687DBB7516339D6CCB5593D96622AD82DF05E9D53B00001774",
+     "name": "XPUNKS #7848",
+     "img": "/nfts/xpunks/05e9d53b00001774.webp"
+    },
+    {
+     "id": "00081B581189F5687DBB7516339D6CCB5593D96622AD82DF145ABA020000259B",
+     "name": "XPUNKS #8237",
+     "img": "/nfts/xpunks/145aba020000259b.webp"
+    },
+    {
+     "id": "00081B581189F5687DBB7516339D6CCB5593D96622AD82DF2F05AADB00000D54",
+     "name": "XPUNKS #3412",
+     "img": "/nfts/xpunks/2f05aadb00000d54.webp"
+    },
+    {
+     "id": "00081B581189F5687DBB7516339D6CCB5593D96622AD82DF665BDC5F000002D0",
+     "name": "XPUNKS #720",
+     "img": "/nfts/xpunks/665bdc5f000002d0.webp"
+    }
+   ]
+  },
+  "seal-on-xrpl-cto": {
+   "slug": "seal-on-xrpl-cto",
+   "name": "SEAL on XRPL CTO",
+   "floor": 250,
+   "items": 906,
+   "samples": [
+    {
+     "id": "001813881F9C83FE46F4EEC59D5E8C0B017F1791F856B882790EDEC90611182D",
+     "name": "seal-428",
+     "img": "/nfts/seal-on-xrpl-cto/790edec90611182d.webp"
+    },
+    {
+     "id": "001813881F9C83FE46F4EEC59D5E8C0B017F1791F856B88214F8C43106111595",
+     "name": "seal-327",
+     "img": "/nfts/seal-on-xrpl-cto/14f8c43106111595.webp"
+    },
+    {
+     "id": "001813881F9C83FE46F4EEC59D5E8C0B017F1791F856B882C278610D06111671",
+     "name": "seal-332",
+     "img": "/nfts/seal-on-xrpl-cto/c278610d06111671.webp"
+    },
+    {
+     "id": "001813881F9C83FE46F4EEC59D5E8C0B017F1791F856B88216A6721D06111781",
+     "name": "seal-780",
+     "img": "/nfts/seal-on-xrpl-cto/16a6721d06111781.webp"
+    },
+    {
+     "id": "001813881F9C83FE46F4EEC59D5E8C0B017F1791F856B8825C5B5AE70611164B",
+     "name": "seal-743",
+     "img": "/nfts/seal-on-xrpl-cto/5c5b5ae70611164b.webp"
+    },
+    {
+     "id": "001813881F9C83FE46F4EEC59D5E8C0B017F1791F856B882449EB2EE06111554",
+     "name": "seal-297",
+     "img": "/nfts/seal-on-xrpl-cto/449eb2ee06111554.webp"
+    }
+   ]
+  },
+  "parc": {
+   "slug": "parc",
+   "name": "Pixel Ape Rowboat Club (PARC)",
+   "floor": 24.9,
+   "items": 9996,
+   "samples": [
+    {
+     "id": "000813885A50B70EB8E06045D776B55BB4E6339076E718FC5DD6BC2D048A5191",
+     "name": "Nelson Osinski",
+     "img": "/nfts/parc/5dd6bc2d048a5191.webp"
+    },
+    {
+     "id": "000813885A50B70EB8E06045D776B55BB4E6339076E718FC141C3F64048A4BCA",
+     "name": "Marvin Mohr",
+     "img": "/nfts/parc/141c3f64048a4bca.webp"
+    },
+    {
+     "id": "000813885A50B70EB8E06045D776B55BB4E6339076E718FC2AEFE28C048A46F2",
+     "name": "Lynn Keeling",
+     "img": "/nfts/parc/2aefe28c048a46f2.webp"
+    },
+    {
+     "id": "000813885A50B70EB8E06045D776B55BB4E6339076E718FC4AEC946F048A47D3",
+     "name": "Saul Boyer",
+     "img": "/nfts/parc/4aec946f048a47d3.webp"
+    },
+    {
+     "id": "000813885A50B70EB8E06045D776B55BB4E6339076E718FC4ECDCCB8048A451E",
+     "name": "Corey Reynolds",
+     "img": "/nfts/parc/4ecdccb8048a451e.webp"
+    },
+    {
+     "id": "000813885A50B70EB8E06045D776B55BB4E6339076E718FC61D2656E048A47D4",
+     "name": "Ronnie Huel",
+     "img": "/nfts/parc/61d2656e048a47d4.webp"
+    }
+   ]
+  },
+  "bearchampgf": {
+   "slug": "bearchampgf",
+   "name": "The Bear Champ GF",
+   "floor": 400,
+   "items": 500,
+   "samples": [
+    {
+     "id": "00081388EF7C422EF52CEB969960BEF4144D7BC3F862C46706CCC988059EA0EF",
+     "name": "189",
+     "img": "/nfts/bearchampgf/06ccc988059ea0ef.webp"
+    },
+    {
+     "id": "00081388EF7C422EF52CEB969960BEF4144D7BC3F862C467F8FDD96B059EA1CE",
+     "name": "415",
+     "img": "/nfts/bearchampgf/f8fdd96b059ea1ce.webp"
+    },
+    {
+     "id": "00081388EF7C422EF52CEB969960BEF4144D7BC3F862C4676C7E6437059EA09A",
+     "name": "460",
+     "img": "/nfts/bearchampgf/6c7e6437059ea09a.webp"
+    },
+    {
+     "id": "00081388EF7C422EF52CEB969960BEF4144D7BC3F862C467B12FD73A059EA09D",
+     "name": "128",
+     "img": "/nfts/bearchampgf/b12fd73a059ea09d.webp"
+    },
+    {
+     "id": "00081388EF7C422EF52CEB969960BEF4144D7BC3F862C467FE215427059EA08A",
+     "name": "445",
+     "img": "/nfts/bearchampgf/fe215427059ea08a.webp"
+    },
+    {
+     "id": "00081388EF7C422EF52CEB969960BEF4144D7BC3F862C4672E32AE5D059EA0C4",
+     "name": "55",
+     "img": "/nfts/bearchampgf/2e32ae5d059ea0c4.webp"
+    }
+   ]
+  },
+  "seal-cto-scrolls": {
+   "slug": "seal-cto-scrolls",
+   "name": "SEAL on XRPL CTO - SCROLLS",
+   "floor": 148.95,
+   "items": 906,
+   "samples": [
+    {
+     "id": "001813887D829B8285E64A3B355CD5E563C4F4AC9D706942373CF2F606174059",
+     "name": "SCROLL #887",
+     "img": "/nfts/seal-cto-scrolls/373cf2f606174059.webp"
+    },
+    {
+     "id": "001813887D829B8285E64A3B355CD5E563C4F4AC9D7069427F6432C506173D2C",
+     "name": "SCROLL #74",
+     "img": "/nfts/seal-cto-scrolls/7f6432c506173d2c.webp"
+    },
+    {
+     "id": "001813887D829B8285E64A3B355CD5E563C4F4AC9D706942CD97F22706173E8A",
+     "name": "SCROLL #424",
+     "img": "/nfts/seal-cto-scrolls/cd97f22706173e8a.webp"
+    },
+    {
+     "id": "001813887D829B8285E64A3B355CD5E563C4F4AC9D706942DE1805FB06173E5E",
+     "name": "SCROLL #380",
+     "img": "/nfts/seal-cto-scrolls/de1805fb06173e5e.webp"
+    },
+    {
+     "id": "001813887D829B8285E64A3B355CD5E563C4F4AC9D7069425242C8E80617404F",
+     "name": "SCROLL #877",
+     "img": "/nfts/seal-cto-scrolls/5242c8e80617404f.webp"
+    },
+    {
+     "id": "001813887D829B8285E64A3B355CD5E563C4F4AC9D7069428D06841506173E7C",
+     "name": "SCROLL #410",
+     "img": "/nfts/seal-cto-scrolls/8d06841506173e7c.webp"
+    }
+   ]
+  },
+  "bearchamp": {
+   "slug": "bearchamp",
+   "name": "Bear Champ",
+   "floor": 1250,
+   "items": 500,
+   "samples": [
+    {
+     "id": "00081388EF7C422EF52CEB969960BEF4144D7BC3F862C4670B84D8CB059E9F30",
+     "name": "168",
+     "img": "/nfts/bearchamp/0b84d8cb059e9f30.webp"
+    },
+    {
+     "id": "00081388EF7C422EF52CEB969960BEF4144D7BC3F862C46718505325059E9F8A",
+     "name": "181",
+     "img": "/nfts/bearchamp/18505325059e9f8a.webp"
+    },
+    {
+     "id": "00081388EF7C422EF52CEB969960BEF4144D7BC3F862C4678B38D3A5059EA00A",
+     "name": "470",
+     "img": "/nfts/bearchamp/8b38d3a5059ea00a.webp"
+    },
+    {
+     "id": "00081388EF7C422EF52CEB969960BEF4144D7BC3F862C46753EAE548059E9EAD",
+     "name": "431",
+     "img": "/nfts/bearchamp/53eae548059e9ead.webp"
+    },
+    {
+     "id": "00081388EF7C422EF52CEB969960BEF4144D7BC3F862C467E0D5C5F7059EA05C",
+     "name": "337",
+     "img": "/nfts/bearchamp/e0d5c5f7059ea05c.webp"
+    },
+    {
+     "id": "00081388EF7C422EF52CEB969960BEF4144D7BC3F862C4672A3F483B059E9EA0",
+     "name": "147",
+     "img": "/nfts/bearchamp/2a3f483b059e9ea0.webp"
+    }
+   ]
+  }
+ }
+}
