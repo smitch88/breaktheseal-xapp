@@ -102,8 +102,12 @@ test("explained first, property: every wallet sheet says what it is and every co
 
 test("on a tap only: no request opens on load, from an effect, or by skipping checkout", () => {
   const sheet = read("src/components/live/WalletSheet.tsx");
-  assert.equal(sheet.match(/openInXaman/g)?.length, 2, "defined once, and pressed once: <button onClick={openInXaman}>");
+  assert.equal(sheet.match(/\bopenInXaman\b/g)?.length, 2, "defined once, and pressed once: <button onClick={openInXaman}>");
   assert.match(sheet, /onClick=\{openInXaman\}/);
+  // Showing an open request again is a press too, and only ever re-shows the one the first press opened.
+  assert.equal(sheet.match(/\bshowAgain\b/g)?.length, 2, "defined once, and pressed once: <button onClick={showAgain}>");
+  assert.match(sheet, /onClick=\{showAgain\}/);
+  assert.equal(sheet.match(/reopenInXaman\(/g)?.length, 1);
   for (const file of ["src/lib/again.ts", "src/components/PackBuy.tsx", "src/components/live/LiveCheckout.tsx", "src/components/CheckoutFlow.tsx", "src/app/(site)/checkout/page.tsx"]) assert.doesNotMatch(read(file), /quickStart|go=1|\bgo\b: ?goRaw/, file);
   const boot = read("src/components/XappBoot.tsx");
   assert.doesNotMatch(boot, /openSignRequest|signInXaman|createSignIn/, "the launch asks for nothing");

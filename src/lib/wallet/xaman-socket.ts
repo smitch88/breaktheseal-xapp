@@ -20,6 +20,16 @@ export function readXamanSocket(raw: unknown): XamanSignal | null {
   return null;
 }
 
+/** Xaman's socket saying the request was opened on the phone: from then on the sheet may say it's waiting for the payment's confirmation. */
+export function socketOpened(raw: unknown): boolean {
+  try {
+    const m = JSON.parse(String(raw)) as { opened?: unknown } | null;
+    return !!m && typeof m === "object" && m.opened === true;
+  } catch {
+    return false;
+  }
+}
+
 /** What a read of a payload says about one sign request. A signed request whose submit failed is over: nothing moved. */
 export type XamanRequestState = "pending" | "signed" | "declined" | "expired";
 

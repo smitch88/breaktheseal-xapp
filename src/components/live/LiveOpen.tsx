@@ -7,6 +7,7 @@ import { NFT_LADDERS, type NftPrice } from "@/config/nft-packs";
 import { useDemo, useHydrated } from "@/lib/demo/store";
 import { REFUND_REASONS, api, owedPrizeText, pullComesBack, cardAward, networkLabel, nftAward, parseLiveId, txUrl, verifyHref, xrpShort, xrpText, type LiveCard, type LiveOrder, type LiveRef, dropsToXrp } from "@/lib/live/client";
 import { useCardDetails, usePoll, useRipConfig } from "@/lib/live/hooks";
+import { WAITING_CONFIRMATION } from "@/lib/live/sign-copy";
 import { revealNext, soldTrail, withDetails } from "@/lib/live/proof";
 import { noOrphan, usd2 } from "@/lib/format";
 import { againHref, pullPack } from "@/lib/again";
@@ -92,11 +93,11 @@ export function LiveOpenFlow({ rawId }: { rawId: string }) {
   const steps =
     ref.kind === "nft"
       ? [
-          { done: !!nft && nft.status !== "quoted", wait: "Waiting for your payment", yes: "Payment on the ledger" },
+          { done: !!nft && nft.status !== "quoted", wait: WAITING_CONFIRMATION, yes: "Payment on the ledger" },
           { done: !!drawn, wait: "Waiting for a later ledger to close", yes: "Pull fixed" },
         ]
       : [
-          { done: !!card && card.status !== "quoted", wait: "Waiting for your payment", yes: "Payment on the ledger" },
+          { done: !!card && card.status !== "quoted", wait: WAITING_CONFIRMATION, yes: "Payment on the ledger" },
           { done: !!card && ["source_paid", "opened", "held"].includes(card.status), wait: simulated ? "Buying the pack (simulated source)" : card?.status === "funding" ? "Your pack is on its way" : "Buying your pack", yes: "Pack bought" },
           { done: !!drawn, wait: "Checking it's in the vault", yes: "In the vault" },
         ];

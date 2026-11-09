@@ -65,9 +65,12 @@ export function outcomeOf(event: unknown, uuid: string): SignOutcome | null {
   return e.reason === "SIGNED" ? "signed" : e.reason === "DECLINED" ? "declined" : null;
 }
 
-/** Open a sign request inside Xaman and wait for it to be resolved. The app's own sheet stays on screen beneath it. */
-export async function signInXaman(uuid: string): Promise<SignOutcome> {
-  const sdk = await xappSdk();
+/**
+ * Open a sign request inside Xaman and wait for it to be resolved. The app's own sheet stays on screen beneath it. `onOpened` runs
+ * once Xaman has taken the request (the SDK's openSignRequest answered without an Error), and only then may the sheet say it's waiting.
+ */
+export async function signInXaman(uuid: string, onOpened?: () => void, deps: { sdk?: Promise<Pick<XappSdk, "openSignRequest" | "on" | "off">> | null } = {}): Promise<SignOutcome> {
+  const sdk = await ("sdk" in deps ? deps.sdk : xappSdk());
   if (!sdk) throw new Error("not in Xaman");
   return new Promise<SignOutcome>((resolve, reject) => {
     const listen = (event: unknown) => {
@@ -83,7 +86,7 @@ export async function signInXaman(uuid: string): Promise<SignOutcome> {
         if (r instanceof Error) {
           sdk.off("payload", listen);
           reject(r);
-        }
+        } else onOpened?.();
       },
       (e) => {
         sdk.off("payload", listen);

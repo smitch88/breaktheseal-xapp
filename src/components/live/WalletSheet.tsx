@@ -1,11 +1,12 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { sheetMode, signInXaman } from "@/lib/auth/xapp-host";
+import { reopenInXaman, sheetMode, signInXaman } from "@/lib/auth/xapp-host";
 import { noOrphan } from "@/lib/format";
 import { useDemo } from "@/lib/demo/store";
 import { api, dropsToXrp, type WalletLink } from "@/lib/live/client";
-import { failureText, readXamanSocket } from "@/lib/wallet/xaman-socket";
+import { payCopy, payStep } from "@/lib/live/sign-copy";
+import { failureText, readXamanSocket, socketOpened } from "@/lib/wallet/xaman-socket";
 import { Sheet } from "../Sheet.tsx";
 import { useXapp } from "../XappHost.tsx";
 import { JoeySign } from "./JoeySign.tsx";
@@ -69,22 +70,32 @@ function AnyWallet({ tx }: { tx: Readonly<Record<string, unknown>> }) {
 
 /**
  * The one transaction a player signs. In Joey for a Joey sign-in. For Xaman, its QR on desktop, its app link on a phone, or, inside
- * the xApp, the request itself, opened only when the player presses Approve under the sheet's plain explanation and fees. Nothing opens
- * a request on its own. The plain details for any other wallet are always there. It only asks: the server moves a pull forward when
- * the ledger says it happened, never because this sheet did.
+ * the xApp, the request itself, opened only when the player presses the sheet's button (Continue to payment for a payment, Approve in
+ * Xaman for anything else) under its plain explanation and fees. Nothing opens a request on its own. The plain details for any other
+ * wallet are always there. It only asks: the server moves a pull forward when the ledger says it happened, never because this sheet did. A payment's sheet (`pay`) reads "Ready to pay" with Continue to payment
+ * until Xaman has really opened the request, and only then "Waiting for payment confirmation" (payCopy).
  */
-export function WalletSheet({ title, intro, wallet, tx, onClose, onCheck, onRetry, declined = "You said no in your wallet, so nothing moved.", children }: { title: string; intro: string; wallet: WalletLink | null; tx: Readonly<Record<string, unknown>>; onClose: () => void; onCheck?: () => void; onRetry?: () => void; declined?: string; children?: React.ReactNode }) {
+export function WalletSheet({ title, intro, wallet, tx, onClose, onCheck, onRetry, declined = "You said no in your wallet, so nothing moved.", pay = false, children }: { title: string; intro: string; wallet: WalletLink | null; tx: Readonly<Record<string, unknown>>; onClose: () => void; onCheck?: () => void; onRetry?: () => void; declined?: string; pay?: boolean; children?: React.ReactNode }) {
   const check = useRef(onCheck);
   check.current = onCheck;
   const { wallet: signedWith } = useDemo();
   const [ended, setEnded] = useState<"declined" | "expired" | null>(null);
   const [failure, setFailure] = useState<string | null>(null);
+  // Pressed and not yet taken by Xaman; taken by Xaman (opened); and signed there. Nothing says "waiting" before opened.
+  const [opening, setOpening] = useState(false);
+  const [opened, setOpened] = useState(false);
+  const [signed, setSigned] = useState(false);
   const uuid = wallet?.uuid;
+  const current = useRef(uuid);
+  current.current = uuid;
 
   // A new request is a new start.
   useEffect(() => {
     setEnded(null);
     setFailure(null);
+    setOpening(false);
+    setOpened(false);
+    setSigned(false);
   }, [uuid]);
 
   /** Where the request stands. A signature the ledger turned down isn't the player saying no, so it says why. */
@@ -106,8 +117,10 @@ export function WalletSheet({ title, intro, wallet, tx, onClose, onCheck, onRetr
     try {
       socket = new WebSocket(wallet.ws);
       socket.onmessage = (e) => {
+        if (socketOpened(e.data)) setOpened(true);
         const signal = readXamanSocket(e.data);
         if (signal === "signed") {
+          setSigned(true);
           check.current?.();
           setTimeout(() => after.current(), 5000);
         } else if (signal) setEnded(signal);
@@ -133,28 +146,55 @@ export function WalletSheet({ title, intro, wallet, tx, onClose, onCheck, onRetr
   const { active, shell } = useXapp();
   const inXapp = active && !!wallet;
   const [refused, setRefused] = useState<string | null>(null);
-  // Only ever from the Approve button: the sheet above it has already said what this is and what it costs.
+  // Only ever from the sheet's one button (Continue to payment, or Approve in Xaman): the sheet above it has already said what this is and what it costs.
   const openInXaman = useCallback(() => {
     if (!uuid) return;
+    const mine = () => current.current === uuid;
     setRefused(null);
-    void signInXaman(uuid).then(
+    setOpening(true);
+    void signInXaman(uuid, () => {
+      if (!mine()) return;
+      setOpening(false);
+      setOpened(true);
+    }).then(
       (outcome) => {
+        if (!mine()) return;
+        setOpening(false);
         if (outcome === "signed") {
+          setSigned(true);
           check.current?.();
           setTimeout(() => after.current(), 5000);
         } else setEnded("declined");
       },
-      () => setRefused("Xaman didn't open the request. Try again."),
+      () => {
+        if (!mine()) return;
+        setOpening(false);
+        setRefused("Xaman didn't open the request. Try again.");
+      },
     );
+  }, [uuid]);
+  // The request is already open in Xaman and the first press is still listening for its answer, so this only shows it again.
+  const showAgain = useCallback(() => {
+    if (uuid) void reopenInXaman(uuid).catch(() => {});
   }, [uuid]);
 
   const mode = sheetMode({ signedWith, inXapp, hasWallet: !!wallet, ended });
   const saidNo = shell ? declined.replace("You said no in your wallet", "You declined in Xaman") : declined;
+  const step = payStep({ opening, opened, signed, ended: mode === "ended" });
+  const copy = payCopy(step);
+  const heading = pay ? copy.title : title;
+  // The spinner line, for a payment, only once Xaman has the request open: in the xApp, or on the website's Xaman link.
+  const status = pay && (mode === "xapp" || mode === "link") ? copy.status : null;
 
   return (
-    <Sheet onClose={onClose} label={title}>
-      <h3>{title}</h3>
+    <Sheet onClose={onClose} label={heading}>
+      <h3>{noOrphan(heading)}</h3>
       <p className="fine">{noOrphan(intro)}</p>
+      {status ? (
+        <div className="waitrow" role="status">
+          <i className="spin" aria-hidden="true" /> {noOrphan(status)}
+        </div>
+      ) : null}
       {mode === "joey" ? (
         <>
           <JoeySign tx={tx} onSent={onCheck} declined={declined} />
@@ -175,9 +215,15 @@ export function WalletSheet({ title, intro, wallet, tx, onClose, onCheck, onRetr
       ) : mode === "xapp" ? (
         <>
           {refused ? <p className="freshness">{noOrphan(refused)}</p> : null}
-          <button className="btn full" onClick={openInXaman}>
-            Approve in Xaman
-          </button>
+          {pay && step === "open" ? (
+            <button className="btn ol full" onClick={showAgain}>
+              {copy.action}
+            </button>
+          ) : pay && step === "signed" ? null : (
+            <button className="btn full" disabled={pay && step === "opening"} onClick={openInXaman}>
+              {pay ? copy.action : "Approve in Xaman"}
+            </button>
+          )}
         </>
       ) : mode === "link" && wallet ? (
         <>
@@ -185,8 +231,8 @@ export function WalletSheet({ title, intro, wallet, tx, onClose, onCheck, onRetr
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img className="walletqr only-desk" src={wallet.qr} alt="QR code to approve this in Xaman" width={220} height={220} />
           <p className="fine only-desk">Scan this with Xaman on your phone.</p>
-          <a className="btn full only-phone" href={wallet.open}>
-            Open Xaman
+          <a className="btn full only-phone" href={wallet.open} onClick={() => setOpened(true)}>
+            {pay ? copy.action ?? "Open Xaman" : "Open Xaman"}
           </a>
           <details className="anywallet">
             <summary>Use another wallet</summary>

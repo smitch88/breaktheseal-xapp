@@ -10,6 +10,7 @@ import { againHref, pullPack } from "@/lib/again";
 import { orderBackXrp, pullMultiple, totalMultiple } from "@/lib/pull-multiple";
 import { LIVE_CARD, LIVE_NFT, REFUND_REASONS, api, cardAward, dropsToXrp, xrpShort, cardStatusLabel, multiApi, networkLabel, nftAward, nftStatusLabel, txUrl, verifyHref, type LiveBundle, type LiveCard } from "@/lib/live/client";
 import { usePoll } from "@/lib/live/hooks";
+import { WAITING_CONFIRMATION } from "@/lib/live/sign-copy";
 import { cashOutLabel, cashOutTotal, outcomeOf, outcomeText, payoutText, sellLine, sellTotal, type ChildState, type PayoutStatus } from "@/lib/live/multi";
 import { readStep, writeStep } from "@/lib/reveal-flow";
 import { useRails, useXrpUsd } from "../Providers.tsx";
@@ -152,7 +153,7 @@ export function LiveMultiOpen({ rawId }: { rawId: string }) {
   const paid = !!bundle && bundle.status !== "quoted";
   const ready = outcome?.ready ?? 0;
   const steps = [
-    { done: paid, wait: "Waiting for your one payment", yes: "Payment on the ledger" },
+    { done: paid, wait: WAITING_CONFIRMATION, yes: "Payment on the ledger" },
     { done: !!award, wait: bundle?.kind === "card" ? "Buying your packs" : "Waiting for a later ledger to close", yes: bundle && ready < bundle.qty ? `${ready} of ${bundle.qty} ready` : "Every pull fixed" },
   ];
   const unpaid = bundle?.status === "quoted" ? checkoutHref(bundle) : null;
@@ -302,7 +303,7 @@ export function LiveMultiReveal({ rawId }: { rawId: string }) {
       tag={tag}
       stageMode="live"
       waitSteps={[
-        { done: true, wait: "Waiting for your one payment", yes: "Payment on the ledger" },
+        { done: true, wait: WAITING_CONFIRMATION, yes: "Payment on the ledger" },
         { done: false, wait: bundle.kind === "card" ? "Buying this pack" : "Waiting for a later ledger to close", yes: "Pull fixed" },
       ]}
       onClose={close}

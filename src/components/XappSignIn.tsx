@@ -64,8 +64,11 @@ function useAccountProof(onDone: () => void) {
       await refresh();
       return setView({ name: "again", text: body.state === "retry" ? "Xaman didn't answer. Try again." : refusalText(body.state) });
     }
-    setView({ name: "waiting", uuid: body.uuid });
-    const outcome = await signInXaman(body.uuid).catch(() => null);
+    // "Approve the request in Xaman" only once Xaman has taken the request; until then the button stays pressed.
+    const uuid = body.uuid;
+    const outcome = await signInXaman(uuid, () => {
+      if (live.current) setView({ name: "waiting", uuid });
+    }).catch(() => null);
     if (!live.current) return;
     if (outcome === "signed") await check();
     else setView({ name: "again", text: outcome === "declined" ? "You declined in Xaman, so nothing changed." : "Xaman didn't open the request. Try again." });

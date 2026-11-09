@@ -16,7 +16,7 @@ import { useConfirmAccount, useConnect, useRails } from "../Providers.tsx";
 import { useXapp } from "../XappHost.tsx";
 import { QtyPicker, useQtyRoom } from "./QtyPicker.tsx";
 import { RestockLine, RestockMark, useHeldCheckout } from "./Restock.tsx";
-import { payIntro } from "@/lib/live/sign-copy";
+import { READY_TO_PAY, payIntro } from "@/lib/live/sign-copy";
 import { WalletSheet } from "./WalletSheet.tsx";
 
 type Props = { pack: PackRef; name: string; price: number; back: string; xrpUsd: number; stage: React.ReactNode; qty?: number };
@@ -266,11 +266,7 @@ export function LiveCheckout({ pack, name, price, back, xrpUsd, stage, qty: firs
         </div>
       </div>
       {made && sheet ? (
-        <WalletSheet title={made.kind === "multi" ? "Approve one payment" : "Approve the payment"} intro={payIntro({ xrp: payXrp === null ? null : xrpText(payXrp), name, qty: made.kind === "multi" ? made.bundle.qty : 1, testnet: !!label })} wallet={made.wallet} tx={made.tx} onClose={() => setSheet(false)} onCheck={() => void look()} onRetry={start} declined="You said no in your wallet, so nothing was charged.">
-          <div className="waitrow" role="status">
-            <i className="spin" aria-hidden="true" /> Waiting for your payment
-          </div>
-        </WalletSheet>
+        <WalletSheet pay title={READY_TO_PAY} intro={payIntro({ xrp: payXrp === null ? null : xrpText(payXrp), name, qty: made.kind === "multi" ? made.bundle.qty : 1, testnet: !!label })} wallet={made.wallet} tx={made.tx} onClose={() => setSheet(false)} onCheck={() => void look()} onRetry={start} declined="You said no in your wallet, so nothing was charged." />
       ) : null}
     </main>
   );
