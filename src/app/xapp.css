@@ -94,7 +94,7 @@ html[data-xapp] .xptop{position:sticky;top:0;z-index:20;display:grid;grid-templa
 html[data-xapp] .pgrid,html[data-xapp] .pgrid.five{grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--xr)}
 html[data-xapp] .pgrid~.pgrid{margin-top:var(--xr)}
 html[data-xapp] .pgrid .pc,html[data-xapp] .pgrid.five .pc{padding:10px}
-/* The kind stays at the top left. With a Restocking tag beside it on a narrow card, the tag drops under it rather than splitting "XRPL NFT". */
+/* The kind stays at the top left; a Sold out tag beside it on a narrow card drops under it rather than splitting the kind. */
 html[data-xapp] .pc .pt{flex-wrap:wrap;gap:4px 8px;letter-spacing:.4px;min-height:0}
 html[data-xapp] .pc .pt>span{white-space:nowrap}
 html[data-xapp] .pc .stack{height:150px;margin:6px 0}

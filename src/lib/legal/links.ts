@@ -4,7 +4,7 @@ export const SUPPORT_EMAIL = "gm@bearish.af";
 /** Where else to reach us, besides email. Web pages only: inside Xaman they open in the phone's browser. */
 export const SUPPORT_CHANNELS = [
   { href: "https://discord.gg/bearish", label: "Discord" },
-  { href: "https://x.com/bearish_af", label: "X @bearish_af" },
+  { href: "https://x.com/sealonxrp", label: "X @sealonxrp" },
 ] as const;
 
 /** The three legal pages, as the footer and checkout link them. Small on purpose: checkout is a client bundle. */

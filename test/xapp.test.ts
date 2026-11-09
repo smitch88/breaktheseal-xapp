@@ -309,7 +309,7 @@ test("no tap leaves the webview: off-site links and new windows go through Xaman
   // Xaman's openBrowser drops mailto. Left to the webview, an email link goes to the phone's mail app.
   assert.equal(xappLink("mailto:gm@bearish.af", "_blank", origin), null);
   assert.equal(xappLink("http://example.com/a", null, origin), "https://example.com/a");
-  for (const out of ["https://discord.gg/bearish", "https://x.com/bearish_af", "https://xrpl.to", "https://livenet.xrpl.org/transactions/AB"]) assert.match(xappLink(out, "_blank", origin) ?? "", XAMAN_OPENS, out);
+  for (const out of ["https://discord.gg/bearish", "https://x.com/sealonxrp", "https://xrpl.to", "https://livenet.xrpl.org/transactions/AB"]) assert.match(xappLink(out, "_blank", origin) ?? "", XAMAN_OPENS, out);
   for (const inside of ["/packs", "/terms#refunds", "#who", "/collection/rip_1"]) assert.equal(xappLink(inside, null, origin), null);
   for (const nothing of [null, undefined, "", "javascript:alert(1)"]) assert.equal(xappLink(nothing, "_blank", origin), null);
   fc.assert(

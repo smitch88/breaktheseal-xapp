@@ -7,7 +7,7 @@ import type { NftPackView, NftTierView } from "@/lib/nft/view";
 import { shortCollection } from "@/lib/nft/view";
 import { XRP_PRIZE_ART } from "@/lib/prize-art";
 import type { PullMultiple } from "@/lib/pull-multiple";
-import { RestockStamp, RestockTag } from "./live/Restock.tsx";
+import { RestockStamp } from "./live/Restock.tsx";
 import { Slab } from "./Slab.tsx";
 
 export function SecHead({ title, right }: { title: string; right?: React.ReactNode }) {
@@ -89,7 +89,6 @@ export function NftCard({ pack, xrp }: { pack: Pick<NftPackView, "price" | "name
     <article className="pc nft">
       <div className="pt">
         <span>XRPL NFT</span>
-        <RestockTag price={pack.price} />
       </div>
       <Link href={`/nft/${pack.price}`} aria-label={pack.name}>
         <div className="stack one">

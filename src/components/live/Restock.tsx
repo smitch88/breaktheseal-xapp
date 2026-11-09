@@ -28,11 +28,6 @@ export function RestockStamp({ price, ms }: { price: number; ms?: number }) {
   return usePackAvailability(price, ms) === "restocking" ? <RestockMark /> : null;
 }
 
-/** The small tag beside a pack's kind on a shelf card, the same place Sold out sits. */
-export function RestockTag({ price }: { price: number }) {
-  return usePackAvailability(price) === "restocking" ? <span className="tag warnT">Restocking</span> : null;
-}
-
 /** Where a buy button would be. Plain words, nothing to tap. */
 export const RestockLine = () => (
   <p className="restockline" role="status">

@@ -323,13 +323,13 @@ test("off our site: Discord, X, xrpl.to and any other https site still go throug
   const origin = "https://breaktheseal.rip";
   const asked: string[] = [];
   const sdk = Promise.resolve({ openBrowser: ({ url }: { url: string }) => void asked.push(url) });
-  const outside = ["https://discord.gg/bearish", "https://x.com/bearish_af", "https://xrpl.to", "https://livenet.xrpl.org/accounts/rLixKPQ3jGk4yYhAt3ybAwdrC8tvTLLvG", "http://example.com/a"];
+  const outside = ["https://discord.gg/bearish", "https://x.com/sealonxrp", "https://xrpl.to", "https://livenet.xrpl.org/accounts/rLixKPQ3jGk4yYhAt3ybAwdrC8tvTLLvG", "http://example.com/a"];
   for (const href of outside) {
     const url = xappLink(href, "_blank", origin);
     assert.ok(url?.startsWith("https://"), href);
     assert.equal(await openOutside(url!, { sdk, fallback: () => assert.fail("no tab while Xaman answers") }), "xaman");
   }
-  assert.deepEqual(asked, ["https://discord.gg/bearish", "https://x.com/bearish_af", "https://xrpl.to/", "https://livenet.xrpl.org/accounts/rLixKPQ3jGk4yYhAt3ybAwdrC8tvTLLvG", "https://example.com/a"]);
+  assert.deepEqual(asked, ["https://discord.gg/bearish", "https://x.com/sealonxrp", "https://xrpl.to/", "https://livenet.xrpl.org/accounts/rLixKPQ3jGk4yYhAt3ybAwdrC8tvTLLvG", "https://example.com/a"]);
   fc.assert(
     fc.property(fc.webUrl({ validSchemes: ["https"] }), fc.constantFrom(null, "_blank"), (href, target) => {
       fc.pre(new URL(href).origin !== origin);

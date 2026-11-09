@@ -18,7 +18,7 @@ export const FACTS = {
   supportEmail: SUPPORT_EMAIL,
   privacyEmail: SUPPORT_EMAIL,
   domain: OFFICIAL_DOMAIN,
-  socials: "x.com/bearish_af and discord.gg/bearish",
+  socials: "x.com/sealonxrp and discord.gg/bearish",
   effective: "November 4, 2026",
   restricted: placesInWords(restrictedPlaces(process.env)),
   cap: "the greater of US$100 or what you paid us in the 12 months before the claim",

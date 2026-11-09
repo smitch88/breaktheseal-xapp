@@ -10,7 +10,7 @@ export const OG_VERSION = 1;
 export const ogImage = (slug: string) => `/assets/og/${slug}.jpg?v=${OG_VERSION}`;
 /** A card machine's preview, drawn from its live name: see src/app/og/pack/[code]/route.tsx. */
 export const machineOgImage = (code: string) => `/og/pack/${encodeURIComponent(code)}?v=${OG_VERSION}`;
-export const X_HANDLE = "@bearish_af";
+export const X_HANDLE = "@sealonxrp";
 
 /** Only the live site goes in search. Previews and the testnet stay out. */
 export const indexable = (env: Env) => publicOrigin(env) === `https://${OFFICIAL_DOMAIN}`;
